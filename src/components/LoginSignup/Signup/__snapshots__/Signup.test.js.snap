@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signup snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="SignupForm"
+  >
+    <h1>
+      Signup
+    </h1>
+    <form
+      action="#"
+      class="text-left"
+    >
+      <div
+        class="form-group"
+      >
+        <label
+          class=""
+          for="username"
+        >
+          Username
+        </label>
+        <input
+          autocomplete="username"
+          class="form-control"
+          id="username"
+          name="username"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        class="form-group"
+      >
+        <label
+          class=""
+          for="email2"
+        >
+          Email
+        </label>
+        <input
+          autocomplete="email"
+          class="form-control"
+          id="email2"
+          name="email"
+          type="email"
+          value=""
+        />
+      </div>
+      <div
+        class="form-group"
+      >
+        <label
+          class=""
+          for="password2"
+        >
+          Password
+        </label>
+        <input
+          autocomplete="current-password"
+          class="form-control"
+          id="password2"
+          name="password"
+          type="password"
+          value=""
+        />
+        <small
+          class="form-text text-muted"
+        >
+          <ul
+            class="pl-3"
+          >
+            <li>
+              Minimum length 8 characters
+            </li>
+            <li>
+              Required 1 uppercase letter, 1 lowercase letter, and 1 number
+            </li>
+          </ul>
+        </small>
+      </div>
+      <button
+        class="btn btn-primary"
+        type="submit"
+      >
+        Signup
+      </button>
+      <button
+        class="btn btn-secondary ml-2"
+      >
+        Cancel
+      </button>
+    </form>
+  </div>
+</DocumentFragment>
+`;

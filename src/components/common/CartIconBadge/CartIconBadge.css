@@ -1,0 +1,14 @@
+.CartIconBadge .cart-count-badge {
+  position: absolute;
+  right: -6px;
+  top: -12px;
+  font-size: x-small;
+  padding: 3px 5px;
+}
+
+.CartIconBadge.large .cart-count-badge {
+  right: -5px;
+  top: -2px;
+  font-size: xx-small;
+  padding: 2px 4px 4px 4px;
+}

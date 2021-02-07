@@ -1,0 +1,35 @@
+/* @media screen and (max-width: 991px) {
+  .Checkout1 .cart-col {
+    display: none;
+  }
+} */
+
+/* shippingForm */
+select#shipping_method {
+  overflow-y: hidden;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+select#shipping_method option {
+  padding: 3px 8px;
+}
+
+select#shipping_method option:hover {
+  background: var(--dark);
+  color: var(--light);
+}
+
+/* CustomerInfoForms */
+.CustomerInfoForms .form-control:disabled,
+.form-control[readonly] {
+  color: black;
+  font-weight: 500;
+}
+
+@media screen and (min-width: 992px) {
+  .cart-col > div {
+    position: sticky;
+    top: 10vh;
+  }
+}

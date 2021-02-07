@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProductCard snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="ProductCard mb-4 mx-auto card"
+  >
+    <div
+      class="img-wrapper"
+    >
+      <img
+        alt="Samsung XG-900 55 inch LCD TV"
+        class="card-img-top"
+        height="100%"
+        src="https://www.lg.com/sg/images/tvs/md05271244/gallery/LG-43LH600T-L.jpg"
+        width="auto"
+      />
+    </div>
+    <div
+      class="card-body"
+    >
+      <h5
+        class="card-title"
+      >
+        Samsung XG-900 55 inch LCD TV
+      </h5>
+      <h6
+        class="mb-2 text-muted card-subtitle"
+      >
+        <em>
+          Latest generation smart televison 2021
+        </em>
+      </h6>
+      <p
+        class="card-text"
+      >
+        <span
+          class="sc-bdfBwQ ehKgzr"
+        >
+          <span
+            class="sc-gsTCUz cxQGHo price"
+          >
+            $400.40
+          </span>
+        </span>
+      </p>
+    </div>
+  </div>
+</DocumentFragment>
+`;

@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pricing1 snapshot 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bdfBwQ ehKgzr"
+  >
+    <span
+      class="sc-gsTCUz cxQGHo price"
+    >
+      $400.40
+    </span>
+  </span>
+</DocumentFragment>
+`;
+
+exports[`Pricing1 w/ discount snapshot 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-dlfnbm gHhlng mb-1"
+  >
+    Sale 15% OFF
+  </span>
+  <span
+    class="sc-bdfBwQ bnWraN"
+  >
+    <span
+      class="sc-gsTCUz jbCYhM price"
+    >
+      $400.40
+    </span>
+  </span>
+  <span
+    class="sc-hKgILt hnYLUB ml-2 p-1"
+  >
+    $340.34
+  </span>
+</DocumentFragment>
+`;

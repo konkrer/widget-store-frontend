@@ -5,9 +5,51 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  /* reduce jumpy-ness by always showing scrollbar */
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+/* don't have modal hide scrollbar to reduce jumpy-ness */
+.modal-open {
+  overflow-x: initial !important;
+  overflow-y: initial !important;
+  padding-right: 0 !important;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.text-xxs {
+  font-size: xx-small;
+}
+.text-xs {
+  font-size: x-small;
+}
+.text-smaller {
+  font-size: smaller;
+}
+.text-sm {
+  font-size: small;
+}
+.text-md {
+  font-size: medium;
+}
+.text-lg {
+  font-size: large;
+}
+.text-xl {
+  font-size: x-large;
+}
+.text-xxl {
+  font-size: xx-large;
+}
+
+.btn-noStyle {
+  background-color: transparent;
+  border: none;
+  padding: 0;
 }

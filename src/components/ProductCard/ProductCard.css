@@ -1,0 +1,18 @@
+/* .ProductCard {
+  min-height: 375px;
+} */
+
+.ProductCard {
+  min-width: 318px;
+  min-height: 350px;
+  max-width: 318px;
+  max-height: 350px;
+  background: whitesmoke;
+  overflow: hidden;
+}
+
+.ProductCard .img-wrapper {
+  min-height: 200px;
+  max-height: 200px;
+  overflow: hidden;
+}

@@ -1,0 +1,73 @@
+/* Navbar css  */
+
+/* .Navbar {
+  background-color: rgb(47, 47, 47, 0.98);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+} */
+
+/* @media screen and (max-width: 991px) and (orientation: landscape) {
+  .Navbar {
+    position: static;
+  }
+} */
+
+.brand-style {
+  color: gold !important;
+  text-shadow: 1px 1px 3px black, -1px 1px 3px black, 1px -1px 3px black,
+    -1px -1px 3px black;
+}
+
+.navbar-brand {
+  padding-left: 0.4rem;
+  padding-right: 0.4rem;
+  border-radius: 5px;
+}
+
+.navbar-text {
+  font-weight: 400;
+}
+
+.Navbar a:not(.navbar-brand),
+.navbtn,
+.navitem {
+  color: rgb(206, 206, 206);
+  padding: 0.5rem;
+  border-radius: 5px;
+  margin-right: 5px;
+}
+
+.Navbar .dropdown-item {
+  color: white;
+}
+.Navbar .dropdown-menu a {
+  color: inherit;
+}
+
+.Navbar a:hover:not(.nav-link),
+.navbtn:hover,
+.dropdown-item:hover {
+  text-decoration: none;
+  background-color: rgb(206, 206, 206);
+  color: blue;
+}
+
+.Navbar .dropdown a:hover {
+  background-color: unset;
+}
+
+.Navbar a.active:not(.navbar-brand) {
+  font-weight: 500;
+  background-color: rgb(206, 206, 206);
+  color: black;
+}
+
+.Navbar .dropdown a.active {
+  background-color: unset;
+}
+
+.Navbar .dropdown-menu {
+  /* background-color: rgb(47, 47, 47); */
+  background-color: var(--secondary);
+}

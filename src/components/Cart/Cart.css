@@ -1,0 +1,72 @@
+@keyframes animActiveRight {
+  from {
+    opacity: 0;
+    right: -520px;
+  }
+  to {
+    opacity: 1;
+    right: 0px;
+  }
+}
+
+@keyframes animReverseRight {
+  from {
+    opacity: 1;
+    right: 0px;
+  }
+  to {
+    opacity: 0;
+    right: -520px;
+  }
+}
+
+.SideCart.animActive {
+  animation: animActiveRight 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.SideCart.animReverse {
+  animation: animReverseRight 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes fadeInScrBck {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.5;
+  }
+}
+
+@keyframes fadeOutScrBck {
+  from {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.ScreenBackground.animActive {
+  animation: fadeInScrBck 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.ScreenBackground.animReverse {
+  animation: fadeOutScrBck 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.SideCart td {
+  padding: 0 5px;
+}
+
+.SideCart .ItemsListDiv a {
+  color: var(--dark);
+  font-weight: 500;
+}
+
+.SideCart .ItemsListDiv a:hover {
+  color: var(--primary);
+}
+
+.TabulationTable tr td:nth-child(even) {
+  padding-left: 25px;
+}
