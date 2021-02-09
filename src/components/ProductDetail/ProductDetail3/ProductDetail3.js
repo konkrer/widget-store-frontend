@@ -8,9 +8,9 @@ import { useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
 
 // local imports
-import ScreenBackground from './ScreenBackground';
-import PDModal from './PDModalCard';
-import './ProductDetail.css';
+import ScreenBackground from '../ModalBackground';
+import PDModal from '../PDModalCard';
+// import '../ProductDetail.css';
 
 const ProductDetail3 = ({ selectedId, setSelectedId, disabled }) => {
   const product = useSelector(state => state.cart.items[selectedId]);

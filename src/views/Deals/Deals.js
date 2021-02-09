@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 // local imports
 import Navbar from '../../components/Navbar/Navbar';
 import ProductList from '../../components/ProductList/ProductList';
-import ProductDetail from '../../components/ProductDetail/ProductDetail';
+import ProductDetail from '../../components/ProductDetail/ProductDetail1/ProductDetail';
 import LoginSignup from '../../components/LoginSignup/LoginSignup';
 import { getPathRoot } from '../../helpers/helpers';
 import Cart from '../../components/Cart/Cart';
@@ -47,10 +47,10 @@ function Deals() {
       <Route exact path={`${pathRoot}/product/:id`}>
         <ProductDetail />
       </Route>
-      <Route path={`${pathRoot}/cart`}>
+      <Route exact path={`${pathRoot}/cart`}>
         <Cart />
       </Route>
-      <Route path={`${pathRoot}/login`}>
+      <Route exact path={`${pathRoot}/login`}>
         <LoginSignup />
       </Route>
     </>

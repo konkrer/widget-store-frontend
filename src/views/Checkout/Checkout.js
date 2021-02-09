@@ -10,7 +10,7 @@ import LoginSignup from '../../components/LoginSignup/LoginSignup';
 import CartList from '../../components/common/CartList/CartList';
 import CheckoutForms from '../../components/CheckoutForms/CheckoutForms';
 import { calculateTax, calculateTotal } from '../../helpers/monies';
-import ProductDetail3 from '../../components/ProductDetail/ProductDetail3';
+import ProductDetail3 from '../../components/ProductDetail/ProductDetail3/ProductDetail3';
 import PanelClose from '../../components/common/PanelClose/PanelClose';
 import './Checkout.css';
 
@@ -43,7 +43,7 @@ const Checkout = () => {
   }, [subtotal]);
 
   const handleClose = () => {
-    history.goBack();
+    history.push('/shop');
   };
 
   return (

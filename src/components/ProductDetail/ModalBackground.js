@@ -4,11 +4,11 @@ import styled from 'styled-components';
 const ScreenBackground = styled.div`
   position: fixed;
   top: 0;
-  bottom: 0;
   left: 0;
   width: 100vw;
+  height: 100vh;
   background: rgba(0, 0, 0, 0.5);
-  z-index: 99;
+  z-index: 1040;
   display: flex;
   flex-direction: column;
   justify-content: center;

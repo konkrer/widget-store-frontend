@@ -2,11 +2,11 @@
 import { act, fireEvent } from '@testing-library/react';
 
 // local imports
-import { renderWithStore } from '../../helpers/testHelpers';
-import { testStore } from '../../redux/store/reduxStore';
+import { renderWithStore } from '../../../helpers/testHelpers';
+import { testStore } from '../../../redux/store/reduxStore';
 import ProductDetail from './ProductDetail';
-import resetCart from '../../redux/actions/cart/resetCart';
-import { TEST_DATA, populateTestDataHook } from '../../helpers/testConfig';
+import resetCart from '../../../redux/actions/cart/resetCart';
+import { TEST_DATA, populateTestDataHook } from '../../../helpers/testConfig';
 
 const axios = require('axios');
 jest.mock('axios');

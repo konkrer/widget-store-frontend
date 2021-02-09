@@ -9,12 +9,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AnimatePresence, motion } from 'framer-motion';
 
 // local imports
-import APIRequest from '../../hooks/apiHook';
-import { getPathRoot } from '../../helpers/helpers';
-import toggleDir from '../../redux/actions/animation/toggleDir';
-import ScreenBackground from './ScreenBackground';
-import './ProductDetail.css';
-import PDModal from './PDModalCard';
+import APIRequest from '../../../hooks/apiHook';
+import { getPathRoot } from '../../../helpers/helpers';
+import toggleDir from '../../../redux/actions/animation/toggleDir';
+import ScreenBackground from '../ModalBackground';
+import PDModal from '../PDModalCard';
+// import '../ProductDetail.css';
 
 const ProductDetail2 = () => {
   const { id } = useParams();
@@ -29,7 +29,7 @@ const ProductDetail2 = () => {
   useEffect(() => {
     // toggle animation direction
     dispatch(toggleDir());
-    // add 'modal-open' class to <body>
+    // add 'modal-open' class to <body> to remove scrolling
     const copy = body.current;
     copy.classList.add('modal-open');
 
@@ -61,9 +61,9 @@ const ProductDetail2 = () => {
       {modal && (
         <motion.div
           initial={{ opacity: 0 }}
-          animate={{ opacity: [0, 0.7, 0.95, 0.98, 1] }}
+          animate={{ opacity: [0, 0.94, 0.95, 0.98, 1] }}
           exit={{ opacity: [1, 0.2, 0] }}
-          transition={{ type: 'linear', ease: 'easeOut' }}
+          transition={{ type: 'linear', ease: 'easeOut', delay: 0.1 }}
         >
           <ScreenBackground onClick={handleClose} className="close-modal">
             <motion.div
@@ -81,7 +81,7 @@ const ProductDetail2 = () => {
                 scale: 1,
                 skewX: 0,
                 rotateX: '0deg',
-                opacity: [0, 0.6, 0.96, 1, 1],
+                opacity: 1,
               }}
               exit={{
                 x: 1100 * (slideoutDir ? 1 : -1) * -1,

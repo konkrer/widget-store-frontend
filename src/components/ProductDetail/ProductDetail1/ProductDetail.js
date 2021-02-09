@@ -8,10 +8,10 @@ import React, { useState } from 'react';
 import { Modal } from 'reactstrap';
 
 // local imports
-import APIRequest from '../../hooks/apiHook';
-import { getPathRoot } from '../../helpers/helpers';
-import './ProductDetail.css';
-import PDModal from './PDModalCard';
+import APIRequest from '../../../hooks/apiHook';
+import { getPathRoot } from '../../../helpers/helpers';
+import PDModal from '../PDModalCard';
+import '../ProductDetail.css';
 
 const ProductDetail = () => {
   const { id } = useParams();

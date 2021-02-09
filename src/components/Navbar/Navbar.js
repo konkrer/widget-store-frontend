@@ -21,12 +21,14 @@ import NavbarCartElement from './NavbarCartEl/NavbarCartEl';
 import { getPathRoot } from '../../helpers/helpers';
 import './Navbar.css';
 
+/** Navbar wrapper allows navbar to be sticky. Provides background color. */
 const NavbarWrapper = styled.div`
   background-color: rgb(47, 47, 47, 0.98);
   position: ${p => (p.pathRoot === '/checkout' ? 'static' : 'sticky')};
   top: 0;
   z-index: 50;
 
+  // landscape on phone no sticky navbar
   @media screen and (max-width: 991px) and (orientation: landscape) {
     position: static;
   }
