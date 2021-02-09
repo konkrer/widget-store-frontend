@@ -6,8 +6,8 @@ exports[`CartItem snapshot 1`] = `
     class="CartItem py-4 "
   >
     <a
-      class="CartItem-name px-1 font-weight-bold"
-      href="/shop/product/1"
+      class="CartItem-name"
+      href="//product/1"
     >
       Samsung XG-900 55 inch LCD TV
     </a>

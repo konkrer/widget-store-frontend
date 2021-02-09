@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import * as Yup from 'yup';
 import { Button } from 'reactstrap';
@@ -9,6 +9,7 @@ import { asyncAPIRequest } from '../../../hooks/apiHook';
 import ShippingAddressForm from './ShippingAddressForm';
 import CustomerAddressForm from './CustomerAddressForm';
 import AddressBox from '../AddressBox/AddressBox';
+import PaymentOptions from '../../common/PaymentOptions/PaymentOptions';
 
 /**
  * Customer info forms for checkout stage 1.
@@ -23,30 +24,36 @@ const CustomerInfoForms = ({
   subtotal,
   setCustomerCheckmark,
 }) => {
-  const user = useSelector(state => state.user);
-  // API request response error to display
+  const { user, token } = useSelector(
+    state => ({
+      user: state.user.user,
+      token: state.user.token,
+    }),
+    shallowEqual
+  );
+  // vars for API request to user profile
   const [responseError, setResponseError] = useState(null);
   const [loadingUser, setLoadingUser] = useState(true);
-  // flag vars for customer and shipping forms display
+  // flag vars for customer and shipping forms display control, forms reset
   const [formDisabled, setFormDisabled] = useState(false);
   const [shippingFormDisabled, setShippingFormDisabled] = useState(true);
   const [formReset, setFormReset] = useState(false);
 
   // Note orginal user when page loads
-  const userOriginal = useRef(user.token);
+  const userOriginal = useRef(token);
   const defaultAddress = useRef(false);
   const FORM_DATA = useRef(DEFAULT_CUST_FORM_DATA);
 
-  // get user profile data if user is logged in when page loads
+  // get user profile data if user is logged in
   useEffect(() => {
     async function getUser() {
       try {
         const resp = await asyncAPIRequest(
-          `/users/${user.user.username}`,
+          `/users/${user.username}`,
           'get',
           null,
           {
-            _token: user.token,
+            _token: token,
           }
         );
         if (resp.error) setResponseError(resp.error.response.data.message);
@@ -73,37 +80,52 @@ const CustomerInfoForms = ({
       }
     }
     // only attempt getting user info if user is logged in
-    if (user.token) getUser();
-  }, [user]);
+    if (token) getUser();
+  }, [user, token]);
 
   // if user logs in or out reset forms and data
   useEffect(() => {
-    if (user.token !== userOriginal.current) {
-      // remove customer data and shipping data.
-      setOrderData(orderData => ({
-        ...orderData,
-        customer: null,
-        shipping: false,
-        shippingAddress: null,
-        tax: null,
-      }));
-      // set new user token reference
-      userOriginal.current = user.token;
-      defaultAddress.current = false;
-      setFormDisabled(false);
-      setShippingFormDisabled(true);
-      goTo1();
-      // reset forms by remounting. Set to default if user not signed in.
-      if (user.token === null) FORM_DATA.current = DEFAULT_CUST_FORM_DATA;
-      setFormReset(true);
-      setTimeout(() => {
-        setFormReset(false);
-      }, 100);
+    let reset;
+    async function userChangeCheck() {
+      if (token !== userOriginal.current) {
+        // remove customer data and shipping data.
+        setOrderData(orderData => ({
+          ...orderData,
+          customer: null,
+          shipping: false,
+          shippingAddress: null,
+          tax: null,
+        }));
+        // set new user token reference
+        userOriginal.current = token;
+        // reset variables
+        defaultAddress.current = false;
+        setFormDisabled(false);
+        setShippingFormDisabled(true);
+
+        // Forms Reset-
+        // Set form data to default if user is not signed in.
+        if (token === null) FORM_DATA.current = DEFAULT_CUST_FORM_DATA;
+        // reset forms by remounting forms.
+        setFormReset(true);
+        // reset = await new Promise(res => setTimeout(res, 100));
+        // setFormReset(false);
+        reset = setTimeout(() => {
+          setFormReset(false);
+        }, 100);
+
+        goTo1();
+      }
     }
-  }, [user.token, setOrderData, goTo1]);
+    userChangeCheck();
+
+    return () => {
+      clearTimeout(reset);
+    };
+  }, [token, setOrderData, goTo1]);
 
   // if user is logged in but user profile data has not loaded yet return loading...
-  if (user.token && loadingUser) return <h1>Loading...</h1>;
+  if (token && loadingUser) return <h1>Loading...</h1>;
 
   const editCustomerInfoButton = (
     <Button
@@ -111,7 +133,7 @@ const CustomerInfoForms = ({
         setShippingFormDisabled(true);
         setFormDisabled(formDisabled => !formDisabled);
       }}
-      color="info"
+      color="primary"
       className="mb-4"
       size="sm"
       outline
@@ -126,7 +148,7 @@ const CustomerInfoForms = ({
         setFormDisabled(true);
         setShippingFormDisabled(shippigFormDisabled => !shippigFormDisabled);
       }}
-      color="info"
+      color="primary"
       className="mb-4"
       size="sm"
       outline
@@ -135,12 +157,13 @@ const CustomerInfoForms = ({
     </Button>
   );
 
-  const customerFormPropsBundle = {
+  const customerAddressFormProps = {
     orderData,
     setOrderData,
     FORM_DATA,
     shippingFormDisabled,
     user,
+    token,
     formDisabled,
     responseError,
     setResponseError,
@@ -153,9 +176,9 @@ const CustomerInfoForms = ({
   };
 
   return (
-    <div className="CustomerInfoForms px-1 px-md-4 pt-2 pb-3 bg-light text-dark rounded">
+    <div className="CustomerInfoForms px-1 px-md-4 pt-2 pb-3 bg-light text-dark rounded border">
       {/* If user not logged in show login button */}
-      {!user.user && (
+      {!user && (
         <div>
           <NavLink
             to="/checkout/login"
@@ -188,7 +211,7 @@ const CustomerInfoForms = ({
       )}
       {!formReset && (
         <>
-          <CustomerAddressForm bundle={customerFormPropsBundle} />
+          <CustomerAddressForm {...customerAddressFormProps} />
           <ShippingAddressForm
             setOrderData={setOrderData}
             FORM_DATA={FORM_DATA}
@@ -197,6 +220,7 @@ const CustomerInfoForms = ({
           />
         </>
       )}
+      <PaymentOptions />
     </div>
   );
 };

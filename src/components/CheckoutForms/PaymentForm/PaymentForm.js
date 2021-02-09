@@ -19,6 +19,18 @@ const PaymentForm = ({ orderData, goTo2 }) => {
   const history = useHistory();
   const dispatch = useDispatch();
 
+  /**
+   * cartChange()
+   *
+   * Return true if cart has changed from previous state.
+   */
+
+  const cartChange = (numCartItemsRef, cart) => {
+    // If numCartItemsRef is unset return false
+    if (!numCartItemsRef.current) return false;
+    return numCartItemsRef.current !== cart.numCartItems;
+  };
+
   // initalize payment dropin element
   useEffect(() => {
     // if useEffect triggered by a cart change return
@@ -31,8 +43,9 @@ const PaymentForm = ({ orderData, goTo2 }) => {
     numCartItemsRef.current = cart.numCartItems;
 
     // pause to allow checkout section animation to complete
-    setTimeout(() => {
+    const timerId = setTimeout(() => {
       const payDiv = document.querySelector('#dropin-container');
+      if (!payDiv) return;
       payDiv.innerHTML = '';
       // braintree client create and data collection
       dropin
@@ -78,6 +91,7 @@ const PaymentForm = ({ orderData, goTo2 }) => {
         .catch(err => {
           console.error(err);
         });
+      return () => clearTimeout(timerId);
     }, 900);
   }, [orderData, cart, history, dispatch]);
 
@@ -129,13 +143,6 @@ const PaymentForm = ({ orderData, goTo2 }) => {
       <h5 className="text-center">Total: ${orderData.total}</h5>
     </>
   );
-};
-
-/** Return true if numCartItemsRef is set and
- * numCartItems is not equal to numCartItemsRef */
-const cartChange = (numCartItemsRef, cart) => {
-  if (!numCartItemsRef.current) return false;
-  return numCartItemsRef.current !== cart.numCartItems;
 };
 
 export default PaymentForm;

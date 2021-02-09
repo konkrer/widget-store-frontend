@@ -10,13 +10,18 @@ import decrementQuantity from '../../../redux/actions/cart/decrementQuantity';
 import removeProduct from '../../../redux/actions/cart/removeProduct';
 import { animateVariant } from '../../../helpers/helpers';
 
-const ItemsListDiv = styled.div`
+const CartListDivWrapper = styled.div`
+  display: inline-block;
+  overflow: hidden;
   border: 1px solid black;
   border-radius: 5px;
+  margin-top: 0px;
+`;
+
+const CartListDiv = styled.div`
   min-height: ${p => (p.orderData ? '30vh' : '60vh')};
   max-height: 60vh;
   width: 95vw;
-  margin-top: 10px;
   overflow-y: auto;
   overflow-x: hidden;
   background: ${p => (p.numProducts === 1 ? 'white' : 'var(--light)')};
@@ -29,7 +34,7 @@ const ItemsListDiv = styled.div`
   }
 `;
 
-const ItemsListDivHeader = styled.div`
+const CartListDivHeader = styled.div`
   @media screen and (min-width: 992px) {
     position: sticky;
     top: 0;
@@ -60,7 +65,7 @@ const TabulationTable = styled.table`
   }
 `;
 
-const ItemsList = ({ disabled, orderData }) => {
+const CartList = ({ disabled, orderData, setSelectedId }) => {
   const cart = useSelector(state => state.cart);
   const dispatch = useDispatch();
   const itemsValues = Object.values(cart.items);
@@ -104,30 +109,41 @@ const ItemsList = ({ disabled, orderData }) => {
     animateVariant(setAnimTotal, 500);
   }, [orderData?.total]);
 
+  const animVariants = {
+    active: {
+      scale: 1.2,
+      rotate: [0, 2, -2, 2, -2, 2, -2, 2, -2, 2, -2, 2, -2, 0],
+    },
+    default: { scale: 1, rotate: 0 },
+  };
+
   return (
     <div>
-      <ItemsListDiv
-        orderData={!!orderData}
-        className="ItemsListDiv mx-auto text-dark"
-        numProducts={Object.keys(cart.items).length}
-      >
-        <ItemsListDivHeader className="border-bottom py-1 bg-secondary text-light">
-          <div className="CartItem-name">Item</div>
-          <div className="CartItem-price">Price</div>
-          <div className="CartItem-quant-adj">Quantity</div>
-          <div className="CartItem-total">Item Total</div>
-        </ItemsListDivHeader>
-        {itemsValues.map((item, idx) => (
-          <CartItem
-            item={item}
-            handleIncrement={handleIncrement}
-            handleDecrement={handleDecrement}
-            handleRemove={handleRemove}
-            key={item.product_id}
-            disabled={disabled}
-          />
-        ))}
-      </ItemsListDiv>
+      <CartListDivWrapper className="">
+        <CartListDiv
+          orderData={!!orderData}
+          className="CartListDiv mx-auto text-dark"
+          numProducts={Object.keys(cart.items).length}
+        >
+          <CartListDivHeader className="border-bottom py-1 bg-secondary text-light">
+            <div className="CartItem-name">Item</div>
+            <div className="CartItem-price">Price</div>
+            <div className="CartItem-quant-adj">Quantity</div>
+            <div className="CartItem-total">Item Total</div>
+          </CartListDivHeader>
+          {itemsValues.map((item, idx) => (
+            <CartItem
+              item={item}
+              handleIncrement={handleIncrement}
+              handleDecrement={handleDecrement}
+              handleRemove={handleRemove}
+              key={item.product_id}
+              disabled={disabled}
+              setSelectedId={setSelectedId}
+            />
+          ))}
+        </CartListDiv>
+      </CartListDivWrapper>
       <TabulationDiv>
         <TabulationTable className="TabulationTable ml-auto">
           <tbody>
@@ -135,12 +151,7 @@ const ItemsList = ({ disabled, orderData }) => {
               <td className="text-left">Subtotal</td>
               <td className="text-right">
                 <motion.div
-                  variants={{
-                    active: {
-                      scale: 1.3,
-                    },
-                    default: {},
-                  }}
+                  variants={animVariants}
                   animate={animSubtotal}
                   transition={{ ease: 'easeInOut' }}
                 >
@@ -153,12 +164,7 @@ const ItemsList = ({ disabled, orderData }) => {
                 <td className="text-left">Tax</td>
                 <td className="text-right">
                   <motion.div
-                    variants={{
-                      active: {
-                        scale: 1.3,
-                      },
-                      default: {},
-                    }}
+                    variants={animVariants}
                     animate={animTax}
                     transition={{ ease: 'easeInOut' }}
                   >
@@ -172,12 +178,7 @@ const ItemsList = ({ disabled, orderData }) => {
                 <td className="text-left">Shipping</td>
                 <td className="text-right">
                   <motion.div
-                    variants={{
-                      active: {
-                        scale: 1.3,
-                      },
-                      default: {},
-                    }}
+                    variants={animVariants}
                     animate={animShipping}
                     transition={{ ease: 'easeInOut' }}
                   >
@@ -193,12 +194,7 @@ const ItemsList = ({ disabled, orderData }) => {
                 <td className="text-left">Total</td>
                 <td className="text-right">
                   <motion.div
-                    variants={{
-                      active: {
-                        scale: 1.3,
-                      },
-                      default: {},
-                    }}
+                    variants={animVariants}
                     animate={animTotal}
                     transition={{ ease: 'easeInOut' }}
                   >
@@ -214,4 +210,4 @@ const ItemsList = ({ disabled, orderData }) => {
   );
 };
 
-export default ItemsList;
+export default CartList;

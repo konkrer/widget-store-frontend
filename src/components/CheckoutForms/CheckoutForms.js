@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { Collapse, Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown, faCheck } from '@fortawesome/free-solid-svg-icons';
@@ -9,6 +9,7 @@ import CustomerInfoForms from './CustomerInfoForms/CustomerInfoForms';
 import ShippingForm from './ShippingForm/ShippingForm';
 import PaymentForm from './PaymentForm/PaymentForm';
 import { motion } from 'framer-motion';
+import './CheckoutForms.css';
 
 const CheckoutForms = ({ setDisabled, orderData, setOrderData }) => {
   // state for which step of checkout process is active
@@ -27,45 +28,55 @@ const CheckoutForms = ({ setDisabled, orderData, setOrderData }) => {
   const [loadingShipping, setLoadingShipping] = useState(true);
   const [shippingMethods, setShippingMethods] = useState({});
 
-  const getShippingCosts = customerData => {
-    if (!customerData) return;
-    // fake call to api for shipping costs
-    try {
-      // fake response with shipping costs, etc
-      const resp = fakeAPICall(customerData, items);
+  const getShippingCosts = useCallback(
+    customerData => {
+      if (!customerData) return;
+      // fake call to api for shipping costs
+      try {
+        // fake response with shipping costs, etc
+        const resp = fakeAPICall(customerData, items);
 
-      if (resp.error) setResponseError(resp.error.response.data.message);
-      else {
-        setShippingMethods(resp.data);
-        setLoadingShipping(false);
+        if (resp.error) setResponseError(resp.error.response.data.message);
+        else {
+          setShippingMethods(resp.data);
+          setLoadingShipping(false);
+        }
+      } catch (error) {
+        console.log(error);
+        setResponseError(error.message);
       }
-    } catch (error) {
-      console.log(error);
-      setResponseError(error.message);
-    }
-  };
+    },
+    [items]
+  );
 
   // go to customer info form (step 1)
-  const goTo1 = () => {
+  const goTo1 = useCallback(() => {
     setStep(1);
     setDisabled(false);
-  };
+  }, [setDisabled]);
+
   // go to shipping (step 2)
-  const goTo2 = force => {
-    // if forcing or shipping does not equal false proceed
-    if (force || orderData.shipping !== false) {
-      setStep(2);
-      // disable cart adjustments
-      setDisabled(true);
-    }
-  };
+  const goTo2 = useCallback(
+    force => {
+      // if forcing or shipping does not equal false proceed
+      if (force || orderData.shipping !== false) {
+        setStep(2);
+        // disable cart adjustments
+        setDisabled(true);
+      }
+    },
+    [orderData.shipping, setDisabled]
+  );
+
   // go to payment (step 3)
-  const goTo3 = force => {
-    if (!force && !orderData.shipping) return;
-    setStep(3);
-    setDisabled(true);
-    // history.push('/checkout/payment');
-  };
+  const goTo3 = useCallback(
+    force => {
+      if (!force && !orderData.shipping) return;
+      setStep(3);
+      setDisabled(true);
+    },
+    [orderData.shipping, setDisabled]
+  );
 
   return (
     <div className="CheckoutForms text-left pt-2 pt-sm-0">

@@ -36,7 +36,7 @@ const ShippingForm = ({
       {formik => (
         <Form className="text-left ShippingAddressForm">
           <Collapse isOpen={!shippingFormDisabled}>
-            <h6 className="text-info">Shipping Address</h6>
+            <h6 className="font-weight-bold">Shipping Address</h6>
             <Row form>
               <Col sm={6}>
                 <FormGroup>

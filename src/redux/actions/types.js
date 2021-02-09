@@ -6,3 +6,4 @@ export const REMOVE_PRODUCT = 'REMOVE_PRODUCT';
 export const LOG_OUT = 'LOG_OUT';
 export const LOG_IN = 'LOG_IN';
 export const SHED_EMPTY = 'SHED_EMPTY';
+export const TOGGLE_DIR = 'TOGGLE_DIR';

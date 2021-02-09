@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Badge } from 'reactstrap';
 import Decimal from 'decimal.js';
 import { motion } from 'framer-motion';
@@ -14,7 +14,7 @@ import {
 
 // local imports
 import { calculateDiscountPrice } from '../../../../helpers/monies';
-import { animateVariant } from '../../../../helpers/helpers';
+import { animateVariant, getPathRoot } from '../../../../helpers/helpers';
 import './CartItem.css';
 
 const CartItem = ({
@@ -24,24 +24,50 @@ const CartItem = ({
   handleRemove,
   className = '',
   disabled,
+  setSelectedId,
 }) => {
   const [animItemTotal, setAnimItemTotal] = useState(false);
   const price = calculateDiscountPrice(item);
   const itemTotal = new Decimal(price).times(item.quantity).toFixed(2);
+  const location = useLocation();
+  const pathRoot = getPathRoot(location.pathname);
 
-  // animation effects
+  // animation effects based on item quantity
   useEffect(() => {
     animateVariant(setAnimItemTotal, 500);
   }, [item.quantity]);
 
-  return (
-    <div className={`CartItem py-4 ${className}`}>
+  /** The product name in the CartItem will open a product detail modal.
+   * Return either a link to the product url or a button to set state
+   * for the shared layout animation.
+   */
+  const productNameLink = (setSelectedId => {
+    // if part of shared layout name button sets selected ID
+    if (setSelectedId)
+      return (
+        <motion.button
+          className="btn-noStyle CartItem-name"
+          onClick={() => setSelectedId(item.product_id)}
+          layoutId={item.product_id}
+        >
+          {item.name}
+        </motion.button>
+      );
+
+    // else link links to product page
+    return (
       <Link
-        to={`/shop/product/${item.product_id}`}
-        className="CartItem-name px-1 font-weight-bold"
+        to={`${pathRoot}/product/${item.product_id}`}
+        className="CartItem-name"
       >
         {item.name}
       </Link>
+    );
+  })(setSelectedId);
+
+  return (
+    <div className={`CartItem py-4 ${className}`}>
+      {productNameLink}
       <div className="CartItem-price">${price}</div>
       <div className="CartItem-quant-adj pt-4 pt-sm-0">
         <Badge
@@ -80,9 +106,9 @@ const CartItem = ({
         <motion.div
           variants={{
             active: {
-              scale: 1.35,
+              scale: 1.2,
             },
-            default: {},
+            default: { scale: 1 },
           }}
           animate={animItemTotal}
           transition={{ ease: 'easeInOut' }}

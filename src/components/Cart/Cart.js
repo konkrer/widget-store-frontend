@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 // local imports
 import CartHeader from './Cart_components/CartHeader';
 import CartFooter from './Cart_components/CartFooter';
-import ItemsList from '../common/ItemsList/ItemsList';
+import CartList from '../common/CartList/CartList';
 import { getPathRoot } from '../../helpers/helpers';
 import './Cart.css';
 
@@ -70,7 +70,7 @@ function Cart() {
       <SideCart className={`SideCart ${cartAnimationClass}`}>
         <CartHeader handleClose={handleClose} numCartItems={numCartItems} />
 
-        <ItemsList />
+        <CartList />
 
         {/* ---------- Animate CartFooter ---------- */}
         <motion.div
@@ -80,7 +80,7 @@ function Cart() {
           }}
           initial={{ y: 300, x: 1000, opacity: 0 }}
           animate={cartAnimationClass}
-          transition={{ type: 'tween', ease: 'easeOut', delay: 0.08 }}
+          transition={{ type: 'tween', ease: 'easeOut', delay: 0.15 }}
         >
           <CartFooter numCartItems={numCartItems} goToCheckout={goToCheckout} />
         </motion.div>

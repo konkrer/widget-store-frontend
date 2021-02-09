@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Home snapshot 1`] = `
+exports[`NewProducts snapshot 1`] = `
 <DocumentFragment>
   <div
     class="sc-bdfBwQ hnBsPZ"
@@ -28,7 +28,7 @@ exports[`Home snapshot 1`] = `
         />
       </button>
       <div
-        class="collapse navbar-collapse"
+        class="pr-4 collapse navbar-collapse"
       >
         <ul
           class="mr-auto navbar-nav"
@@ -170,17 +170,17 @@ exports[`Home snapshot 1`] = `
     style="opacity: 0.0022222222222222222;"
   >
     <div
-      class="container my-4 py-3 Home dark-gradient1 rounded"
+      class="container my-4 py-3 NewProducts dark-gradient1 rounded"
     >
       <h1
         class="brand-style"
       >
-        Widget Store
+        New Products
       </h1>
       <h2
         class="lead font-italic mb-4 Home-byline"
       >
-        We have what you need!
+        Check out our newest items!
       </h2>
       <div
         class="justify-content-center pb-2 card-deck"

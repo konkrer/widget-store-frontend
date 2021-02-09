@@ -12,30 +12,30 @@ import {
 
 // local imports
 import shedEmpty from '../../../redux/actions/cart/shedEmpty';
-import { asyncAPIRequest } from '../../../hooks/apiHook';
 import { customerInfoSchema } from './CustomerInfoForms';
 import { calculateTax, calculateTotal } from '../../../helpers/monies';
 import { animateVariant } from '../../../helpers/helpers';
+import { updateUserProfile } from '../../../helpers/apiHelpers';
 
 const CustomerAddressForm = ({
-  bundle: {
-    orderData,
-    setOrderData,
-    FORM_DATA,
-    shippingFormDisabled,
-    user,
-    formDisabled,
-    responseError,
-    setResponseError,
-    defaultAddress,
-    setFormDisabled,
-    goTo2,
-    getShippingCosts,
-    subtotal,
-    setCustomerCheckmark,
-  },
+  orderData,
+  setOrderData,
+  FORM_DATA,
+  shippingFormDisabled,
+  user,
+  token,
+  formDisabled,
+  responseError,
+  setResponseError,
+  defaultAddress,
+  setFormDisabled,
+  goTo2,
+  getShippingCosts,
+  subtotal,
+  setCustomerCheckmark,
 }) => {
-  const cart = useSelector(state => state.cart);
+  const numCartItems = useSelector(state => state.cart.numCartItems);
+  const items = useSelector(state => state.cart.items);
   const dispatch = useDispatch();
 
   // Handle CustomerInfoForm submit.
@@ -53,7 +53,7 @@ const CustomerAddressForm = ({
 
     // if user is signed in and "update customer info"
     // btn has been clicked from the CustomerInfoForm
-    if (user.token && !formDisabled) {
+    if (token && !formDisabled) {
       // data changing - shipping will be set false
       // disabling the "shipping" button that goes to step 2.
       shippingFalsey = false;
@@ -61,6 +61,7 @@ const CustomerAddressForm = ({
       const error = await updateUserProfile(
         values,
         user,
+        token,
         setResponseError,
         defaultAddress,
         setFormDisabled
@@ -71,16 +72,17 @@ const CustomerAddressForm = ({
       FORM_DATA.current = values;
     } else {
       // "next" btn has been clicked as the form submit
-      if (cart.numCartItems === 0) return;
-      // if first step is complete can go directly to shipping with next btn.
-      if (orderData.shipping !== false) return goTo2();
+      if (numCartItems === 0) return;
+      // if first step is complete can go directly to shipping with next btn
+      // except if user is not signed in. Then next btn always updates orderData.
+      if (orderData.shipping !== false && token) return goTo2();
       // change so address box updates w/ latest values
       FORM_DATA.current = values;
       // remove any zero quantity items
       dispatch(shedEmpty());
       // get shipping cost with submitted customer address
       getShippingCosts({
-        cart,
+        items,
         shippingAddress: orderData.shippingAddress || values,
       });
       // enable the "shipping" button that goes to step 2.
@@ -107,7 +109,7 @@ const CustomerAddressForm = ({
   // buttons to show at bottom of customer info form
   const customerSubmitButtons = formik => {
     // if user signed in and customer info form showing
-    if (user.token && !formDisabled)
+    if (token && !formDisabled)
       // return "update" and "cancel" buttons
       return (
         <div className="text-right">
@@ -128,15 +130,14 @@ const CustomerAddressForm = ({
           </Button>
         </div>
       );
-    // if customer info form closed and shipping address form closed
+    // if shipping address form is closed show "next" button
     else if (shippingFormDisabled)
-      // return "Next" button
       return (
         <Button
           type="submit"
           color="primary"
           disabled={formik.isSubmitting}
-          className="form-control rounded-pill mt-0 mt-lg-4"
+          className="form-control rounded-pill mt-0 mt-lg-4 mb-2"
         >
           Next
         </Button>
@@ -155,7 +156,7 @@ const CustomerAddressForm = ({
       {formik => (
         <Form className="text-left CustomerInfoForm">
           <Collapse isOpen={!formDisabled}>
-            <h6 className="text-info">Customer Info</h6>
+            <h6 className="font-weight-bold">Customer Info</h6>
             <Row form>
               <Col sm={6}>
                 <FormGroup>
@@ -216,7 +217,7 @@ const CustomerAddressForm = ({
                       formik.errors.email &&
                       'is-invalid'
                     }`}
-                    disabled={formDisabled || user.token}
+                    disabled={formDisabled || token}
                   />
                   <ErrorMessage
                     name="email"
@@ -366,55 +367,6 @@ const CustomerAddressForm = ({
       )}
     </Formik>
   );
-};
-
-/**
- * Make patch request to update user profile.
- *
- * @param {object} values - form values
- * @param {object} user - user object
- * @param {function} setResponseError - set error for display
- */
-
-const updateUserProfile = async (
-  values,
-  user,
-  setResponseError,
-  defaultAddress,
-  setFormDisabled
-) => {
-  const userUpdateData = { ...values };
-  // remove email to dis-allow email updating from here
-  delete userUpdateData['email'];
-  delete userUpdateData['user_id'];
-
-  // remomve empty string values from object
-  Object.entries(userUpdateData).forEach(([key, value]) => {
-    if (value === '') delete userUpdateData[key];
-  });
-  try {
-    // make patch request
-    const resp = await asyncAPIRequest(
-      `/users/${user.user.username}`,
-      'patch',
-      userUpdateData,
-      { _token: user.token }
-    );
-    // if error updating show message and return true
-    if (resp.error) {
-      setResponseError(resp.error.response.data.message);
-      return true;
-    } else {
-      // determine if enough info to have a default shipping address
-      defaultAddress.current = values;
-
-      // disable form if a sufficient shipping address data is available
-      if (defaultAddress.current) setFormDisabled(true);
-    }
-  } catch (error) {
-    setResponseError(error.message);
-    return true;
-  }
 };
 
 export default CustomerAddressForm;

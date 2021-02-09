@@ -57,7 +57,7 @@ const ShippingForm = ({
         isShippingAddress="true"
       />
       <h6 className="text-light shippingHeading">Choose a way to ship</h6>
-      <div className="ShippingForm px-4 pt-2 pb-3 bg-light text-dark rounded">
+      <div className="ShippingForm px-4 pt-2 pb-3 bg-light text-dark rounded border">
         <Formik
           initialValues={{
             shipping_method: [null],
@@ -95,7 +95,12 @@ const ShippingForm = ({
               }}
             >
               <FormGroup>
-                <Label htmlFor="shipping_method">Shipping Options</Label>
+                <Label
+                  htmlFor="shipping_method"
+                  className="text-lg font-italic"
+                >
+                  Shipping Options
+                </Label>
                 <Field
                   as="select"
                   name="shipping_method"

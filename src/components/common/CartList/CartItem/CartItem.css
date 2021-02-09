@@ -1,12 +1,12 @@
-.ItemsListDiv > .CartItem:nth-child(odd) {
+.CartListDiv > .CartItem:nth-child(odd) {
   background: white;
   border-top: 1px solid #dfdfdf;
   border-bottom: 1px solid #dfdfdf;
 }
-.ItemsListDiv > .CartItem:nth-child(2) {
+.CartListDiv > .CartItem:nth-child(2) {
   border-bottom: 1px solid #dfdfdf;
 }
-.ItemsListDiv > .CartItem:nth-child(3) {
+.CartListDiv > .CartItem:nth-child(3) {
   border-top: none;
 }
 
@@ -16,7 +16,7 @@
   justify-content: space-between;
   align-items: center;
   font-size: medium;
-  background: var(--light);
+  background: rgb(245, 248, 255);
 }
 
 .CartItem-name {
@@ -24,13 +24,26 @@
   width: 40%;
   flex-shrink: 0;
   display: inline-block;
+  font-weight: bold;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
 }
+/* On checkout page CartItem-name will be a button not a link. */
+.CartItem button.CartItem-name {
+  color: var(--primary);
+}
+.CartItem button.CartItem-name:hover {
+  color: darkblue;
+  text-decoration: underline;
+}
+
 .CartItem-price {
   flex-basis: 15%;
   width: 15%;
   flex-shrink: 0;
   display: inline-block;
 }
+
 .CartItem-quant-adj {
   flex-basis: 20%;
   width: 20%;
@@ -46,6 +59,7 @@
 .CartItem-quant-adj .increment {
   margin-right: 1px;
 }
+
 .CartItem-total {
   flex-basis: 25%;
   width: 25%;

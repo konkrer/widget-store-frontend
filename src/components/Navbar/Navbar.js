@@ -48,7 +48,7 @@ const NavbarOne = () => {
           </NavLink>
         </NavbarText>
         <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar>
+        <Collapse isOpen={isOpen} navbar className="pr-4">
           <Nav className="mr-auto" navbar>
             <NavbarText>
               <NavLink to="/new">New Products</NavLink>

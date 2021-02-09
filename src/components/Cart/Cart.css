@@ -21,7 +21,7 @@
 }
 
 .SideCart.animActive {
-  animation: animActiveRight 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: animActiveRight 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 .SideCart.animReverse {
@@ -58,12 +58,12 @@
   padding: 0 5px;
 }
 
-.SideCart .ItemsListDiv a {
+.SideCart .CartListDiv a {
   color: var(--dark);
   font-weight: 500;
 }
 
-.SideCart .ItemsListDiv a:hover {
+.SideCart .CartListDiv a:hover {
   color: var(--primary);
 }
 

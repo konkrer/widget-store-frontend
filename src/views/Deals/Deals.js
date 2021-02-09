@@ -1,6 +1,7 @@
-import { useMemo } from 'react';
+import { useEffect } from 'react';
 import { Route, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useSelector, useDispatch } from 'react-redux';
 
 // local imports
 import Navbar from '../../components/Navbar/Navbar';
@@ -9,16 +10,18 @@ import ProductDetail from '../../components/ProductDetail/ProductDetail';
 import LoginSignup from '../../components/LoginSignup/LoginSignup';
 import { getPathRoot } from '../../helpers/helpers';
 import Cart from '../../components/Cart/Cart';
+import toggleDir from '../../redux/actions/animation/toggleDir';
 import './Deals.css';
 
 function Deals() {
   const location = useLocation();
   const pathRoot = getPathRoot(location.pathname);
+  const slideoutDir = useSelector(state => state.animation.flipFlop);
+  const dispatch = useDispatch();
 
-  const slideoutDir = useMemo(() => {
-    // return a random '-' neg sign or an empty string ''
-    return Math.floor(Math.random() * 2) ? '-' : '';
-  }, []);
+  useEffect(() => {
+    dispatch(toggleDir());
+  }, [dispatch]);
 
   return (
     <>
@@ -27,7 +30,7 @@ function Deals() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{
-          marginLeft: `${slideoutDir}200vw`,
+          marginLeft: `${slideoutDir ? '' : '-'}200vw`,
           opacity: 0,
         }}
         transition={{ duration: 0.5 }}

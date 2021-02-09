@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Home snapshot 1`] = `
+exports[`Deals snapshot 1`] = `
 <DocumentFragment>
   <div
     class="sc-bdfBwQ hnBsPZ"
@@ -170,17 +170,17 @@ exports[`Home snapshot 1`] = `
     style="opacity: 0.0022222222222222222;"
   >
     <div
-      class="container my-4 py-3 Home dark-gradient1 rounded"
+      class="container my-4 py-3 Deals dark-gradient1 rounded"
     >
       <h1
         class="brand-style"
       >
-        Widget Store
+        Deals
       </h1>
       <h2
         class="lead font-italic mb-4 Home-byline"
       >
-        We have what you need!
+        Here's what's on sale!
       </h2>
       <div
         class="justify-content-center pb-2 card-deck"

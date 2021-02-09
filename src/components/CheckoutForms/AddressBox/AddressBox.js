@@ -47,7 +47,7 @@ const AddressBox = ({
           {title}
         </h6>
         {!isTextBox && (
-          <address className="bg-light p-2 text-dark rounded border border-dark">
+          <address className="bg-white p-2 text-dark rounded border">
             {customer.first_name} {customer.last_name}
             <br />
             {!isShippingAddress && customer.email}
