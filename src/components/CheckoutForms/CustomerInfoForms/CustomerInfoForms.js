@@ -1,15 +1,16 @@
 import { useState, useEffect, useRef } from 'react';
-import { shallowEqual, useSelector } from 'react-redux';
+import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import * as Yup from 'yup';
 import { Button } from 'reactstrap';
 
 // local imports
 import { asyncAPIRequest } from '../../../hooks/apiHook';
-import ShippingAddressForm from './ShippingAddressForm';
-import CustomerAddressForm from './CustomerAddressForm';
+import ShippingAddressForm from './ShippingAddressForm/ShippingAddressForm';
+import CustomerAddressForm from './CustomerAddressForm/CustomerAddressForm';
 import AddressBox from '../AddressBox/AddressBox';
 import PaymentOptions from '../../common/PaymentOptions/PaymentOptions';
+import resetCart from '../../../redux/actions/cart/resetCart';
 
 /**
  * Customer info forms for checkout stage 1.
@@ -24,6 +25,7 @@ const CustomerInfoForms = ({
   subtotal,
   setCustomerCheckmark,
 }) => {
+  const dispatch = useDispatch();
   const { user, token } = useSelector(
     state => ({
       user: state.user.user,
@@ -47,36 +49,35 @@ const CustomerInfoForms = ({
   // get user profile data if user is logged in
   useEffect(() => {
     async function getUser() {
-      try {
-        const resp = await asyncAPIRequest(
-          `/users/${user.username}`,
-          'get',
-          null,
-          {
-            _token: token,
-          }
-        );
-        if (resp.error) setResponseError(resp.error.response.data.message);
-        else {
-          // parse relevant data
-          const userData = getCustomerDataFromResponse(resp);
-
-          // update default form state to show user info on form
-          FORM_DATA.current = {
-            ...FORM_DATA.current,
-            ...userData,
-          };
-          // determine if enough info to have a default shipping address
-          defaultAddress.current = enoughInfoForDefaultAddress(userData);
-
-          // disable form is sufficient shipping address data is available
-          if (defaultAddress.current) setFormDisabled(true);
-
-          setLoadingUser(false);
+      const resp = await asyncAPIRequest(
+        `/users/${user.username}`,
+        'get',
+        null,
+        {
+          _token: token,
         }
-      } catch (error) {
-        console.log(error);
-        setResponseError(error.message);
+      );
+      if (resp.error) {
+        setResponseError(resp.error.response.data.message);
+        setLoadingUser(false);
+      } else {
+        // parse relevant data
+        const userData = getCustomerDataFromResponse(resp);
+
+        // update default form state to show user info on form
+        FORM_DATA.current = {
+          ...FORM_DATA.current,
+          ...userData,
+        };
+        // determine if enough info to have a default shipping address
+        defaultAddress.current = enoughInfoForDefaultAddress(userData);
+
+        // hide form is sufficient shipping address data is available
+        if (defaultAddress.current) {
+          setFormDisabled(true);
+        }
+
+        setLoadingUser(false);
       }
     }
     // only attempt getting user info if user is logged in
@@ -104,8 +105,11 @@ const CustomerInfoForms = ({
         setShippingFormDisabled(true);
 
         // Forms Reset-
-        // Set form data to default if user is not signed in.
-        if (token === null) FORM_DATA.current = DEFAULT_CUST_FORM_DATA;
+        // if user is not signed in set form data to default and clear cart.
+        if (token === null) {
+          FORM_DATA.current = DEFAULT_CUST_FORM_DATA;
+          dispatch(resetCart());
+        }
         // reset forms by remounting forms.
         setFormReset(true);
         // reset = await new Promise(res => setTimeout(res, 100));
@@ -122,7 +126,7 @@ const CustomerInfoForms = ({
     return () => {
       clearTimeout(reset);
     };
-  }, [token, setOrderData, goTo1]);
+  }, [token, setOrderData, goTo1, dispatch]);
 
   // if user is logged in but user profile data has not loaded yet return loading...
   if (token && loadingUser) return <h1>Loading...</h1>;
@@ -184,7 +188,7 @@ const CustomerInfoForms = ({
             to="/checkout/login"
             className="btn btn-info btn-sm mb-3 mt-1"
           >
-            Login / Create Account
+            Login / Signup
           </NavLink>
           <span className="pl-3">
             <i>- or checkout as guest below</i>

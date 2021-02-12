@@ -1,7 +1,7 @@
 /** Navbar tests */
 
 // local imports
-import { renderWithStore } from '../../helpers/testHelpers';
+import { renderWithStore } from '../../utils/testHelpers';
 import Navbar from './Navbar';
 
 test('renders Navbar', () => {

@@ -2,6 +2,7 @@ import {
   calculateDiscountPrice,
   calculateDiscountPercent,
   getDiscountData,
+  calculateSubtotal,
   calculateTax,
   calculateTotal,
 } from './monies';
@@ -68,6 +69,23 @@ describe('getDiscountData', () => {
     const data = getDiscountData(product);
     expect(data.discountPrice).toEqual('400.40');
     expect(data.percent).toEqual('0');
+  });
+});
+
+describe('calculateSubtotal', () => {
+  test('should give accurate subtotal', () => {
+    expect(calculateSubtotal({ 1: product, 2: product2 })).toBe('834.97');
+    expect(calculateSubtotal({ 1: product })).toBe('800.80');
+    expect(calculateSubtotal({ 2: product2 })).toBe('34.17');
+    expect(calculateSubtotal({ 2: { ...product2, quantity: 3 } })).toBe(
+      '102.51'
+    );
+    expect(calculateSubtotal({})).toBe('0.00');
+  });
+
+  test('should return subtotal for non-CA residents', () => {
+    expect(calculateTax('100.00', 'Nevada')).toBe('0.00');
+    expect(calculateTax('1000.00', 'MI')).toBe('0.00');
   });
 });
 

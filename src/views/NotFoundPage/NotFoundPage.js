@@ -1,9 +1,8 @@
-import { useState } from 'react';
 import styled from 'styled-components';
 import { Button } from 'reactstrap';
 
 // local imports
-import { FramerRedirect } from '../../helpers/helpers';
+import { FramerLink } from '../../utils/helpers';
 
 const FlexOverlay = styled.div`
   height: 100vh;
@@ -15,17 +14,15 @@ const FlexOverlay = styled.div`
 `;
 
 const NotFoundPage = () => {
-  const [redirectHome, setRedirectHome] = useState(false);
-
-  if (redirectHome) return <FramerRedirect to="/shop" />;
-
   return (
     <FlexOverlay>
       <section className="lead text-light">
         <h1>404 Page Not Found</h1>
-        <Button color="primary" size="lg" onClick={setRedirectHome}>
-          Go Home
-        </Button>
+        <FramerLink to="/shop">
+          <Button color="primary" size="lg">
+            Go Home
+          </Button>
+        </FramerLink>
       </section>
     </FlexOverlay>
   );

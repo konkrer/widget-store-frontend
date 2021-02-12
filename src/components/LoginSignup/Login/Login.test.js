@@ -2,7 +2,7 @@ import { act, fireEvent } from '@testing-library/react';
 import axios from 'axios';
 
 // local imports
-import { renderWithStore } from '../../../helpers/testHelpers';
+import { renderWithStore } from '../../../utils/testHelpers';
 import { testStore } from '../../../redux/store/reduxStore';
 import logout from '../../../redux/actions/user/logout';
 import Login from './Login';
@@ -130,4 +130,29 @@ test('shoud show error message with submit failure', async () => {
   const errorMessage = getByRole('alert');
   expect(errorMessage).toBeInTheDocument();
   expect(errorMessage.textContent).toBe('error message');
+});
+
+test('show password button shows/hides password', async () => {
+  const { getByLabelText, getByRole } = renderWithStore(<Login />);
+
+  const showPasswordtn = getByRole('button', { name: /show password/i });
+  const passwordInput = getByLabelText(/password/i);
+
+  await act(async () => {
+    fireEvent.change(passwordInput, { target: { value: 'Password1' } });
+  });
+
+  expect(passwordInput.type).toBe('password');
+
+  await act(async () => {
+    fireEvent.click(showPasswordtn);
+  });
+
+  expect(passwordInput.type).toBe('text');
+
+  await act(async () => {
+    fireEvent.click(showPasswordtn);
+  });
+
+  expect(passwordInput.type).toBe('password');
 });

@@ -4,10 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 
 // local imports
 import { fireEvent, render } from '@testing-library/react';
-import {
-  TEST_DATA,
-  populateTestDataHook,
-} from '../../../../helpers/testConfig';
+import { TEST_DATA, populateTestDataHook } from '../../../../utils/testConfig';
 import CartItem from './CartItem';
 
 let handleIncrement, handleDecrement, handleRemove;

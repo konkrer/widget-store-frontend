@@ -2,6 +2,17 @@ import Decimal from 'decimal.js';
 
 const SF_SALES_TAX = new Decimal('0.085');
 
+// calculate items subtotal from items object
+export function calculateSubtotal(items) {
+  return Object.values(items)
+    .reduce((acc, product) => {
+      const price = new Decimal(calculateDiscountPrice(product));
+      const itemTotal = price.times(product.quantity);
+      return itemTotal.plus(acc);
+    }, 0)
+    .toFixed(2);
+}
+
 // calculate discounted price
 export function calculateDiscountPrice(product) {
   if (product.discount === '0.00') return product.price;

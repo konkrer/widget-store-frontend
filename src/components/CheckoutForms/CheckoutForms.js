@@ -30,20 +30,15 @@ const CheckoutForms = ({ setDisabled, orderData, setOrderData }) => {
 
   const getShippingCosts = useCallback(
     customerData => {
-      if (!customerData) return;
+      // if (!customerData) return;
       // fake call to api for shipping costs
-      try {
-        // fake response with shipping costs, etc
-        const resp = fakeAPICall(customerData, items);
+      // fake response with shipping costs, etc
+      const resp = fakeAPICall(customerData, items);
 
-        if (resp.error) setResponseError(resp.error.response.data.message);
-        else {
-          setShippingMethods(resp.data);
-          setLoadingShipping(false);
-        }
-      } catch (error) {
-        console.log(error);
-        setResponseError(error.message);
+      if (resp.error) setResponseError(resp.error.response.data.message);
+      else {
+        setShippingMethods(resp.data);
+        setLoadingShipping(false);
       }
     },
     [items]
@@ -177,7 +172,7 @@ const CheckoutForms = ({ setDisabled, orderData, setOrderData }) => {
   );
 };
 
-function fakeAPICall(customer, cart) {
+function fakeAPICall() {
   return FAKE_SHIPPING_RESPONSE;
 }
 

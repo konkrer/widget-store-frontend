@@ -8,7 +8,7 @@ import Navbar from '../../components/Navbar/Navbar';
 import ProductList from '../../components/ProductList/ProductList';
 import ProductDetail from '../../components/ProductDetail/ProductDetail2/ProductDetail2';
 import LoginSignup from '../../components/LoginSignup/LoginSignup';
-import { getPathRoot } from '../../helpers/helpers';
+import { getPathRoot } from '../../utils/helpers';
 import Cart from '../../components/Cart/Cart';
 import toggleDir from '../../redux/actions/animation/toggleDir';
 import './Home.css';

@@ -1,4 +1,4 @@
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 /**
@@ -31,6 +31,11 @@ export const FramerRedirect = props => (
     <Redirect {...props} />
   </motion.div>
 );
+export const FramerLink = props => (
+  <motion.div exit="undefined">
+    <Link {...props} />
+  </motion.div>
+);
 
 /**
  * animateVariant()
@@ -55,7 +60,7 @@ export const animateVariant = (setterFunct, delay, callback, args = []) => {
   // if animation state is false set to 'default' else 'active'
   setterFunct(state => (state === false ? 'default' : 'active'));
   // after delay set back to "default"
-  setTimeout(() => {
+  return setTimeout(() => {
     setterFunct('default');
     if (callback) callback(...args);
   }, delay);

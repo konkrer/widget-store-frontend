@@ -1,7 +1,17 @@
 // local imports
-// import { fireEvent } from '@testing-library/react';
-import { renderWithStore } from '../../helpers/testHelpers';
+import { fireEvent } from '@testing-library/react';
+import { renderWithStore } from '../../utils/testHelpers';
 import LoginSignup from './LoginSignup';
+
+const mockUseHistoryGoBack = jest.fn();
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useHistory: () => ({
+    goBack: mockUseHistoryGoBack,
+  }),
+}));
+
+afterEach(() => jest.resetAllMocks());
 
 test('should render', () => {
   renderWithStore(<LoginSignup />);
@@ -12,21 +22,22 @@ test('LoginSignup snapshot', async () => {
   expect(asFragment()).toMatchSnapshot();
 });
 
-// test('login form shows and signup form can be accessed', () => {
-//   const { queryByLabelText, getByRole, debug } = renderWithStore(
-//     <LoginSignup />
-//   );
+/** this test need to be improved - no assertions */
+test('changing tabs login/signup ok', () => {
+  const { getByTestId } = renderWithStore(<LoginSignup />);
 
-//   // login form should show and have no username input and have login button
-//   let usernameInput = queryByLabelText(/username/i);
-//   const signupButton = getByRole('button', { name: /signup/i });
-//   const loginButton = getByRole('button', { name: /login/i });
-//   debug();
-//   expect(signupButton).not.toBeVisible();
-//   expect(usernameInput).not.toBeVisible();
-//   expect(loginButton).toBeInTheDocument();
+  const loginLink = getByTestId('login tab link');
+  const signupLink = getByTestId('signup tab link');
 
-//   // change tab to signup form
-//   const signupTab = getByRole('link', { name: /signup/i });
-//   fireEvent.click(signupTab);
-// });
+  fireEvent.click(loginLink);
+  fireEvent.click(signupLink);
+});
+
+test('close button calls history goBack', () => {
+  const { getAllByRole } = renderWithStore(<LoginSignup />);
+
+  const cancelBtn = getAllByRole('button', { name: /cancel/i });
+  fireEvent.click(cancelBtn[0]);
+
+  expect(mockUseHistoryGoBack.mock.calls.length).toBe(1);
+});

@@ -23,7 +23,7 @@ exports[`Login snapshot 1`] = `
         </label>
         <input
           autocomplete="email"
-          class="form-control"
+          class="form-control form-control-sm undefined"
           id="email1"
           name="email"
           type="email"
@@ -39,26 +39,36 @@ exports[`Login snapshot 1`] = `
         >
           Password
         </label>
+        <button
+          class=" ml-1 text-sm py-0 border-0 font-italic btn btn-outline-primary btn-sm"
+          type="button"
+        >
+          Show Password
+        </button>
         <input
           autocomplete="current-password"
-          class="form-control"
+          class="form-control form-control-sm undefined"
           id="password1"
           name="password"
           type="password"
           value=""
         />
       </div>
-      <button
-        class="btn btn-primary"
-        type="submit"
+      <div
+        class="mt-4"
       >
-        Login
-      </button>
-      <button
-        class="btn btn-secondary ml-2"
-      >
-        Cancel
-      </button>
+        <button
+          class="btn btn-primary"
+          type="submit"
+        >
+          Login
+        </button>
+        <button
+          class="btn btn-secondary ml-2"
+        >
+          Cancel
+        </button>
+      </div>
     </form>
   </div>
 </DocumentFragment>

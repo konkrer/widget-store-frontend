@@ -10,7 +10,7 @@ exports[`CustomerInfoForms snapshot 1`] = `
         class="btn btn-info btn-sm mb-3 mt-1"
         href="/checkout/login"
       >
-        Login / Create Account
+        Login / Signup
       </a>
       <span
         class="pl-3"

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -15,9 +15,18 @@ import ModalCard from './ModalCard';
 import Pricing1 from '../common/Pricing/Pricing1';
 import CartIconBadge from '../common/CartIconBadge/CartIconBadge';
 import addProduct from '../../redux/actions/cart/addProduct';
-import { getPathRoot, animateVariant } from '../../helpers/helpers';
+import { getPathRoot, animateVariant } from '../../utils/helpers';
 
-const PDModal = ({ handleClose, product, innerContentOnly, disabled }) => {
+/**
+ * Product Detail Modal Card
+ *
+ * Returns 'card' with product info and add to cart functionality.
+ *
+ * If innerContentOnly is true returns inner content only - no card.
+ * innerContentOnly is used inconjunction with bootstrap modals.
+ */
+
+const PDModalCard = ({ handleClose, product, innerContentOnly, disabled }) => {
   const location = useLocation();
   const pathRoot = getPathRoot(location.pathname);
   const history = useHistory();
@@ -26,6 +35,7 @@ const PDModal = ({ handleClose, product, innerContentOnly, disabled }) => {
   // state
   const numCartItems = useSelector(state => state.cart.numCartItems);
   const [animClass, setBtnAnimation] = useState('default');
+  const animationTimer = useRef(null);
 
   // add to cart form
   const INIT_FORM_STATE = { quantity: disabled ? product.quantity : 1 };
@@ -39,15 +49,17 @@ const PDModal = ({ handleClose, product, innerContentOnly, disabled }) => {
     }));
   };
 
-  const handleAddToCart = e => {
+  const handleSubmit = e => {
     e.preventDefault();
     dispatch(addProduct({ ...product, quantity: formData.quantity }));
-    animateVariant(setBtnAnimation, 1000);
+    animationTimer.current = animateVariant(setBtnAnimation, 1000);
   };
 
-  const goToCart = () => {
-    history.push(`${pathRoot}/cart`);
-  };
+  useEffect(() => {
+    return () => {
+      clearTimeout(animationTimer.current);
+    };
+  }, []);
 
   // modal close btn
   const closeBtn = <button className="close-modal close">&times;</button>;
@@ -77,7 +89,8 @@ const PDModal = ({ handleClose, product, innerContentOnly, disabled }) => {
         </div>
       </ModalBody>
       <ModalFooter>
-        <form onSubmit={handleAddToCart}>
+        {/* Add to cart form */}
+        <form onSubmit={handleSubmit}>
           <label htmlFor="quantity">Quantity</label>
           <input
             type="number"
@@ -93,6 +106,9 @@ const PDModal = ({ handleClose, product, innerContentOnly, disabled }) => {
             Add To Cart
           </Button>
         </form>
+        {/* End add to cart form */}
+
+        {/* Go to cart button w/ animation */}
         <motion.div
           variants={{
             active: {
@@ -111,8 +127,9 @@ const PDModal = ({ handleClose, product, innerContentOnly, disabled }) => {
             className={animClass}
             style={{ color: 'var(--btnAnimColor)' }}
             id="cart-button"
-            onClick={goToCart}
+            onClick={() => history.push(`${pathRoot}/cart`)}
             disabled={disabled || pathRoot === '/checkout'}
+            aria-label={'go to cart'}
           >
             <CartIconBadge
               numCartItems={numCartItems}
@@ -124,6 +141,8 @@ const PDModal = ({ handleClose, product, innerContentOnly, disabled }) => {
             Go To Shopping Cart
           </UncontrolledTooltip>
         </motion.div>
+        {/* End go to cart button w/ animation */}
+
         <Button color="secondary" className="close-modal">
           Cancel
         </Button>
@@ -135,10 +154,14 @@ const PDModal = ({ handleClose, product, innerContentOnly, disabled }) => {
   if (innerContentOnly) return modalInner;
 
   return (
-    <ModalCard className="ProductDetail" color="var(--dark)">
+    <ModalCard
+      className="ProductDetail"
+      color="var(--dark)"
+      data-testid="ModalCard"
+    >
       {modalInner}
     </ModalCard>
   );
 };
 
-export default PDModal;
+export default PDModalCard;

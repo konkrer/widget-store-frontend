@@ -2,8 +2,8 @@
 
 // local imports
 import { act } from '@testing-library/react';
-import { renderWithStore } from '../../helpers/testHelpers';
-import { TEST_DATA, populateTestDataHook } from '../../helpers/testConfig';
+import { renderWithStore } from '../../utils/testHelpers';
+import { TEST_DATA, populateTestDataHook } from '../../utils/testConfig';
 import ProductList from './ProductList';
 
 const axios = require('axios');

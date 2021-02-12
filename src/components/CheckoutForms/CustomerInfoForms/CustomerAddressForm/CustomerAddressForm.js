@@ -1,3 +1,4 @@
+import { useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import {
@@ -11,11 +12,11 @@ import {
 } from 'reactstrap';
 
 // local imports
-import shedEmpty from '../../../redux/actions/cart/shedEmpty';
-import { customerInfoSchema } from './CustomerInfoForms';
-import { calculateTax, calculateTotal } from '../../../helpers/monies';
-import { animateVariant } from '../../../helpers/helpers';
-import { updateUserProfile } from '../../../helpers/apiHelpers';
+import shedEmpty from '../../../../redux/actions/cart/shedEmpty';
+import { customerInfoSchema } from '../CustomerInfoForms';
+import { calculateTax, calculateTotal } from '../../../../utils/monies';
+import { animateVariant } from '../../../../utils/helpers';
+import { asyncAPIRequest } from '../../../../hooks/apiHook';
 
 const CustomerAddressForm = ({
   orderData,
@@ -37,12 +38,13 @@ const CustomerAddressForm = ({
   const numCartItems = useSelector(state => state.cart.numCartItems);
   const items = useSelector(state => state.cart.items);
   const dispatch = useDispatch();
+  const animationTimer = useRef(null);
 
   // Handle CustomerInfoForm submit.
   //
   // For logged in users: submitting this form will
   // update the user profile or proceed to shipping step
-  // depending if user has the customer info form visible
+  // depending if the user has the customer info form
   // or the "next" button visible.
   //
   // For non-logged in users: this form will
@@ -55,7 +57,7 @@ const CustomerAddressForm = ({
     // btn has been clicked from the CustomerInfoForm
     if (token && !formDisabled) {
       // data changing - shipping will be set false
-      // disabling the "shipping" button that goes to step 2.
+      // this disabes the "shipping" button that goes to step 2.
       shippingFalsey = false;
       // update user profile
       const error = await updateUserProfile(
@@ -88,7 +90,12 @@ const CustomerAddressForm = ({
       // enable the "shipping" button that goes to step 2.
       shippingFalsey = null;
       // animate checkmark then show shipping form
-      animateVariant(setCustomerCheckmark, 500, goTo2, [true]);
+      animationTimer.current = animateVariant(
+        setCustomerCheckmark,
+        500,
+        goTo2,
+        [true]
+      );
     }
     // update orderData
     const tax = calculateTax(subtotal, values.state);
@@ -105,6 +112,12 @@ const CustomerAddressForm = ({
         : null,
     }));
   };
+
+  useEffect(() => {
+    return () => {
+      clearTimeout(animationTimer.current);
+    };
+  }, []);
 
   // buttons to show at bottom of customer info form
   const customerSubmitButtons = formik => {
@@ -367,6 +380,61 @@ const CustomerAddressForm = ({
       )}
     </Formik>
   );
+};
+
+/**
+ * updateUserProfile()
+ *
+ * Make patch request to update a user profile. Used by CustomerAddressForm
+ * to allow updating customer address of signed in users.
+ *
+ * @param {object} values - form values
+ * @param {object} user - user object
+ * @param {token} token - user token
+ * @param {function} setResponseError - state setter for error display
+ * @param {any} defaultAddress - Falsey or obj with address components
+ * @param {function} setFormDisabled - state setter to hide form after update
+ *
+ * returns: true if an error happened else undefined
+ */
+
+export const updateUserProfile = async (
+  values,
+  user,
+  token,
+  setResponseError,
+  defaultAddress,
+  setFormDisabled
+) => {
+  const userUpdateData = { ...values };
+  // remove email to dis-allow email updating from here
+  delete userUpdateData['email'];
+  delete userUpdateData['user_id'];
+
+  // remomve key/value pairs having a value of empty string from userUpdateData
+  Object.entries(userUpdateData).forEach(([key, value]) => {
+    if (value === '') delete userUpdateData[key];
+  });
+
+  try {
+    // make patch request
+    const resp = await asyncAPIRequest(
+      `/users/${user.username}`,
+      'patch',
+      userUpdateData,
+      { _token: token }
+    );
+    if (resp.error) {
+      setResponseError(resp.error.response.data.message);
+      return true;
+    } else {
+      defaultAddress.current = values;
+      setFormDisabled(true);
+    }
+  } catch (error) {
+    setResponseError(error.message);
+    return true;
+  }
 };
 
 export default CustomerAddressForm;

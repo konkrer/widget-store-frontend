@@ -6,7 +6,7 @@ exports[`snapshot 1`] = `
     class="Checkout text-light"
   >
     <div
-      class="sc-bdfBwQ hnBsPZ"
+      class="sc-bdfBwQ fijioT"
     >
       <nav
         class="Navbar navbar navbar-expand-md navbar-dark"
@@ -189,6 +189,7 @@ exports[`snapshot 1`] = `
           class="Panel-close"
         >
           <button
+            aria-label="close"
             class="btn-noStyle"
           >
             <svg
@@ -459,7 +460,7 @@ exports[`snapshot 1`] = `
                         class="btn btn-info btn-sm mb-3 mt-1"
                         href="/checkout/login"
                       >
-                        Login / Create Account
+                        Login / Signup
                       </a>
                       <span
                         class="pl-3"

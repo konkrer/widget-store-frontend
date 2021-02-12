@@ -1,15 +1,26 @@
-/** ProductDetail tests */
+/** ProductDetail2 tests */
 import { act, fireEvent } from '@testing-library/react';
 
 // local imports
+import ProductDetail2 from './ProductDetail2';
+import resetCart from '../../../redux/actions/cart/resetCart';
 import { renderWithStore } from '../../../utils/testHelpers';
 import { testStore } from '../../../redux/store/reduxStore';
-import ProductDetail from './ProductDetail';
-import resetCart from '../../../redux/actions/cart/resetCart';
 import { TEST_DATA, populateTestDataHook } from '../../../utils/testConfig';
 
 const axios = require('axios');
 jest.mock('axios');
+
+// mock useHistory
+let mockUseHistoryReplace = jest.fn();
+let mockUseHistoryPush = jest.fn();
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useHistory: () => ({
+    replace: mockUseHistoryReplace,
+    push: mockUseHistoryPush,
+  }),
+}));
 
 beforeAll(() => {
   populateTestDataHook(TEST_DATA);
@@ -28,16 +39,16 @@ afterEach(() => {
   testStore.dispatch(resetCart());
 });
 
-test('renders ProductDetail', async () => {
+test('renders ProductDetail2', async () => {
   await act(async () => {
-    renderWithStore(<ProductDetail />);
+    renderWithStore(<ProductDetail2 />);
   });
 });
 
-test('ProductDetail snapshot', async () => {
+test('ProductDetail2 snapshot', async () => {
   let asFragment;
   await act(async () => {
-    const resp = renderWithStore(<ProductDetail />);
+    const resp = renderWithStore(<ProductDetail2 />);
     asFragment = resp.asFragment;
   });
   expect(asFragment()).toMatchSnapshot();
@@ -46,7 +57,7 @@ test('ProductDetail snapshot', async () => {
 test('Quantity input in document', async () => {
   let getByLabelText;
   await act(async () => {
-    const resp = renderWithStore(<ProductDetail />);
+    const resp = renderWithStore(<ProductDetail2 />);
     getByLabelText = resp.getByLabelText;
   });
   // test quantity input present with value of '1'
@@ -58,7 +69,7 @@ test('Quantity input in document', async () => {
 test('Add to cart adds to store.cart data', async () => {
   let getByText;
   await act(async () => {
-    const resp = renderWithStore(<ProductDetail />);
+    const resp = renderWithStore(<ProductDetail2 />);
     getByText = resp.getByText;
   });
   // click add to cart button
@@ -76,7 +87,7 @@ test('Add to cart adds to store.cart data', async () => {
 test('Add to cart can add multiple quantity to store.cart data', async () => {
   let getByText, getByLabelText;
   await act(async () => {
-    const resp = renderWithStore(<ProductDetail />);
+    const resp = renderWithStore(<ProductDetail2 />);
     getByText = resp.getByText;
     getByLabelText = resp.getByLabelText;
   });
@@ -92,4 +103,35 @@ test('Add to cart can add multiple quantity to store.cart data', async () => {
   const cart = testStore.getState().cart;
   expect(cart.items).toHaveProperty('1');
   expect(cart.items[1].quantity).toEqual(3);
+});
+
+test('closing modal ok', async () => {
+  let getByRole;
+  await act(async () => {
+    const resp = renderWithStore(<ProductDetail2 />);
+    getByRole = resp.getByRole;
+  });
+  const cancelButton = getByRole('button', { name: /cancel/i });
+  act(() => {
+    fireEvent.click(cancelButton);
+  });
+  // await delay to allow animation then page url change
+  await new Promise(res => setTimeout(res, 500));
+  expect(mockUseHistoryPush.mock.calls.length).toBe(1);
+  expect(mockUseHistoryPush.mock.calls[0][0]).toBe('/');
+});
+
+test('API error returns null', async () => {
+  axios.mockImplementation(() => {
+    throw new Error();
+  });
+  let queryByRole;
+  await act(async () => {
+    const resp = renderWithStore(<ProductDetail2 />);
+    queryByRole = resp.queryByRole;
+  });
+  const cancelButton = queryByRole('button', { name: /cancel/i });
+  expect(cancelButton).not.toBeInTheDocument();
+  expect(mockUseHistoryReplace.mock.calls.length).toBe(1);
+  expect(mockUseHistoryReplace.mock.calls[0][0]).toBe('/');
 });

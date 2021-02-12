@@ -1,8 +1,8 @@
 /** ProductCard tests */
 
 // local imports
-import { renderWithStore } from '../../helpers/testHelpers';
-import { TEST_DATA, populateTestDataHook } from '../../helpers/testConfig';
+import { renderWithStore } from '../../utils/testHelpers';
+import { TEST_DATA, populateTestDataHook } from '../../utils/testConfig';
 import ProductCard from './ProductCard';
 
 beforeAll(() => {

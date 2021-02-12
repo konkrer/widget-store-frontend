@@ -6,7 +6,7 @@ import incrementQuantity from '../actions/cart/incrementQuantity';
 import decrementQuantity from '../actions/cart/decrementQuantity';
 import resetCart from '../actions/cart/resetCart';
 
-import { TEST_DATA, populateTestDataHook } from '../../helpers/testConfig';
+import { TEST_DATA, populateTestDataHook } from '../../utils/testConfig';
 
 beforeAll(() => {
   populateTestDataHook(TEST_DATA);

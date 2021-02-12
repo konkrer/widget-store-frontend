@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotFoundPage snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-bdfBwQ bzXUqH"
+  >
+    <section
+      class="lead text-light"
+    >
+      <h1>
+        404 Page Not Found
+      </h1>
+      <div>
+        <a
+          href="/shop"
+        >
+          <button
+            class="btn btn-primary btn-lg"
+          >
+            Go Home
+          </button>
+        </a>
+      </div>
+    </section>
+  </div>
+</DocumentFragment>
+`;

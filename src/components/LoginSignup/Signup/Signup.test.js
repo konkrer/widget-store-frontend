@@ -2,12 +2,23 @@ import { act, fireEvent } from '@testing-library/react';
 import axios from 'axios';
 
 // local imports
-import { renderWithStore } from '../../../helpers/testHelpers';
+import { renderWithStore } from '../../../utils/testHelpers';
 import { testStore } from '../../../redux/store/reduxStore';
 import logout from '../../../redux/actions/user/logout';
 import Signup from './Signup';
 
 jest.mock('axios');
+
+// label regexs and test values for form inputs testing
+let inputs;
+
+beforeEach(() => {
+  inputs = [
+    [/username/i, 'test_user'],
+    [/email/i, 'abc@def.gh'],
+    [/password/i, 'Password1'],
+  ];
+});
 
 afterEach(() => {
   jest.resetAllMocks();
@@ -27,19 +38,12 @@ test('shoud store user data in store with submit success', async () => {
 
   const { getByLabelText, getByRole } = renderWithStore(<Signup />);
 
-  const usernameInput = getByLabelText(/username/i);
+  // add values to all inputs
   await act(async () => {
-    fireEvent.change(usernameInput, { target: { value: 'test_user' } });
-  });
-
-  const emailInput = getByLabelText(/email/i);
-  await act(async () => {
-    fireEvent.change(emailInput, { target: { value: 'abc@def.gh' } });
-  });
-
-  const passwordInput = getByLabelText(/password/i);
-  await act(async () => {
-    fireEvent.change(passwordInput, { target: { value: 'Password1' } });
+    inputs.forEach(async ([re, text]) => {
+      const input = getByLabelText(re);
+      fireEvent.change(input, { target: { value: text } });
+    });
   });
 
   const SignupButton = getByRole('button', { name: /signup/i });
@@ -66,19 +70,15 @@ test('shoud store user data in store with submit success', async () => {
 test('shoud not call axios with bad username', async () => {
   const { getByLabelText, getByRole } = renderWithStore(<Signup />);
 
-  const usernameInput = getByLabelText(/username/i);
-  await act(async () => {
-    fireEvent.change(usernameInput, { target: { value: 't' } });
-  });
+  // make username input value too short
+  inputs[0][1] = 't';
 
-  const emailInput = getByLabelText(/email/i);
+  // add values to all inputs
   await act(async () => {
-    fireEvent.change(emailInput, { target: { value: 'abc@def.gh' } });
-  });
-
-  const passwordInput = getByLabelText(/password/i);
-  await act(async () => {
-    fireEvent.change(passwordInput, { target: { value: 'Password1' } });
+    inputs.forEach(async ([re, text]) => {
+      const input = getByLabelText(re);
+      fireEvent.change(input, { target: { value: text } });
+    });
   });
 
   const SignupButton = getByRole('button', { name: /Signup/i });
@@ -92,19 +92,15 @@ test('shoud not call axios with bad username', async () => {
 test('shoud not call axios with bad email', async () => {
   const { getByLabelText, getByRole } = renderWithStore(<Signup />);
 
-  const usernameInput = getByLabelText(/username/i);
-  await act(async () => {
-    fireEvent.change(usernameInput, { target: { value: 'test_user' } });
-  });
+  // make email input value incorrect
+  inputs[1][1] = 'abc@cd.';
 
-  const emailInput = getByLabelText(/email/i);
+  // add values to all inputs
   await act(async () => {
-    fireEvent.change(emailInput, { target: { value: 'abc@def.' } });
-  });
-
-  const passwordInput = getByLabelText(/password/i);
-  await act(async () => {
-    fireEvent.change(passwordInput, { target: { value: 'Password1' } });
+    inputs.forEach(async ([re, text]) => {
+      const input = getByLabelText(re);
+      fireEvent.change(input, { target: { value: text } });
+    });
   });
 
   const SignupButton = getByRole('button', { name: /Signup/i });
@@ -118,19 +114,15 @@ test('shoud not call axios with bad email', async () => {
 test('shoud not call axios with bad password', async () => {
   const { getByLabelText, getByRole } = renderWithStore(<Signup />);
 
-  const usernameInput = getByLabelText(/username/i);
-  await act(async () => {
-    fireEvent.change(usernameInput, { target: { value: 'test_user' } });
-  });
+  // make password input missing number
+  inputs[2][1] = 'Password';
 
-  const emailInput = getByLabelText(/email/i);
+  // add values to all inputs
   await act(async () => {
-    fireEvent.change(emailInput, { target: { value: 'abc@def.gh' } });
-  });
-
-  const passwordInput = getByLabelText(/password/i);
-  await act(async () => {
-    fireEvent.change(passwordInput, { target: { value: 'Password' } });
+    inputs.forEach(async ([re, text]) => {
+      const input = getByLabelText(re);
+      fireEvent.change(input, { target: { value: text } });
+    });
   });
 
   const SignupButton = getByRole('button', { name: /Signup/i });
@@ -148,19 +140,12 @@ test('shoud show error message with submit failure', async () => {
 
   const { getByLabelText, getByRole } = renderWithStore(<Signup />);
 
-  const usernameInput = getByLabelText(/username/i);
+  // add values to all inputs
   await act(async () => {
-    fireEvent.change(usernameInput, { target: { value: 'test_user' } });
-  });
-
-  const emailInput = getByLabelText(/email/i);
-  await act(async () => {
-    fireEvent.change(emailInput, { target: { value: 'abc@def.gh' } });
-  });
-
-  const passwordInput = getByLabelText(/password/i);
-  await act(async () => {
-    fireEvent.change(passwordInput, { target: { value: 'Password1' } });
+    inputs.forEach(async ([re, text]) => {
+      const input = getByLabelText(re);
+      fireEvent.change(input, { target: { value: text } });
+    });
   });
 
   const SignupButton = getByRole('button', { name: /Signup/i });
@@ -174,7 +159,32 @@ test('shoud show error message with submit failure', async () => {
   expect(user.token).toBe(null);
   expect(user.user).toBe(null);
 
-  const errorMessage = getByRole('alert');
-  expect(errorMessage).toBeInTheDocument();
-  expect(errorMessage.textContent).toBe('error message');
+  const alert = getByRole('alert');
+  expect(alert).toBeInTheDocument();
+  expect(alert.textContent).toBe('error message');
+});
+
+test('show password button shows/hides password', async () => {
+  const { getByLabelText, getByRole } = renderWithStore(<Signup />);
+
+  const showPasswordtn = getByRole('button', { name: /show password/i });
+  const passwordInput = getByLabelText(/password/i);
+
+  await act(async () => {
+    fireEvent.change(passwordInput, { target: { value: 'Password1' } });
+  });
+
+  expect(passwordInput.type).toBe('password');
+
+  await act(async () => {
+    fireEvent.click(showPasswordtn);
+  });
+
+  expect(passwordInput.type).toBe('text');
+
+  await act(async () => {
+    fireEvent.click(showPasswordtn);
+  });
+
+  expect(passwordInput.type).toBe('password');
 });

@@ -8,8 +8,8 @@ import { Provider } from 'react-redux';
 import { testStore } from '../../../redux/store/reduxStore';
 import resetCart from '../../../redux/actions/cart/resetCart';
 import addProduct from '../../../redux/actions/cart/addProduct';
-import { renderWithStore } from '../../../helpers/testHelpers';
-import { TEST_DATA, populateTestDataHook } from '../../../helpers/testConfig';
+import { renderWithStore } from '../../../utils/testHelpers';
+import { TEST_DATA, populateTestDataHook } from '../../../utils/testConfig';
 import CartList from './CartList';
 
 let cart;

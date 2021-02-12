@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import {
   TabContent,
   TabPane,
@@ -28,19 +28,19 @@ const LoginSignup = () => {
   };
 
   // close modal function
-  const handleClose = e => {
-    return history.goBack();
-  };
-
-  // modal variables
-  const [modal] = useState(true);
+  const handleClose = useCallback(
+    e => {
+      return history.goBack();
+    },
+    [history]
+  );
 
   return (
     <Container>
       <Row className="">
         <Col sm="12" md={{ size: 6, offset: 3 }} className="rounded">
           <div>
-            <Modal isOpen={modal} toggle={handleClose} className="">
+            <Modal isOpen={true} toggle={handleClose} className="">
               <ModalBody>
                 <Nav tabs>
                   <NavItem>
@@ -49,6 +49,7 @@ const LoginSignup = () => {
                       onClick={() => {
                         toggleTab('1');
                       }}
+                      data-testid="login tab link"
                     >
                       Login
                     </NavLink>
@@ -59,6 +60,7 @@ const LoginSignup = () => {
                       onClick={() => {
                         toggleTab('2');
                       }}
+                      data-testid="signup tab link"
                     >
                       Signup
                     </NavLink>

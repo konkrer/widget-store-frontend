@@ -1,7 +1,5 @@
 /** Cart reducer. Reset, upload data to store, change quantity. */
 
-import Decimal from 'decimal.js';
-
 import {
   RESET_CART,
   ADD_PRODUCT,
@@ -10,7 +8,7 @@ import {
   REMOVE_PRODUCT,
   SHED_EMPTY,
 } from '../actions/types';
-import { calculateDiscountPrice } from '../../helpers/monies';
+import { calculateSubtotal } from '../../utils/monies';
 
 const INITIAL_STATE = {
   items: {},
@@ -40,7 +38,7 @@ function cart(state = INITIAL_STATE, action) {
           quantity: newQuantity,
         },
       };
-      subtotal = getSubtotal(items);
+      subtotal = calculateSubtotal(items);
       numCartItems = getNumCartItems(items);
       return { ...state, items, subtotal, numCartItems };
 
@@ -53,7 +51,7 @@ function cart(state = INITIAL_STATE, action) {
           quantity: state.items[action.payload.id].quantity + 1,
         },
       };
-      subtotal = getSubtotal(items);
+      subtotal = calculateSubtotal(items);
       numCartItems = getNumCartItems(items);
       return { ...state, items, subtotal, numCartItems };
 
@@ -70,14 +68,14 @@ function cart(state = INITIAL_STATE, action) {
           quantity: state.items[action.payload.id].quantity - 1,
         },
       };
-      subtotal = getSubtotal(items);
+      subtotal = calculateSubtotal(items);
       numCartItems = getNumCartItems(items);
       return { ...state, items, subtotal, numCartItems };
 
     case REMOVE_PRODUCT:
       items = { ...state.items };
       delete items[action.payload.id];
-      subtotal = getSubtotal(items);
+      subtotal = calculateSubtotal(items);
       numCartItems = getNumCartItems(items);
       return { ...state, items, subtotal, numCartItems };
 
@@ -93,16 +91,6 @@ function cart(state = INITIAL_STATE, action) {
     default:
       return state;
   }
-}
-
-function getSubtotal(items) {
-  return Object.values(items)
-    .reduce((acc, product) => {
-      const price = new Decimal(calculateDiscountPrice(product));
-      const itemTotal = price.times(product.quantity);
-      return itemTotal.plus(acc);
-    }, 0)
-    .toFixed(2);
 }
 
 function getNumCartItems(items) {

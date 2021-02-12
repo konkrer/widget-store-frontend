@@ -11,7 +11,7 @@ import {
 
 //local imports
 import Pricing1 from '../common/Pricing/Pricing1';
-import { getPathRoot } from '../../helpers/helpers';
+import { getPathRoot } from '../../utils/helpers';
 import './ProductCard.css';
 
 const ProductCard = ({ product }) => {

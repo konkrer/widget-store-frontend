@@ -1,7 +1,7 @@
 /** CartIconBadge tests */
 
 // local imports
-import { renderWithStore } from '../../../helpers/testHelpers';
+import { renderWithStore } from '../../../utils/testHelpers';
 import CartIconBadge from './CartIconBadge';
 
 test('renders CartIconBadge', () => {

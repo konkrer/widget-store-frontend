@@ -1,0 +1,149 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProductDetail3 snapshot 1`] = `
+<DocumentFragment>
+  <div
+    style="opacity: 0.05555555555555556;"
+  >
+    <div
+      class="sc-bdfBwQ hlJzBg close-modal"
+    >
+      <div>
+        <div
+          class="sc-gsTCUz gyKeDX ProductDetail"
+          color="var(--dark)"
+          data-testid="ModalCard"
+        >
+          <div
+            class="modal-header"
+          >
+            <h5
+              class="modal-title"
+            >
+              <div>
+                Samsung XG-900 55 inch LCD TV
+              </div>
+            </h5>
+            <button
+              class="close-modal close"
+            >
+              ×
+            </button>
+          </div>
+          <div
+            class="p-0 row modal-body"
+          >
+            <div
+              class="col-12 col-lg-6"
+            >
+              <img
+                alt="Samsung XG-900 55 inch LCD TV"
+                class="ProductDetail-img img-fluid"
+                src="https://www.lg.com/sg/images/tvs/md05271244/gallery/LG-43LH600T-L.jpg"
+              />
+            </div>
+            <div
+              class="col-12 col-lg-6"
+            >
+              <div
+                class="details p-2"
+              >
+                <h5
+                  class="mb-4 text-center pt-4"
+                >
+                  Latest generation smart televison 2021
+                </h5>
+                <p>
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil, voluptates enim nam voluptatum, quia doloribus quis sequi, porro consequatur excepturi eos error voluptas nobis modi atque magni commodi amet placeat.
+                </p>
+                <div
+                  class="text-right pb-3 pr-5 mr-5"
+                >
+                  <span
+                    class="sc-dlfnbm kJMwKE"
+                  >
+                    <span
+                      class="sc-hKgILt gCMyNV price"
+                    >
+                      $400.40
+                    </span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="modal-footer"
+          >
+            <form>
+              <label
+                for="quantity"
+              >
+                Quantity
+              </label>
+              <input
+                id="quantity"
+                min="1"
+                name="quantity"
+                placeholder="1"
+                type="number"
+                value="1"
+              />
+              <button
+                class="btn btn-primary"
+              >
+                Add To Cart
+              </button>
+            </form>
+            <div
+              style="--btnAnimColor: white;"
+            >
+              <button
+                aria-label="go to cart"
+                class="default btn btn-secondary"
+                id="cart-button"
+                type="button"
+              >
+                <span
+                  class="CartIconBadge position-relative large"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="svg-inline--fa fa-shopping-cart fa-w-18 fa-lg "
+                    data-icon="shopping-cart"
+                    data-prefix="fas"
+                    focusable="false"
+                    role="img"
+                    viewBox="0 0 576 512"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M528.12 301.319l47.273-208C578.806 78.301 567.391 64 551.99 64H159.208l-9.166-44.81C147.758 8.021 137.93 0 126.529 0H24C10.745 0 0 10.745 0 24v16c0 13.255 10.745 24 24 24h69.883l70.248 343.435C147.325 417.1 136 435.222 136 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-15.674-6.447-29.835-16.824-40h209.647C430.447 426.165 424 440.326 424 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-22.172-12.888-41.332-31.579-50.405l5.517-24.276c3.413-15.018-8.002-29.319-23.403-29.319H218.117l-6.545-32h293.145c11.206 0 20.92-7.754 23.403-18.681z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                  <span
+                    class="cart-count-badge badge-pill badge badge-primary"
+                  >
+                    1
+                    <span
+                      class="sr-only"
+                    >
+                      cart items
+                    </span>
+                  </span>
+                </span>
+              </button>
+            </div>
+            <button
+              class="close-modal btn btn-secondary"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

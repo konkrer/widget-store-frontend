@@ -10,11 +10,11 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 // local imports
 import APIRequest from '../../../hooks/apiHook';
-import { getPathRoot } from '../../../helpers/helpers';
+import { getPathRoot } from '../../../utils/helpers';
 import toggleDir from '../../../redux/actions/animation/toggleDir';
 import ScreenBackground from '../ModalBackground';
 import PDModal from '../PDModalCard';
-// import '../ProductDetail.css';
+import '../ProductDetail.css';
 
 const ProductDetail2 = () => {
   const { id } = useParams();

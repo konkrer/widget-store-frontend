@@ -9,7 +9,7 @@ import { Modal } from 'reactstrap';
 
 // local imports
 import APIRequest from '../../../hooks/apiHook';
-import { getPathRoot } from '../../../helpers/helpers';
+import { getPathRoot } from '../../../utils/helpers';
 import PDModal from '../PDModalCard';
 import '../ProductDetail.css';
 

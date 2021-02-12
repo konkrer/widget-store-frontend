@@ -8,7 +8,7 @@
 import styled from 'styled-components';
 
 // local imports
-import { getDiscountData } from '../../../helpers/monies';
+import { getDiscountData } from '../../../utils/monies';
 
 // styled components:
 

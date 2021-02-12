@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
@@ -8,7 +8,7 @@ import CartItem from './CartItem/CartItem';
 import incrementQuantity from '../../../redux/actions/cart/incrementQuantity';
 import decrementQuantity from '../../../redux/actions/cart/decrementQuantity';
 import removeProduct from '../../../redux/actions/cart/removeProduct';
-import { animateVariant } from '../../../helpers/helpers';
+import { animateVariant } from '../../../utils/helpers';
 
 const CartListDivWrapper = styled.div`
   display: inline-block;
@@ -66,6 +66,10 @@ const TabulationTable = styled.table`
 `;
 
 const CartList = ({ disabled, orderData, setSelectedId }) => {
+  const animationTimerSubtotal = useRef(null);
+  const animationTimerTax = useRef(null);
+  const animationTimerShipping = useRef(null);
+  const animationTimerTotal = useRef(null);
   const cart = useSelector(state => state.cart);
   const dispatch = useDispatch();
   const itemsValues = Object.values(cart.items);
@@ -94,20 +98,29 @@ const CartList = ({ disabled, orderData, setSelectedId }) => {
 
   // animation effects
   useEffect(() => {
-    animateVariant(setAnimSubtotal, 500);
+    animationTimerSubtotal.current = animateVariant(setAnimSubtotal, 500);
   }, [cart.subtotal]);
 
   useEffect(() => {
-    animateVariant(setAnimTax, 500);
+    animationTimerTax.current = animateVariant(setAnimTax, 500);
   }, [orderData?.tax]);
 
   useEffect(() => {
-    animateVariant(setAnimShipping, 500);
+    animationTimerShipping.current = animateVariant(setAnimShipping, 500);
   }, [orderData?.shipping?.details?.cost]);
 
   useEffect(() => {
-    animateVariant(setAnimTotal, 500);
+    animationTimerTotal.current = animateVariant(setAnimTotal, 500);
   }, [orderData?.total]);
+
+  useEffect(() => {
+    return () => {
+      clearTimeout(animationTimerSubtotal.current);
+      clearTimeout(animationTimerTax.current);
+      clearTimeout(animationTimerShipping.current);
+      clearTimeout(animationTimerTotal.current);
+    };
+  }, []);
 
   const animVariants = {
     active: {

@@ -1,11 +1,12 @@
+import { useRef, useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { Button, FormGroup, Label, Alert } from 'reactstrap';
 
 // local imports
 import AddressBox from '../AddressBox/AddressBox';
-import { calculateTotal } from '../../../helpers/monies';
-import { animateVariant } from '../../../helpers/helpers';
+import { calculateTotal } from '../../../utils/monies';
+import { animateVariant } from '../../../utils/helpers';
 
 /**
  * Customer info form for checkout stage 1.
@@ -22,6 +23,8 @@ const ShippingForm = ({
   subtotal,
   setShippingCheckmark,
 }) => {
+  const animationTimer = useRef(null);
+
   const handleSubmit = values => {
     // if shipping data has already been set from the
     // form onChange handler no need to set again here
@@ -38,12 +41,23 @@ const ShippingForm = ({
         shipping: { shipping_method: values.shipping_method[0], details },
         total,
       }));
-      animateVariant(setShippingCheckmark, 500, goTo3, [true]);
+      animationTimer.current = animateVariant(
+        setShippingCheckmark,
+        500,
+        goTo3,
+        [true]
+      );
     }
 
     // go to shipping form
     else goTo3(true);
   };
+
+  useEffect(() => {
+    return () => {
+      clearTimeout(animationTimer.current);
+    };
+  }, []);
 
   //
   if (loadingShipping) return <h1>Loading...</h1>;
@@ -90,7 +104,12 @@ const ShippingForm = ({
                     total,
                   }));
                   if (!orderData.shipping)
-                    animateVariant(setShippingCheckmark, 500, goTo3, [true]);
+                    animationTimer.current = animateVariant(
+                      setShippingCheckmark,
+                      500,
+                      goTo3,
+                      [true]
+                    );
                 }
               }}
             >

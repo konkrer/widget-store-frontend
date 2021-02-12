@@ -2,7 +2,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { Button, FormGroup, Label, Col, Row, Collapse } from 'reactstrap';
 
 // local imports
-import { customerInfoSchema } from './CustomerInfoForms';
+import { customerInfoSchema } from '../CustomerInfoForms';
 
 const ShippingForm = ({
   setOrderData,

@@ -66,7 +66,6 @@ export const populateTestDataHook = testData => {
     state: 'TX',
     postal_code: '39488',
     phone_number: '(555) 555-5555',
-    set_default: false,
   };
 
   testData.cart = {
@@ -87,5 +86,42 @@ export const populateTestDataHook = testData => {
     },
     numCartItems: 1,
     subtotal: '34.17',
+  };
+
+  testData.orderGet = {
+    customer: 1,
+    customer_info: {
+      first_name: 'Test',
+      last_name: 'User',
+      email: 'foo@gmail.com',
+      address: '123 Main St',
+      address_line2: '',
+      city: 'Big City',
+      state: 'TX',
+      postal_code: '39488',
+      phone_number: '(555) 555-5555',
+    },
+
+    discount: null,
+    items: [
+      { 0: { order_id: 2, product_id: 6, quantity: 1 } },
+      { 1: { order_id: 2, product_id: 8, quantity: 1 } },
+    ],
+
+    order_date: '2021-02-05T08:00:00.000Z',
+    order_id: 2,
+    shipping_address: null,
+    shipping_cost: '12.00',
+    shipping_method: {
+      details: { cost: '12.00', name: 'USPS ground shipping (3-7 days)' },
+      shipping_method: 'usps_ground',
+    },
+
+    status: 'Pending',
+    subtotal: '784.16',
+    tax: '66.65',
+    total: '862.81',
+    total_items_quantity: 2,
+    tracking_number: null,
   };
 };

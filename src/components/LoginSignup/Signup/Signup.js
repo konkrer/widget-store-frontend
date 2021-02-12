@@ -3,32 +3,30 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Redirect, useLocation } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { Button, FormGroup, Label, Alert, FormText } from 'reactstrap';
+import * as Yup from 'yup';
 
 // local imports
 import { asyncAPIRequest } from '../../../hooks/apiHook';
-import { getPathRoot } from '../../../helpers/helpers';
+import { getPathRoot } from '../../../utils/helpers';
 import login from '../../../redux/actions/user/login';
 
 const Signup = ({ handleClose }) => {
   const user = useSelector(state => state.user.user);
   const [responseError, setResponseError] = useState(null);
+  const [passwordShow, setPasswordShow] = useState(false);
   const dispatch = useDispatch();
   const location = useLocation();
 
   if (user) return <Redirect to={`${getPathRoot(location.pathname)}`} />;
 
   const handleSubmit = async values => {
-    try {
-      const resp = await asyncAPIRequest('/users', 'post', values);
-      if (resp.error) {
-        setResponseError(resp.error.response.data.message);
-      } else {
-        const { user, token } = resp.data;
-        dispatch(login(user, token));
-        return <Redirect to={`${getPathRoot(location.pathname)}`} />;
-      }
-    } catch (error) {
-      console.log(error);
+    const resp = await asyncAPIRequest('/users', 'post', values);
+    if (resp.error) {
+      setResponseError(resp.error.response.data.message);
+    } else {
+      const { user, token } = resp.data;
+      dispatch(login(user, token));
+      return <Redirect to={`${getPathRoot(location.pathname)}`} />;
     }
   };
 
@@ -37,13 +35,13 @@ const Signup = ({ handleClose }) => {
       <h1>Signup</h1>
       <Formik
         initialValues={{ username: '', email: '', password: '' }}
-        validate={signupValidation}
+        validationSchema={SignupSchema}
         onSubmit={(values, { setSubmitting }) => {
           handleSubmit(values);
           setSubmitting(false);
         }}
       >
-        {({ isSubmitting }) => (
+        {formik => (
           <Form className="text-left">
             <FormGroup>
               <Label htmlFor="username">Username</Label>
@@ -52,12 +50,16 @@ const Signup = ({ handleClose }) => {
                 name="username"
                 id="username"
                 autoComplete="username"
-                className="form-control"
+                className={`form-control form-control-sm ${
+                  formik.touched.username &&
+                  formik.errors.username &&
+                  'is-invalid'
+                }`}
               />
               <ErrorMessage
                 name="username"
                 component="div"
-                className="text-danger mt-1"
+                className="text-danger mt-1 text-sm"
               />
             </FormGroup>
             <FormGroup>
@@ -67,22 +69,42 @@ const Signup = ({ handleClose }) => {
                 name="email"
                 id="email2"
                 autoComplete="email"
-                className="form-control"
+                className={`form-control form-control-sm ${
+                  formik.touched.email && formik.errors.email && 'is-invalid'
+                }`}
               />
               <ErrorMessage
                 name="email"
                 component="div"
-                className="text-danger mt-1"
+                className="text-danger mt-1 text-sm"
               />
             </FormGroup>
             <FormGroup>
               <Label htmlFor="password2">Password</Label>
+              <Button
+                className=" ml-1 text-sm py-0 border-0 font-italic"
+                color="primary"
+                outline
+                size="sm"
+                onClick={() => setPasswordShow(state => !state)}
+              >
+                {passwordShow ? 'Hide' : 'Show'} Password
+              </Button>
               <Field
-                type="password"
+                type={passwordShow ? 'text' : 'password'}
                 name="password"
                 id="password2"
                 autoComplete="current-password"
-                className="form-control"
+                className={`form-control form-control-sm ${
+                  formik.touched.password &&
+                  formik.errors.password &&
+                  'is-invalid'
+                }`}
+              />
+              <ErrorMessage
+                name="password"
+                component="div"
+                className="text-danger text-sm"
               />
               <FormText>
                 <ul className="pl-3">
@@ -93,19 +115,20 @@ const Signup = ({ handleClose }) => {
                   </li>
                 </ul>
               </FormText>
-              <ErrorMessage
-                name="password"
-                component="div"
-                className="text-danger mt-1"
-              />
             </FormGroup>
             {responseError && <Alert color="danger">{responseError}</Alert>}
-            <Button type="submit" color="primary" disabled={isSubmitting}>
-              Signup
-            </Button>
-            <Button color="secondary ml-2" onClick={handleClose}>
-              Cancel
-            </Button>
+            <div className="mt-4">
+              <Button
+                type="submit"
+                color="primary"
+                disabled={formik.isSubmitting}
+              >
+                Signup
+              </Button>
+              <Button color="secondary ml-2" onClick={handleClose}>
+                Cancel
+              </Button>
+            </div>
           </Form>
         )}
       </Formik>
@@ -113,30 +136,20 @@ const Signup = ({ handleClose }) => {
   );
 };
 
-/** Validation logic */
-const signupValidation = values => {
-  const errors = {};
-  if (!values.username) {
-    errors.username = 'Username Required';
-  } else if (!/^[^   ]{2,55}$/.test(values.username)) {
-    errors.username = 'Username must be between 2 and 55 characters';
-  }
-  if (!values.email) {
-    errors.email = 'Email Required';
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-    errors.email = 'Invalid email address';
-  }
-  if (!values.password) {
-    errors.password = 'Password Required';
-  } else if (
-    !/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,55}$/.test(
-      values.password
+/** Form validation logic */
+const SignupSchema = Yup.object({
+  username: Yup.string()
+    .min(2, 'Min length 2')
+    .max(55, 'Max length 55')
+    .required('Required'),
+  email: Yup.string().email('Invalid email address').required('Required'),
+  password: Yup.string()
+    .matches(
+      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{3,55}$/,
+      'Needs 1 uppercase letter, 1 lowercase letter, and 1 number'
     )
-  ) {
-    errors.password =
-      'Password must be at least 8 characters long, contain at least 1 uppercase letter, 1 lowercase letter, and 1 number';
-  }
-  return errors;
-};
+    .min(8, 'Minimum password length is 8')
+    .required('Required'),
+});
 
 export default Signup;

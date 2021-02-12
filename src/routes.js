@@ -10,7 +10,7 @@ import Checkout from './views/Checkout/Checkout';
 import OrderSuccess from './views/OrderSuccess/OrderSuccess';
 import Admin from './views/Admin/Admin';
 import NotFoundPage from './views/NotFoundPage/NotFoundPage';
-import { getPathRoot, FramerRedirect } from './helpers/helpers';
+import { getPathRoot, FramerRedirect } from './utils/helpers';
 
 function Routes() {
   const location = useLocation();

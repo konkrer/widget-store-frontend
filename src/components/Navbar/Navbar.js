@@ -18,7 +18,7 @@ import {
 import { STORE_NAME } from '../../storeSetup';
 import UserAuthElement from './UserAuthEl/UserAuthEl';
 import NavbarCartElement from './NavbarCartEl/NavbarCartEl';
-import { getPathRoot } from '../../helpers/helpers';
+import { getPathRoot } from '../../utils/helpers';
 import './Navbar.css';
 
 /** Navbar wrapper allows navbar to be sticky. Provides background color. */

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Badge } from 'reactstrap';
 import Decimal from 'decimal.js';
@@ -13,8 +13,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 // local imports
-import { calculateDiscountPrice } from '../../../../helpers/monies';
-import { animateVariant, getPathRoot } from '../../../../helpers/helpers';
+import { calculateDiscountPrice } from '../../../../utils/monies';
+import { animateVariant, getPathRoot } from '../../../../utils/helpers';
 import './CartItem.css';
 
 const CartItem = ({
@@ -26,16 +26,20 @@ const CartItem = ({
   disabled,
   setSelectedId,
 }) => {
-  const [animItemTotal, setAnimItemTotal] = useState(false);
   const price = calculateDiscountPrice(item);
   const itemTotal = new Decimal(price).times(item.quantity).toFixed(2);
   const location = useLocation();
   const pathRoot = getPathRoot(location.pathname);
 
   // animation effects based on item quantity
+  const [animItemTotal, setAnimItemTotal] = useState(false);
+  const animationTimer = useRef(null);
   useEffect(() => {
-    animateVariant(setAnimItemTotal, 500);
+    animationTimer.current = animateVariant(setAnimItemTotal, 500);
   }, [item.quantity]);
+
+  // clear timer
+  useEffect(() => clearTimeout(animationTimer.current), []);
 
   /** The product name in the CartItem will open a product detail modal.
    * Return either a link to the product url or a button to set state

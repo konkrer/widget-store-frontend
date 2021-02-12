@@ -2,7 +2,7 @@ import { render } from '@testing-library/react';
 
 // local
 import AddressBox from './AddressBox';
-import { TEST_DATA, populateTestDataHook } from '../../../helpers/testConfig';
+import { TEST_DATA, populateTestDataHook } from '../../../utils/testConfig';
 
 beforeAll(() => {
   populateTestDataHook(TEST_DATA);

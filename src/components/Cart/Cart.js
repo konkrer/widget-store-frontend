@@ -8,7 +8,7 @@ import { motion } from 'framer-motion';
 import CartHeader from './Cart_components/CartHeader';
 import CartFooter from './Cart_components/CartFooter';
 import CartList from '../common/CartList/CartList';
-import { getPathRoot } from '../../helpers/helpers';
+import { getPathRoot } from '../../utils/helpers';
 import './Cart.css';
 
 // background to fade page behind open cart
