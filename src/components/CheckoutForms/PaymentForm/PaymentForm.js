@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 
 // local imports
 import AddressBox from '../AddressBox/AddressBox';
-import { asyncAPIRequest } from '../../../hooks/apiHook';
+import { asyncAxiosRequest } from '../../../utils/asyncAxiosRequest';
 import resetCart from '../../../redux/actions/cart/resetCart';
 import './PaymentForm.css';
 
@@ -78,7 +78,7 @@ const PaymentForm = ({ orderData, goTo2 }) => {
                   nonce: payload.nonce,
                 };
                 // create order on backend server
-                const resp = await asyncAPIRequest('/orders', 'post', data);
+                const resp = await asyncAxiosRequest('/orders', 'post', data);
                 if (resp.error) {
                   return setResponseError(resp.error.response.data.message);
                 }

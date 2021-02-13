@@ -35,6 +35,7 @@ const CheckoutForms = ({ setDisabled, orderData, setOrderData }) => {
       // fake response with shipping costs, etc
       const resp = fakeAPICall(customerData, items);
 
+      /* istanbul ignore next */
       if (resp.error) setResponseError(resp.error.response.data.message);
       else {
         setShippingMethods(resp.data);
@@ -45,12 +46,14 @@ const CheckoutForms = ({ setDisabled, orderData, setOrderData }) => {
   );
 
   // go to customer info form (step 1)
+  /* istanbul ignore next */
   const goTo1 = useCallback(() => {
     setStep(1);
     setDisabled(false);
   }, [setDisabled]);
 
   // go to shipping (step 2)
+  /* istanbul ignore next */
   const goTo2 = useCallback(
     force => {
       // if forcing or shipping does not equal false proceed
@@ -64,10 +67,12 @@ const CheckoutForms = ({ setDisabled, orderData, setOrderData }) => {
   );
 
   // go to payment (step 3)
+  /* istanbul ignore next */
   const goTo3 = useCallback(
     force => {
       if (!force && !orderData.shipping) return;
       setStep(3);
+      // disable cart adjustments
       setDisabled(true);
     },
     [orderData.shipping, setDisabled]
@@ -82,23 +87,27 @@ const CheckoutForms = ({ setDisabled, orderData, setOrderData }) => {
           className="mb-2 btn-sm py-0 border text-light"
         >
           Customer Information{' '}
-          {orderData.customer && orderData.shipping !== false && (
-            <motion.div
-              variants={{
-                active: {
-                  scale: 7,
-                  y: -35,
-                  x: 15,
-                },
-                default: {},
-              }}
-              animate={customerCheckmark}
-              transition={{ duration: 0.4 }}
-              className="d-inline-block"
-            >
-              <FontAwesomeIcon icon={faCheck} className=" text-success" />
-            </motion.div>
-          )}
+          {
+            /* Animated checkmark */
+            /* istanbul ignore next */
+            orderData.customer && orderData.shipping !== false && (
+              <motion.div
+                variants={{
+                  active: {
+                    scale: 7,
+                    y: -35,
+                    x: 15,
+                  },
+                  default: {},
+                }}
+                animate={customerCheckmark}
+                transition={{ duration: 0.4 }}
+                className="d-inline-block"
+              >
+                <FontAwesomeIcon icon={faCheck} className=" text-success" />
+              </motion.div>
+            )
+          }
           <FontAwesomeIcon icon={faCaretDown} size={'1x'} className="ml-1" />
         </Button>
         <Collapse isOpen={step === 1}>
@@ -116,27 +125,31 @@ const CheckoutForms = ({ setDisabled, orderData, setOrderData }) => {
       <section className="mb-3">
         <Button
           color="transparent"
-          onClick={() => goTo2()}
+          onClick={/* istanbul ignore next */ () => goTo2()}
           className="mb-2 btn-sm py-0 border text-light"
         >
           Shipping{' '}
-          {orderData.shipping && (
-            <motion.div
-              variants={{
-                active: {
-                  scale: 7,
-                  y: -35,
-                  x: 15,
-                },
-                default: {},
-              }}
-              animate={shippingCheckmark}
-              transition={{ duration: 0.4 }}
-              className="d-inline-block"
-            >
-              <FontAwesomeIcon icon={faCheck} className=" text-success" />
-            </motion.div>
-          )}
+          {
+            /* Animated checkmark */
+            /* istanbul ignore next */
+            orderData.shipping && (
+              <motion.div
+                variants={{
+                  active: {
+                    scale: 7,
+                    y: -35,
+                    x: 15,
+                  },
+                  default: {},
+                }}
+                animate={shippingCheckmark}
+                transition={{ duration: 0.4 }}
+                className="d-inline-block"
+              >
+                <FontAwesomeIcon icon={faCheck} className=" text-success" />
+              </motion.div>
+            )
+          }
           <FontAwesomeIcon icon={faCaretDown} size={'1x'} className="ml-1" />
         </Button>
         <Collapse isOpen={step === 2}>
@@ -156,7 +169,7 @@ const CheckoutForms = ({ setDisabled, orderData, setOrderData }) => {
       <section className="mb-3">
         <Button
           color="transparent"
-          onClick={() => goTo3()}
+          onClick={/* istanbul ignore next */ () => goTo3()}
           className="mb-2 btn-sm py-0 border text-light"
         >
           Payment

@@ -5,7 +5,7 @@ const AdminPanel = ({ adminUser }) => {
 
   return (
     <div>
-      <h1>AdminPanel</h1>
+      <h1>Admin Panel</h1>
     </div>
   );
 };

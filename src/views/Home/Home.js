@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Route, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useSelector, useDispatch } from 'react-redux';
+import { Container } from 'reactstrap';
 
 // local imports
 import Navbar from '../../components/Navbar/Navbar';
@@ -35,13 +36,16 @@ function Home() {
         }}
         transition={{ duration: 0.5 }}
       >
-        <div className="container my-4 py-3 Home dark-gradient1 rounded">
+        <Container
+          className="my-4 py-4 Home dark-gradient1 rounded px-2 px-xl-5"
+          fluid="xl"
+        >
           <h1 className="brand-style">Widget Store</h1>
           <h2 className="lead font-italic mb-4 Home-byline">
             We have what you need!
           </h2>
           <ProductList />
-        </div>
+        </Container>
       </motion.div>
 
       <Route exact path={`${pathRoot}/product/:id`}>

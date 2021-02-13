@@ -13,6 +13,7 @@ function ProductList({ params }) {
     params
   );
 
+  /* istanbul ignore next */
   if (error) return <div>Error</div>;
   if (loading) return <div>loading...</div>;
 

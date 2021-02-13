@@ -22,6 +22,7 @@ import { getPathRoot } from '../../utils/helpers';
 import './Navbar.css';
 
 /** Navbar wrapper allows navbar to be sticky. Provides background color. */
+/* istanbul ignore next */
 const NavbarWrapper = styled.div`
   background-color: rgb(47, 47, 47, 0.98);
   position: ${p => (p.pathRoot === '/checkout' ? 'static' : 'sticky')};
@@ -36,6 +37,7 @@ const NavbarWrapper = styled.div`
 
 const NavbarOne = () => {
   const [isOpen, setIsOpen] = useState(false);
+  /* istanbul ignore next */
   const toggle = () => setIsOpen(!isOpen);
   const numCartItems = useSelector(state => state.cart.numCartItems) || null;
   const location = useLocation();

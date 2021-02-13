@@ -3,12 +3,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Redirect, useLocation } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { Button, FormGroup, Label, Alert } from 'reactstrap';
-import * as Yup from 'yup';
 
 // local imports
-import { asyncAPIRequest } from '../../../hooks/apiHook';
+import { asyncAxiosRequest } from '../../../utils/asyncAxiosRequest';
 import { getPathRoot } from '../../../utils/helpers';
 import login from '../../../redux/actions/user/login';
+import { LoginSchema } from '../../../utils/schemas/loginSchema';
 
 const Login = ({ handleClose }) => {
   const user = useSelector(state => state.user.user);
@@ -20,7 +20,7 @@ const Login = ({ handleClose }) => {
   if (user) return <Redirect to={`${getPathRoot(location.pathname)}`} />;
 
   const handleSubmit = async values => {
-    const resp = await asyncAPIRequest('/login', 'post', values);
+    const resp = await asyncAxiosRequest('/login', 'post', values);
     if (resp.error) setResponseError(resp.error.response.data.message);
     else {
       const { user, token } = resp.data;
@@ -105,17 +105,5 @@ const Login = ({ handleClose }) => {
     </div>
   );
 };
-
-/** Form validation logic */
-const LoginSchema = Yup.object({
-  email: Yup.string().email('Invalid email address').required('Required'),
-  password: Yup.string()
-    .matches(
-      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{3,55}$/,
-      'Needs 1 uppercase letter, 1 lowercase letter, and 1 number'
-    )
-    .min(8, 'Minimum password length is 8')
-    .required('Required'),
-});
 
 export default Login;

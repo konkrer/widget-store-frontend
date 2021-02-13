@@ -12,6 +12,7 @@ exports[`Cart snapshot 1`] = `
       class="text-left px-4 pt-0 pt-lg-3"
     >
       <button
+        aria-label="close"
         class="btn-noStyle"
       >
         <svg

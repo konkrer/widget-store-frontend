@@ -247,6 +247,40 @@ test('shoud show "is-invalid" class on all invalid inputs', async () => {
   // for invalid input sytling (Bootstrap).
 });
 
+test('shoud show "is-invalid" class on all invalid inputs shipping address form', async () => {
+  const { getByRole, getAllByText, getAllByLabelText } = renderWithStore(
+    <CustomerInfoForms
+      orderData={{ shipping: false }}
+      setOrderData={setOrderData}
+      goTo1={goTo1}
+      goTo2={goTo2}
+      getShippingCosts={getShippingCosts}
+      subtotal={TEST_DATA.cart.subtotal}
+      setCustomerCheckmark={setCustomerCheckmark}
+    />
+  );
+
+  // make address_line2 invalid. second input is on shipping address form
+  const addLine2 = getAllByLabelText(/address line two/i)[1];
+  await act(async () => {
+    fireEvent.change(addLine2, { target: { value: '5'.repeat(256) } });
+  });
+
+  const shippingButton = getByRole('button', {
+    name: /update shipping address/i,
+  });
+  await act(async () => {
+    fireEvent.click(shippingButton);
+  });
+
+  // all required inputs show "required"
+  const invalidInput = getAllByText('Required');
+  expect(invalidInput.length).toBe(inputs.length - 2);
+
+  // test "is-invalid" class is present on all inputs
+  // for invalid input sytling (Bootstrap).
+});
+
 test('shoud call update profile when user attempts update', async () => {
   testStore.dispatch(login({ username: 'test_user' }, 'token'));
   axios.mockResolvedValue(TEST_DATA.userProfileData);
@@ -604,6 +638,35 @@ test("clicking cancel doesn't update user profile", async () => {
   // expect axios to have been called once to get user profile
   // but not called second time to update profile
   expect(axios.mock.calls.length).toBe(1);
+});
+
+test("clicking cancel doesn't update shippingAddress", async () => {
+  testStore.dispatch(login({ username: 'user' }, 'token'));
+  axios.mockResolvedValue(TEST_DATA.userProfileData);
+
+  let getByRole;
+  await act(async () => {
+    const resp = renderWithStore(
+      <CustomerInfoForms
+        orderData={{ shipping: null }}
+        setOrderData={setOrderData}
+        goTo1={goTo1}
+        goTo2={goTo2}
+        getShippingCosts={getShippingCosts}
+        subtotal={TEST_DATA.cart.subtotal}
+        setCustomerCheckmark={setCustomerCheckmark}
+      />
+    );
+    getByRole = resp.getByRole;
+  });
+
+  fireEvent.click(getByRole('button', { name: /edit shipping info/i }));
+  // fireEvent.click(getByTestId('cancel2'));
+  fireEvent.click(getByRole('button', { name: /cancel/i }));
+
+  // expect setOrderData to have been called once to get user profile
+  // but not called second time to update profile
+  expect(setOrderData.mock.calls.length).toBe(0);
 });
 
 test("signed in user doesn't see next btn if not enough address", async () => {

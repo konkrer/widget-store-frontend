@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import { Button } from 'reactstrap';
 
 // local imports
-import { asyncAPIRequest } from '../../../hooks/apiHook';
+import { asyncAxiosRequest } from '../../../utils/asyncAxiosRequest';
 import ShippingAddressForm from './ShippingAddressForm/ShippingAddressForm';
 import CustomerAddressForm from './CustomerAddressForm/CustomerAddressForm';
 import AddressBox from '../AddressBox/AddressBox';
@@ -49,7 +49,7 @@ const CustomerInfoForms = ({
   // get user profile data if user is logged in
   useEffect(() => {
     async function getUser() {
-      const resp = await asyncAPIRequest(
+      const resp = await asyncAxiosRequest(
         `/users/${user.username}`,
         'get',
         null,
@@ -90,13 +90,16 @@ const CustomerInfoForms = ({
     async function userChangeCheck() {
       if (token !== userOriginal.current) {
         // remove customer data and shipping data.
-        setOrderData(orderData => ({
-          ...orderData,
-          customer: null,
-          shipping: false,
-          shippingAddress: null,
-          tax: null,
-        }));
+        setOrderData(
+          /* istanbul ignore next */
+          orderData => ({
+            ...orderData,
+            customer: null,
+            shipping: false,
+            shippingAddress: null,
+            tax: null,
+          })
+        );
         // set new user token reference
         userOriginal.current = token;
         // reset variables
@@ -240,37 +243,6 @@ const DEFAULT_CUST_FORM_DATA = {
   postal_code: '',
   phone_number: '',
 };
-
-/** Form validation logic */
-export const customerInfoSchema = Yup.object({
-  first_name: Yup.string()
-    .max(55, 'Must be 55 characters or less')
-    .required('Required'),
-  last_name: Yup.string()
-    .max(55, 'Must be 55 characters or less')
-    .required('Required'),
-  email: Yup.string().email('Invalid email address').required('Required'),
-  address: Yup.string()
-    .max(255, 'Must be 255 characters or less')
-    .min(8, 'Must be 8 charaters or more')
-    .required('Required'),
-  address_line2: Yup.string().max(255, 'Must be 255 characters or less'),
-  city: Yup.string()
-    .max(55, 'Must be 255 characters or less')
-    .min(2, 'Must be 2 charaters or more')
-    .required('Required'),
-  state: Yup.string()
-    .max(55, 'Must be 255 characters or less')
-    .min(2, 'Must be 2 charaters or more')
-    .required('Required'),
-  postal_code: Yup.string()
-    .matches(/^\d{5}(-?\d{4})?$/, 'Must be 5 or 9 digit postal code')
-    .required('Required'),
-  phone_number: Yup.string().matches(
-    /^(?:\+?(\d{1,3})[- .]?)?[(]?(\d{3})(?:(?:\) )?|[-. )]?)(\d{3})[-. ]?(\d{4})$/,
-    'Must be valid phone number'
-  ),
-});
 
 /**
  * Create a userData object with only the relevant properties to the

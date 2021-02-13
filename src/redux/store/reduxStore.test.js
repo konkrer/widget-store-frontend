@@ -7,8 +7,9 @@ import decrementQuantity from '../actions/cart/decrementQuantity';
 import resetCart from '../actions/cart/resetCart';
 
 import { TEST_DATA, populateTestDataHook } from '../../utils/testConfig';
+import shedEmpty from '../actions/cart/shedEmpty';
 
-beforeAll(() => {
+beforeEach(() => {
   populateTestDataHook(TEST_DATA);
 });
 
@@ -97,7 +98,7 @@ describe('cart reducer', () => {
   test('decrementQuantity works as expected', () => {
     // add test product
     testStore.dispatch(addProduct(TEST_DATA.product));
-    // increment quantity
+    // decrement quantity
     testStore.dispatch(decrementQuantity(TEST_DATA.product.product_id));
 
     let cart = testStore.getState().cart;
@@ -106,6 +107,23 @@ describe('cart reducer', () => {
     expect(cart.items[1].quantity).toBe(99);
     expect(cart.subtotal).toBe('39639.60');
     expect(cart.numCartItems).toBe(99);
+  });
+
+  test('decrementQuantity does not decrement below zero', () => {
+    TEST_DATA.product.quantity = 1;
+    // add test product
+    testStore.dispatch(addProduct(TEST_DATA.product));
+    // decrement quantity
+    testStore.dispatch(decrementQuantity(TEST_DATA.product.product_id));
+
+    let cart = testStore.getState().cart;
+    expect(cart.items[1].quantity).toBe(0);
+
+    // decrement quantity
+    testStore.dispatch(decrementQuantity(TEST_DATA.product.product_id));
+
+    cart = testStore.getState().cart;
+    expect(cart.items[1].quantity).toBe(0);
   });
 
   test('resetCart works as expected', () => {
@@ -119,5 +137,19 @@ describe('cart reducer', () => {
     expect(cart.items).not.toHaveProperty('1');
     expect(cart.subtotal).toBe(0);
     expect(cart.numCartItems).toBe(0);
+  });
+
+  test('shedEmpty removes from cart items w/ quantity of zero', () => {
+    TEST_DATA.product.quantity = 0;
+
+    // add test product
+    testStore.dispatch(addProduct(TEST_DATA.product));
+
+    let cart = testStore.getState().cart;
+    expect(Object.keys(cart.items)).toHaveLength(1);
+
+    testStore.dispatch(shedEmpty());
+    cart = testStore.getState().cart;
+    expect(Object.keys(cart.items)).toHaveLength(0);
   });
 });

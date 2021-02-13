@@ -95,9 +95,14 @@ describe('calculateTax', () => {
     expect(calculateTax('1000.00', 'Ca')).toBe('85.00');
   });
 
-  test('should return subtotal for non-CA residents', () => {
+  test('should return zero for non-CA residents', () => {
     expect(calculateTax('100.00', 'Nevada')).toBe('0.00');
     expect(calculateTax('1000.00', 'MI')).toBe('0.00');
+  });
+
+  test('should return zero for undefined or null', () => {
+    expect(calculateTax('100.00', undefined)).toBe('0.00');
+    expect(calculateTax('1000.00', null)).toBe('0.00');
   });
 });
 

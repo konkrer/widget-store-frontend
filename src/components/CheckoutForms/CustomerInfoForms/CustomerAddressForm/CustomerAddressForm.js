@@ -13,10 +13,10 @@ import {
 
 // local imports
 import shedEmpty from '../../../../redux/actions/cart/shedEmpty';
-import { customerInfoSchema } from '../CustomerInfoForms';
+import { CustomerInfoSchema } from '../../../../utils/schemas/CustomerInfoSchema';
 import { calculateTax, calculateTotal } from '../../../../utils/monies';
 import { animateVariant } from '../../../../utils/helpers';
-import { asyncAPIRequest } from '../../../../hooks/apiHook';
+import { asyncAxiosRequest } from '../../../../utils/asyncAxiosRequest';
 
 const CustomerAddressForm = ({
   orderData,
@@ -160,7 +160,7 @@ const CustomerAddressForm = ({
   return (
     <Formik
       initialValues={FORM_DATA.current}
-      validationSchema={customerInfoSchema}
+      validationSchema={CustomerInfoSchema}
       onSubmit={(values, { setSubmitting }) => {
         handleSubmit(values);
         setSubmitting(false);
@@ -416,24 +416,19 @@ export const updateUserProfile = async (
     if (value === '') delete userUpdateData[key];
   });
 
-  try {
-    // make patch request
-    const resp = await asyncAPIRequest(
-      `/users/${user.username}`,
-      'patch',
-      userUpdateData,
-      { _token: token }
-    );
-    if (resp.error) {
-      setResponseError(resp.error.response.data.message);
-      return true;
-    } else {
-      defaultAddress.current = values;
-      setFormDisabled(true);
-    }
-  } catch (error) {
-    setResponseError(error.message);
+  // make patch request
+  const resp = await asyncAxiosRequest(
+    `/users/${user.username}`,
+    'patch',
+    userUpdateData,
+    { _token: token }
+  );
+  if (resp.error) {
+    setResponseError(resp.error.response.data.message);
     return true;
+  } else {
+    defaultAddress.current = values;
+    setFormDisabled(true);
   }
 };
 

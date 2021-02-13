@@ -36,7 +36,7 @@ const Checkout = () => {
       shipping: false,
       // if customer data calculate tax else return 0
       tax: orderData.customer
-        ? calculateTax(subtotal, orderData.customer?.state)
+        ? calculateTax(subtotal, orderData.customer.state)
         : 0,
       total: calculateTotal(subtotal, orderData.customer?.state),
     }));

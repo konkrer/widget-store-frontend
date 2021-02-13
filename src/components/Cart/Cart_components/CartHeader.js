@@ -8,7 +8,11 @@ import CartIconBadge from '../../common/CartIconBadge/CartIconBadge';
 const CartHeader = ({ numCartItems, handleClose }) => {
   return (
     <div className="text-left px-4 pt-0 pt-lg-3">
-      <button onClick={handleClose} className="btn-noStyle">
+      <button
+        onClick={handleClose}
+        className="btn-noStyle"
+        aria-label={'close'}
+      >
         <FontAwesomeIcon icon={faWindowClose} size="2x" />
       </button>
       <span className="text-xxl pl-2 pl-sm-5">Shopping Cart</span>

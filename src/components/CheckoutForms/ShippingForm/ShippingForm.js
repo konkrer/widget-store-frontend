@@ -9,7 +9,9 @@ import { calculateTotal } from '../../../utils/monies';
 import { animateVariant } from '../../../utils/helpers';
 
 /**
- * Customer info form for checkout stage 1.
+ * Shipping method form for checkout stage 2.
+ *
+ * Form automatically sets orderData.shipping data on shipping option click.
  *
  */
 const ShippingForm = ({
@@ -41,6 +43,7 @@ const ShippingForm = ({
         shipping: { shipping_method: values.shipping_method[0], details },
         total,
       }));
+      // animate checkmark
       animationTimer.current = animateVariant(
         setShippingCheckmark,
         500,
@@ -49,17 +52,17 @@ const ShippingForm = ({
       );
     }
 
-    // go to shipping form
+    // go to payment form
     else goTo3(true);
   };
 
+  // clear animation timer on dismount
   useEffect(() => {
     return () => {
       clearTimeout(animationTimer.current);
     };
   }, []);
 
-  //
   if (loadingShipping) return <h1>Loading...</h1>;
 
   return (

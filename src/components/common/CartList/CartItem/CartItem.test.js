@@ -7,7 +7,7 @@ import { fireEvent, render } from '@testing-library/react';
 import { TEST_DATA, populateTestDataHook } from '../../../../utils/testConfig';
 import CartItem from './CartItem';
 
-let handleIncrement, handleDecrement, handleRemove;
+let handleIncrement, handleDecrement, handleRemove, setSelectedId;
 
 beforeAll(() => {
   populateTestDataHook(TEST_DATA);
@@ -19,6 +19,11 @@ beforeEach(() => {
   handleIncrement = jest.fn();
   handleDecrement = jest.fn();
   handleRemove = jest.fn();
+  setSelectedId = jest.fn();
+});
+
+afterEach(() => {
+  jest.resetAllMocks();
 });
 
 test('renders CartItem', async () => {
@@ -128,4 +133,24 @@ test('clicking remove calls handleRemove', async () => {
 
   expect(handleRemove.mock.calls.length).toBe(1);
   expect(handleRemove.mock.calls[0][0]).toBe(1);
+});
+
+test('sets selected ID when name clicked if setSelectedId passed as prop', () => {
+  const { getByRole } = render(
+    <MemoryRouter>
+      <CartItem
+        item={TEST_DATA.product}
+        handleIncrement={handleIncrement}
+        handleDecrement={handleDecrement}
+        handleRemove={handleRemove}
+        setSelectedId={setSelectedId}
+      />
+    </MemoryRouter>
+  );
+
+  const nameButton = getByRole('button', { name: TEST_DATA.product.name });
+  fireEvent.click(nameButton);
+
+  expect(setSelectedId.mock.calls.length).toBe(1);
+  expect(setSelectedId.mock.calls[0][0]).toBe(TEST_DATA.product.product_id);
 });

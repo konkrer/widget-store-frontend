@@ -10,7 +10,7 @@ import { Modal } from 'reactstrap';
 // local imports
 import APIRequest from '../../../hooks/apiHook';
 import { getPathRoot } from '../../../utils/helpers';
-import PDModal from '../PDModalCard';
+import PDModalCard from '../PDModalCard';
 import '../ProductDetail.css';
 
 const ProductDetail = () => {
@@ -19,8 +19,11 @@ const ProductDetail = () => {
   const location = useLocation();
   const pathRoot = getPathRoot(location.pathname);
 
-  // close modal function
-  const handleClose = e => {
+  // close modal function.
+  // if filterTarget is true only elements with a
+  // class of "close-modal" will close the modal.
+  const handleClose = (e, filterTarget = false) => {
+    if (filterTarget && !e.target.classList.contains('close-modal')) return;
     return history.push(pathRoot);
   };
 
@@ -47,11 +50,13 @@ const ProductDetail = () => {
       size="xl"
       centered
     >
-      <PDModal
-        product={product}
-        handleClose={handleClose}
-        innerContentOnly="true"
-      />
+      <div onClick={e => handleClose(e, true)}>
+        <PDModalCard
+          product={product}
+          handleClose={handleClose}
+          innerContentOnly="true"
+        />
+      </div>
     </Modal>
   );
 };

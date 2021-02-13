@@ -31,11 +31,38 @@ export const FramerRedirect = props => (
     <Redirect {...props} />
   </motion.div>
 );
-export const FramerLink = props => (
-  <motion.div exit="undefined">
-    <Link {...props} />
-  </motion.div>
-);
+
+/**
+ * <FramerLink to="" />
+ *
+ * Component to force react-router-dom link when framer-motion
+ * prevents a link from working.
+ *
+ * If regular <Link /> fails in this environment use this Link instead.
+ *
+ * @param {any} props
+ *
+ * prefix props with wrapper_ to have props apply to motion.div outer wrapper.
+ * i.e. - wrapper_classname.
+ *
+ * returns: motion.div wrapped redirect component
+ */
+
+export const FramerLink = props => {
+  // seperate wrapper props from link props
+  const wrapperProps = {},
+    linkProps = {};
+  Object.entries(props).forEach(([key, val]) => {
+    if (key.startsWith('wrapper_')) wrapperProps[key.slice(8)] = val;
+    else linkProps[key] = val;
+  });
+
+  return (
+    <motion.div exit="undefined" {...wrapperProps}>
+      <Link {...linkProps} />
+    </motion.div>
+  );
+};
 
 /**
  * animateVariant()

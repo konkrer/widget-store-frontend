@@ -2,7 +2,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { Button, FormGroup, Label, Col, Row, Collapse } from 'reactstrap';
 
 // local imports
-import { customerInfoSchema } from '../CustomerInfoForms';
+import { CustomerInfoSchema } from '../../../../utils/schemas/CustomerInfoSchema';
 
 const ShippingForm = ({
   setOrderData,
@@ -27,7 +27,7 @@ const ShippingForm = ({
   return (
     <Formik
       initialValues={FORM_DATA.current}
-      validationSchema={customerInfoSchema}
+      validationSchema={CustomerInfoSchema}
       onSubmit={(values, { setSubmitting }) => {
         handleSubmitShipping(values);
         setSubmitting(false);
@@ -46,8 +46,8 @@ const ShippingForm = ({
                     name="first_name"
                     id="first_name_shipping"
                     className={`form-control form-control-sm ${
-                      formik.touched.first_name_shipping &&
-                      formik.errors.first_name_shipping &&
+                      formik.touched.first_name &&
+                      formik.errors.first_name &&
                       'is-invalid'
                     }`}
                     disabled={shippingFormDisabled}

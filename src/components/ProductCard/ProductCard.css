@@ -9,10 +9,28 @@
   max-height: 350px;
   background: whitesmoke;
   overflow: hidden;
+  transition: 0.2s;
+  transform-origin: top;
 }
 
 .ProductCard .img-wrapper {
   min-height: 200px;
   max-height: 200px;
+  height: 200px;
   overflow: hidden;
+  transition: 0.5s;
+}
+
+@media (pointer: fine) {
+  .ProductCard:hover {
+    transform: scale(1.1);
+    transition: 0.2s;
+    z-index: 1;
+    /* outline: auto darkblue; */
+    box-shadow: 0px 2px 12px 0px blue;
+  }
+  .ProductCard img:hover {
+    transform: scale(1.15);
+    transition: 10s;
+  }
 }

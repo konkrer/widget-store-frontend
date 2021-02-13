@@ -25,20 +25,4 @@ const APIRequest = (url, method, data, params, baseURL = BASE_URL) => {
   return { loading, error, response };
 };
 
-export const asyncAPIRequest = async (
-  url,
-  method,
-  data,
-  params,
-  baseURL = BASE_URL
-) => {
-  try {
-    const resp = await axios({ url, method, data, params, baseURL });
-    // console.log(resp);
-    return resp;
-  } catch (error) {
-    return { error };
-  }
-};
-
 export default APIRequest;

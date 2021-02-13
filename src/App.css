@@ -13,3 +13,11 @@
   padding: 1rem;
   color: black;
 }
+
+a.darkLink {
+  color: var(--dark);
+}
+a.darkLink:hover {
+  text-decoration: none;
+  /* color: darkblue; */
+}

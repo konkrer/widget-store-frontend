@@ -61,3 +61,25 @@ test('panel close calls history push "/shop"', async () => {
   expect(mockUseHistoryPush.mock.calls.length).toBe(1);
   expect(mockUseHistoryPush.mock.calls[0][0]).toBe('/shop');
 });
+
+test('shipping address data shows when present', async () => {
+  axios.mockResolvedValue({
+    data: {
+      order: {
+        ...TEST_DATA.orderGet,
+        shipping_address: { first_name: 'Henry', last_name: 'Ford' },
+      },
+    },
+  });
+  let getByText;
+  await act(async () => {
+    const resp = renderWithStore(<OrderSuccess />);
+    getByText = resp.getByText;
+  });
+
+  const shippingName = getByText(/Henry/);
+  expect(shippingName).toBeInTheDocument();
+
+  const shippingLastName = getByText(/Ford/);
+  expect(shippingLastName).toBeInTheDocument();
+});

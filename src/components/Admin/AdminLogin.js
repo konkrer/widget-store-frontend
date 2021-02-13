@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { useHistory, Redirect } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { LoginSchema } from '../../utils/schemas/loginSchema';
 import {
   FormGroup,
   Row,
@@ -11,13 +14,12 @@ import {
   Button,
   Alert,
 } from 'reactstrap';
-import { useHistory, Redirect } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 
 // local imports
-import { asyncAPIRequest } from '../../hooks/apiHook';
+import { asyncAxiosRequest } from '../../utils/asyncAxiosRequest';
 import login from '../../redux/actions/user/login';
 
+/** Admin login modal */
 const AdminLogin = ({ adminUser, setAdminUser }) => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -31,17 +33,12 @@ const AdminLogin = ({ adminUser, setAdminUser }) => {
   };
 
   const handleSubmit = async values => {
-    try {
-      const resp = await asyncAPIRequest('/admin/login', 'post', values);
-      if (resp.error) setResponseError(resp.error.response.data.message);
-      else {
-        const { user, token } = resp.data;
-        dispatch(login(user, token));
-        setAdminUser(true);
-      }
-    } catch (error) {
-      setResponseError('Authentication Error!');
-      console.log(error);
+    const resp = await asyncAxiosRequest('/admin/login', 'post', values);
+    if (resp.error) setResponseError(resp.error.response.data.message);
+    else {
+      const { user, token } = resp.data;
+      dispatch(login(user, token));
+      setAdminUser(true);
     }
   };
 
@@ -56,7 +53,7 @@ const AdminLogin = ({ adminUser, setAdminUser }) => {
                   <h1>Admin Login</h1>
                   <Formik
                     initialValues={{ email: '', password: '' }}
-                    validate={formValidation}
+                    validationSchema={LoginSchema}
                     onSubmit={(values, { setSubmitting }) => {
                       handleSubmit(values);
                       setSubmitting(false);
@@ -95,7 +92,9 @@ const AdminLogin = ({ adminUser, setAdminUser }) => {
                           />
                         </FormGroup>
                         {responseError && (
-                          <Alert color="danger">{responseError}</Alert>
+                          <Alert color="danger" aria-label={'error'}>
+                            {responseError}
+                          </Alert>
                         )}
                         <Button
                           type="submit"
@@ -118,26 +117,6 @@ const AdminLogin = ({ adminUser, setAdminUser }) => {
       </Row>
     </Container>
   );
-};
-
-const formValidation = values => {
-  const errors = {};
-  if (!values.email) {
-    errors.email = 'Email Required';
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-    errors.email = 'Invalid email address';
-  }
-  if (!values.password) {
-    errors.password = 'Password Required';
-  } else if (
-    !/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,55}$/.test(
-      values.password
-    )
-  ) {
-    errors.password =
-      'Password must be at least 8 characters long, contain at least 1 uppercase letter, 1 lowercase letter, and 1 number.';
-  }
-  return errors;
 };
 
 export default AdminLogin;
