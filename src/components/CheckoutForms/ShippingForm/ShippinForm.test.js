@@ -206,7 +206,7 @@ test('shows shipping response error when error', async () => {
     getByRole = resp.getByRole;
   });
 
-  // click next
+  // expect alert
   const errorAlert = getByRole('alert', { name: /error/i });
   expect(errorAlert.textContent).toBe('bad error');
 });

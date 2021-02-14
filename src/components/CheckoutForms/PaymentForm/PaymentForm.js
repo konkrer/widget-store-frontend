@@ -46,8 +46,7 @@ const PaymentForm = ({ orderData, goTo2 }) => {
                   'No payment method is available.'
                     ? 'Please provide payment information'
                     : requestPaymentMethodErr.message;
-                setResponseError(errorMsg);
-                return console.log(requestPaymentMethodErr);
+                return setResponseError(errorMsg);
               }
               const data = {
                 cart,
@@ -67,7 +66,7 @@ const PaymentForm = ({ orderData, goTo2 }) => {
         });
       })
       .catch(err => {
-        console.error(err);
+        setResponseError(err.message);
       });
   }, [cart, orderData, dispatch, history]);
 
@@ -109,10 +108,11 @@ const PaymentForm = ({ orderData, goTo2 }) => {
         id="dropin-container"
         className="mt-2"
         onClick={() => setBtnDisabled(false)}
+        data-testid={'dropin-container'}
       ></div>
 
       {responseError && btnDisabled && (
-        <Alert color="danger" className="mt-2">
+        <Alert color="danger" className="mt-2" aria-label={'error'}>
           {responseError}
         </Alert>
       )}

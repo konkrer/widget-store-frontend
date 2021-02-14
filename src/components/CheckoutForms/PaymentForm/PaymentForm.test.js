@@ -1,34 +1,44 @@
-import { act, render, fireEvent } from '@testing-library/react';
+import { act, fireEvent } from '@testing-library/react';
+import axios from 'axios';
 
 // local imports
+import { testStore } from '../../../redux/store/reduxStore';
+import addProduct from '../../../redux/actions/cart/addProduct';
 import { TEST_DATA, populateTestDataHook } from '../../../utils/testConfig';
 import { renderWithStore } from '../../../utils/testHelpers';
 import PaymentForm from './PaymentForm';
 
 const goTo2 = jest.fn();
+const mockRequestPaymentMethod = jest.fn();
+const mockUseHistoryReplace = jest.fn();
 
-// const mockDropinCreate = jest.fn(async () => {
-//   return new Promise.resolve();
-// });
+jest.mock('braintree-web-drop-in', () => ({
+  ...jest.requireActual('braintree-web-drop-in'),
+  create: async () => {
+    return { requestPaymentMethod: mockRequestPaymentMethod };
+  },
+}));
 
-// jest.mock('braintree-web-drop-in', () => ({
-//   ...jest.requireActual('braintree-web-drop-in'),
-//   create: () => mockDropinCreate,
-// }));
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useHistory: () => ({
+    replace: mockUseHistoryReplace,
+  }),
+}));
 
-// const instance = jest.fn();
-// instance.requestPaymentMethod.mockImplementation();
+jest.mock('axios');
 
 let orderData;
 
-beforeEach(() => {
+beforeAll(() => {
   populateTestDataHook(TEST_DATA);
+  testStore.dispatch(addProduct({ ...TEST_DATA.product2, quantity: 1 }));
 
   orderData = {
     shipping: { details: { name: 'ups', cost: '15.55' } },
     shippingAddress: null,
-    tax: '34.03',
-    total: '434.43',
+    tax: '0.00',
+    total: '49.72',
     customer: TEST_DATA.CustomerInfoFormsValues,
   };
 });
@@ -37,216 +47,144 @@ afterEach(() => {
   jest.resetAllMocks();
 });
 
-test('Payment form renders', async () => {
-  const { getByText } = renderWithStore(
-    <PaymentForm orderData={orderData} goTo2={goTo2} />
-  );
+test('PaymentForm form renders', async () => {
+  let getByText;
+  await act(async () => {
+    const { getByText: gbt } = renderWithStore(
+      <PaymentForm orderData={orderData} goTo2={goTo2} />
+    );
+    getByText = gbt;
+    // wait for timeout to create dropin
+    await new Promise(res => setTimeout(res, 950));
+  });
 
   // will fail if payment form not rendered
   getByText(/customer info/i);
   getByText(/shipping address/i);
   getByText(/shipping method/i);
-
-  // expect(mockDropinCreate).not.toHaveBeenCalled();
-
-  // wait for dropin to mount after timeout
-  await new Promise(res => setTimeout(res, 950));
-  //   expect(mockDropinCreate).toHaveBeenCalled();
 });
 
-// test('clicking option calls setOrderData', async () => {
-//   let getByRole, getByLabelText;
-//   await act(async () => {
-//     const resp = render(
-//       <PaymentForm
-//         orderData={orderData}
-//         setOrderData={setOrderData}
-//         goTo1={goTo1}
-//         goTo3={goTo3}
-//         responseError={null}
-//         loadingShipping={false}
-//         shippingMethods={TEST_DATA.shippingMethods}
-//         subtotal={'10.00'}
-//         setShippingCheckmark={setShippingCheckmark}
-//       />
-//     );
-//     getByRole = resp.getByRole;
-//     getByLabelText = resp.getByLabelText;
-//   });
+test('Place order button calls requestPayment method', async () => {
+  await act(async () => {
+    const { getByTestId, getByRole } = renderWithStore(
+      <PaymentForm orderData={orderData} goTo2={goTo2} />
+    );
 
-//   // change input
-//   const shippingInput = getByLabelText(/shipping options/i);
-//   await act(async () => {
-//     fireEvent.change(shippingInput, { target: { value: ['ups_ground'] } });
-//   });
-//   // click option
-//   const upsOption = getByRole('option', {
-//     name: /UPS ground shipping \(3-6 days\)/i,
-//   });
-//   await act(async () => {
-//     fireEvent.click(upsOption);
-//   });
+    // wait for timeout to create dropin
+    await new Promise(res => setTimeout(res, 950));
 
-//   // expect orderData update
-//   expect(setOrderData.mock.calls.length).toBe(1);
-//   const newOrderData = setOrderData.mock.calls[0][0]({});
-//   expect(newOrderData.shipping).toHaveProperty('shipping_method');
-//   expect(newOrderData.shipping).toHaveProperty('details');
+    expect(mockRequestPaymentMethod).not.toHaveBeenCalled();
 
-//   // expect animation cycle happened
-//   await new Promise(res => setTimeout(res, 550));
-//   expect(setShippingCheckmark.mock.calls.length).toBe(2);
+    // click payDiv
+    const payDiv = getByTestId('dropin-container');
+    fireEvent.click(payDiv);
 
-//   expect(goTo3.mock.calls.length).toBe(1);
-// });
+    // click place order
+    const placeOrderButton = getByRole('button', { name: /place order/i });
+    fireEvent.click(placeOrderButton);
 
-// test('check mark does not animate if shipping already set', async () => {
-//   let getByRole, getByLabelText;
-//   await act(async () => {
-//     const resp = render(
-//       <PaymentForm
-//         orderData={{ ...orderData, shipping: true }}
-//         setOrderData={setOrderData}
-//         goTo1={goTo1}
-//         goTo3={goTo3}
-//         responseError={null}
-//         loadingShipping={false}
-//         shippingMethods={TEST_DATA.shippingMethods}
-//         subtotal={'10.00'}
-//         setShippingCheckmark={setShippingCheckmark}
-//       />
-//     );
-//     getByRole = resp.getByRole;
-//     getByLabelText = resp.getByLabelText;
-//   });
+    expect(mockRequestPaymentMethod).toHaveBeenCalled();
+    expect(mockRequestPaymentMethod.mock.calls.length).toBe(1);
+  });
+});
 
-//   // select shipping option
-//   const shippingInput = getByLabelText(/shipping options/i);
-//   await act(async () => {
-//     fireEvent.change(shippingInput, { target: { value: ['ups_ground'] } });
-//   });
-//   const upsOption = getByRole('option', {
-//     name: /UPS ground shipping \(3-6 days\)/i,
-//   });
-//   await act(async () => {
-//     fireEvent.click(upsOption);
-//   });
+test('requestPayment returns funct that show alert if error', async () => {
+  await act(async () => {
+    const { getByTestId, getByRole } = renderWithStore(
+      <PaymentForm orderData={orderData} goTo2={goTo2} />
+    );
 
-//   // expect animation cycle not happened. does not goTo3
-//   await new Promise(res => setTimeout(res, 550));
-//   expect(setShippingCheckmark.mock.calls.length).toBe(0);
-//   expect(goTo3.mock.calls.length).toBe(0);
+    // wait for timeout to create dropin
+    await new Promise(res => setTimeout(res, 950));
 
-//   // click next
-//   const nextButton = getByRole('button', { name: /next/i });
-//   await act(async () => {
-//     fireEvent.click(nextButton);
-//   });
-//   // no additonal animation. called goTo3.
-//   expect(setShippingCheckmark.mock.calls.length).toBe(0);
-//   expect(goTo3.mock.calls.length).toBe(1);
-// });
+    // click payDiv
+    const payDiv = getByTestId('dropin-container');
+    fireEvent.click(payDiv);
+    // click place order
+    const placeOrderButton = getByRole('button', { name: /place order/i });
+    fireEvent.click(placeOrderButton);
 
-// test('clicking next calls setOrderData if shipping data not set', async () => {
-//   let getByRole, getByLabelText;
-//   await act(async () => {
-//     const resp = render(
-//       <PaymentForm
-//         orderData={orderData}
-//         setOrderData={setOrderData}
-//         goTo1={goTo1}
-//         goTo3={goTo3}
-//         responseError={null}
-//         loadingShipping={false}
-//         shippingMethods={TEST_DATA.shippingMethods}
-//         subtotal={'10.00'}
-//         setShippingCheckmark={setShippingCheckmark}
-//       />
-//     );
-//     getByRole = resp.getByRole;
-//     getByLabelText = resp.getByLabelText;
-//   });
+    // call the async funct that mockRequestPaymentMethod was called with
+    // passing an error as first argument should show alert w/ message
+    const asyncFunct = mockRequestPaymentMethod.mock.calls[0][0];
+    asyncFunct({ message: 'bad error' });
 
-//   // change input value but don't click. shipping data will not set by
-//   // form onClick listener.
-//   const shippingInput = getByLabelText(/shipping options/i);
-//   await act(async () => {
-//     fireEvent.change(shippingInput, { target: { value: ['ups_ground'] } });
-//   });
+    // expect alert with error message
+    let errorAlert = getByRole('alert', { name: /error/i });
+    expect(errorAlert.textContent).toBe('bad error');
 
-//   // click next
-//   const nextButton = getByRole('button', { name: /next/i });
-//   await act(async () => {
-//     fireEvent.click(nextButton);
-//   });
+    // if error msg is as below text
+    asyncFunct({ message: 'No payment method is available.' });
+    // expect alert with following text
+    expect(errorAlert.textContent).toBe('Please provide payment information');
+  });
+});
 
-//   // expect orderData update
-//   expect(setOrderData.mock.calls.length).toBe(1);
-//   const newOrderData = setOrderData.mock.calls[0][0]({});
-//   expect(newOrderData.shipping).toHaveProperty('shipping_method');
-//   expect(newOrderData.shipping).toHaveProperty('details');
+test('requestPayment returns funct that calls /orders "POST" if no error', async () => {
+  axios.mockResolvedValue({ data: { order: { order_id: 10 } } });
 
-//   // expect animation cycle happened
-//   await new Promise(res => setTimeout(res, 550));
-//   expect(setShippingCheckmark.mock.calls.length).toBe(2);
+  await act(async () => {
+    const { getByTestId, getByRole } = renderWithStore(
+      <PaymentForm orderData={orderData} goTo2={goTo2} />
+    );
 
-//   expect(goTo3.mock.calls.length).toBe(1);
-// });
+    // wait for timeout to create dropin
+    await new Promise(res => setTimeout(res, 950));
 
-// test('shows shipping response error when error', async () => {
-//   let getByRole;
-//   await act(async () => {
-//     const resp = render(
-//       <PaymentForm
-//         orderData={orderData}
-//         setOrderData={setOrderData}
-//         goTo1={goTo1}
-//         goTo3={goTo3}
-//         responseError={'bad error'}
-//         loadingShipping={false}
-//         shippingMethods={TEST_DATA.shippingMethods}
-//         subtotal={'10.00'}
-//         setShippingCheckmark={setShippingCheckmark}
-//       />
-//     );
-//     getByRole = resp.getByRole;
-//   });
+    // click payDiv
+    const payDiv = getByTestId('dropin-container');
+    fireEvent.click(payDiv);
+    // click place order
+    const placeOrderButton = getByRole('button', { name: /place order/i });
+    fireEvent.click(placeOrderButton);
 
-//   // click next
-//   const errorAlert = getByRole('alert', { name: /error/i });
-//   expect(errorAlert.textContent).toBe('bad error');
-// });
+    // call the async funct that mockRequestPaymentMethod was called with
+    // passing an error as first argument should show alert w/ message
+    const asyncFunct = mockRequestPaymentMethod.mock.calls[0][0];
+    asyncFunct(null, { nonce: 'tempNonce' });
+  });
 
-// test('disallows submitting without selection', async () => {
-//   let getByRole;
-//   await act(async () => {
-//     const resp = render(
-//       <PaymentForm
-//         orderData={orderData}
-//         setOrderData={setOrderData}
-//         goTo1={goTo1}
-//         goTo3={goTo3}
-//         responseError={null}
-//         loadingShipping={false}
-//         shippingMethods={TEST_DATA.shippingMethods}
-//         subtotal={'10.00'}
-//         setShippingCheckmark={setShippingCheckmark}
-//       />
-//     );
-//     getByRole = resp.getByRole;
-//   });
+  // expect axios to have been called
+  expect(axios.mock.calls.length).toBe(1);
+  expect(axios.mock.calls[0][0].url).toBe('/orders');
+  expect(axios.mock.calls[0][0].method).toBe('post');
+  expect(axios.mock.calls[0][0].data.nonce).toBe('tempNonce');
+  expect(axios.mock.calls[0][0].data.orderData).toEqual(orderData);
+  expect(axios.mock.calls[0][0].data.cart).toEqual(TEST_DATA.cart);
 
-//   // click next
-//   const nextButton = getByRole('button', { name: /next/i });
-//   await act(async () => {
-//     fireEvent.click(nextButton);
-//   });
+  // expect history replace "/order-success"
+  expect(mockUseHistoryReplace).toHaveBeenCalled();
+  expect(mockUseHistoryReplace.mock.calls[0][0]).toBe('/order-success/10');
+});
 
-//   // expect orderData not updated
-//   expect(setOrderData).not.toHaveBeenCalled();
+test('PaymentForm shows axios error', async () => {
+  axios.mockResolvedValue({
+    error: { response: { data: { message: 'bad error' } } },
+  });
 
-//   // expect animation cycle not happened
-//   await new Promise(res => setTimeout(res, 550));
-//   expect(setShippingCheckmark).not.toHaveBeenCalled();
-//   expect(goTo3).not.toHaveBeenCalled();
-// });
+  let getByRole_;
+  await act(async () => {
+    const { getByTestId, getByRole } = renderWithStore(
+      <PaymentForm orderData={orderData} goTo2={goTo2} />
+    );
+    getByRole_ = getByRole;
+    // wait for timeout to create dropin
+    await new Promise(res => setTimeout(res, 950));
+
+    // click payDiv
+    const payDiv = getByTestId('dropin-container');
+    fireEvent.click(payDiv);
+    // click place order
+    const placeOrderButton = getByRole('button', { name: /place order/i });
+    fireEvent.click(placeOrderButton);
+
+    // call the async funct that mockRequestPaymentMethod was called with
+    // passing an error as first argument should show alert w/ message
+    const asyncFunct = mockRequestPaymentMethod.mock.calls[0][0];
+    asyncFunct(null, { nonce: 'tempNonce' });
+  });
+
+  // expect alert with error message
+  const errorAlert = getByRole_('alert', { name: /error/i });
+  expect(errorAlert.textContent).toBe('bad error');
+});

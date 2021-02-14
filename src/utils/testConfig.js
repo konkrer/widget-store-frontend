@@ -19,15 +19,16 @@ export const populateTestDataHook = testData => {
   };
 
   testData.product2 = {
-    byline: 'A good remote.',
+    byline: 'The only remote you will need',
+    description: 'Lorem ipsum dolor sit, placeat.',
     discount: '0.15',
     image_url:
-      'https://www.lg.com/sg/images/tvs/md05271244/gallery/LG-43LH600T-L.jpg',
+      'https://cnet3.cbsistatic.com/img/SB-Lc9lni02k-GQeFZlVGII6cpg=/1070x602/2010/08/03/57369690-bb77-11e2-8a8e-0291187978f3/33981226-2-1333-OVR-1.jpg',
     name: 'Logitech Singularity Universal Remote',
     price: '40.20',
     product_id: 2,
-    rating: null,
     quantity: 1,
+    rating: null,
   };
 
   testData.userProfileData = {
@@ -72,7 +73,6 @@ export const populateTestDataHook = testData => {
     items: {
       2: {
         byline: 'The only remote you will need',
-        date_added: '2021-01-24T08:00:00.000Z',
         description: 'Lorem ipsum dolor sit, placeat.',
         discount: '0.15',
         image_url:
@@ -80,7 +80,7 @@ export const populateTestDataHook = testData => {
         name: 'Logitech Singularity Universal Remote',
         price: '40.20',
         product_id: 2,
-        quantity: 2,
+        quantity: 1,
         rating: null,
       },
     },

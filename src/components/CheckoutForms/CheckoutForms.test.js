@@ -1,4 +1,4 @@
-import { act, fireEvent } from '@testing-library/react';
+import { act, fireEvent, getByLabelText } from '@testing-library/react';
 import axios from 'axios';
 
 // local imports
@@ -39,11 +39,11 @@ test('renders CheckoutForms', () => {
   );
 });
 
-test('shipping data added to orderdata', async () => {
-  axios.mockResolvedValue(TEST_DATA.userProfileData);
-  // log in user so shipping address form shows
+test('orderdata.shipping set to null on customer data', async () => {
+  // log in user
   testStore.dispatch(login({ username: 'test_user' }, 'token'));
-  testStore.dispatch(addProduct(TEST_DATA.product));
+  // mock user profile response
+  axios.mockResolvedValue(TEST_DATA.userProfileData);
 
   let getByRole;
   await act(async () => {
@@ -56,38 +56,41 @@ test('shipping data added to orderdata', async () => {
     );
     getByRole = resp.getByRole;
   });
-
+  // click next
   const nextBtn = getByRole('button', { name: /next/i });
   await act(async () => {
     fireEvent.click(nextBtn);
   });
-
+  // expect shipping set null
   expect(setOrderData.mock.calls.length).toBe(1);
   const orderData = setOrderData.mock.calls[0][0]({});
   expect(orderData).toHaveProperty('shipping');
   expect(orderData.shipping).toBeNull();
 });
 
-test('shipping cost calc error shows message', async () => {
-  axios.mockResolvedValue(TEST_DATA.userProfileData);
-  // log in user so shipping address form shows
+test('shows PaymentForm when orderData.shipping data', async () => {
+  // log in user
   testStore.dispatch(login({ username: 'test_user' }, 'token'));
-  testStore.dispatch(addProduct(TEST_DATA.product));
+  // mock user profile response
+  axios.mockResolvedValue(TEST_DATA.userProfileData);
 
   let getByRole;
   await act(async () => {
     const resp = renderWithStore(
       <CheckoutForms
-        orderData={{ shipping: false }}
+        orderData={{
+          shipping: { details: { name: 'ups', cost: '15.55' } },
+          shippingAddress: null,
+          tax: '0.00',
+          total: '49.72',
+          customer: TEST_DATA.CustomerInfoFormsValues,
+        }}
         setOrderData={setOrderData}
         setDisabled={setDisabled}
       />
     );
     getByRole = resp.getByRole;
   });
-
-  const nextBtn = getByRole('button', { name: /next/i });
-  await act(async () => {
-    fireEvent.click(nextBtn);
-  });
+  // will fail if payment form not rendered
+  getByRole('button', { name: /place order/i });
 });
