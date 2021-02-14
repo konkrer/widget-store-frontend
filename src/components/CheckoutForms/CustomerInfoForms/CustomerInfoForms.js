@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import * as Yup from 'yup';
 import { Button } from 'reactstrap';
 
 // local imports

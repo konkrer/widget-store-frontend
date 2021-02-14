@@ -37,6 +37,7 @@ const AddressBox = ({
   className,
 }) => {
   if (!customer && !isTextBox) return null;
+
   return (
     <AddressSecton className={className}>
       <div>

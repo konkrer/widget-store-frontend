@@ -88,6 +88,7 @@ export const populateTestDataHook = testData => {
     subtotal: '34.17',
   };
 
+  // mock return from /order/:id
   testData.orderGet = {
     customer: 1,
     customer_info: {
@@ -123,5 +124,32 @@ export const populateTestDataHook = testData => {
     total: '862.81',
     total_items_quantity: 2,
     tracking_number: null,
+  };
+
+  TEST_DATA.shippingMethods = {
+    usps_ground: {
+      cost: '12.00',
+      name: 'USPS ground shipping (3-7 days)',
+    },
+    usps_priority: {
+      cost: '16.00',
+      name: 'USPS priority shipping (2-4 days)',
+    },
+    usps_next_day: {
+      cost: '25.00',
+      name: 'USPS next day delivery (1 day)',
+    },
+    ups_ground: {
+      cost: '16.00',
+      name: 'UPS ground shipping (3-6 days)',
+    },
+    ups_2nd_day: {
+      cost: '20.00',
+      name: 'UPS second day delivery (2 days)',
+    },
+    ups_overnight: {
+      cost: '28.00',
+      name: 'UPS overnight delivery (1 day)',
+    },
   };
 };

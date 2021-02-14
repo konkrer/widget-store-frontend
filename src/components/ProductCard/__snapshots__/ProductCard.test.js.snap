@@ -18,9 +18,7 @@ exports[`ProductCard snapshot 1`] = `
           <img
             alt="Samsung XG-900 55 inch LCD TV"
             class="card-img-top"
-            height="100%"
             src="https://www.lg.com/sg/images/tvs/md05271244/gallery/LG-43LH600T-L.jpg"
-            width="auto"
           />
         </div>
         <div
