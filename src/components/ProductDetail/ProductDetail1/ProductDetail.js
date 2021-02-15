@@ -10,7 +10,7 @@ import { Modal } from 'reactstrap';
 // local imports
 import APIRequest from '../../../hooks/apiHook';
 import { getPathRoot } from '../../../utils/helpers';
-import PDModalCard from '../PDModalCard';
+import PDModalCard from '../modal/PDModalCard';
 import '../ProductDetail.css';
 
 const ProductDetail = () => {
@@ -22,7 +22,7 @@ const ProductDetail = () => {
   // close modal function.
   // if filterTarget is true only elements with a
   // class of "close-modal" will close the modal.
-  const handleClose = (e, filterTarget = false) => {
+  const handleClose = (e, filterTarget) => {
     if (filterTarget && !e.target.classList.contains('close-modal')) return;
     return history.push(pathRoot);
   };

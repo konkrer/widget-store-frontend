@@ -62,7 +62,7 @@ export const populateTestDataHook = testData => {
     last_name: 'User',
     email: 'foo@gmail.com',
     address: '123 Main St',
-    address_line2: '',
+    address_line2: 'Apt 5',
     city: 'Big City',
     state: 'TX',
     postal_code: '39488',

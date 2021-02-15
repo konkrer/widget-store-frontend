@@ -8,8 +8,8 @@ import { useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
 
 // local imports
-import ScreenBackground from '../ModalBackground';
-import PDModal from '../PDModalCard';
+import ScreenBackground from '../modal/ModalBackground';
+import PDModal from '../modal/PDModalCard';
 import '../ProductDetail.css';
 
 const ProductDetail3 = ({ selectedId, setSelectedId, disabled }) => {

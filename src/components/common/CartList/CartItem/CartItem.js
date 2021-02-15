@@ -111,8 +111,9 @@ const CartItem = ({
           variants={{
             active: {
               scale: 1.2,
+              rotate: [0, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 0],
             },
-            default: { scale: 1 },
+            default: { scale: 1, rotate: 0 },
           }}
           animate={animItemTotal}
           transition={{ ease: 'easeInOut' }}

@@ -1,4 +1,4 @@
-import { act, fireEvent } from '@testing-library/react';
+import { act, fireEvent, getByLabelText } from '@testing-library/react';
 import axios from 'axios';
 
 // local imports
@@ -92,6 +92,10 @@ test('shoud add customer data to orderData with submit success', async () => {
       const input = getAllByLabelText(re)[0];
       fireEvent.change(input, { target: { value: text } });
     });
+    const addLine2Input = getAllByLabelText(/address line two/i)[0];
+    fireEvent.change(addLine2Input, { target: { value: 'Apt. 5' } });
+    const phoneInput = getAllByLabelText(/phone number/i)[0];
+    fireEvent.change(phoneInput, { target: { value: '555.555.5555' } });
   });
 
   const nextButton = getByRole('button', {
@@ -100,7 +104,8 @@ test('shoud add customer data to orderData with submit success', async () => {
   await act(async () => {
     fireEvent.click(nextButton);
   });
-  expect(setOrderData).toHaveBeenCalled();
+
+  // should pass customer data to getShippingCosts
   expect(getShippingCosts).toHaveBeenCalled();
   expect(getShippingCosts.mock.calls.length).toBe(1);
   expect(getShippingCosts.mock.calls[0][0].shippingAddress.address).toBe(
@@ -114,7 +119,8 @@ test('shoud add customer data to orderData with submit success', async () => {
     '55555'
   );
 
-  // call funct that was argument to setOrderData with blank "orderData" object
+  expect(setOrderData).toHaveBeenCalled();
+  // call funct. that was an argument to setOrderData with blank "orderData" object
   const orderData = setOrderData.mock.calls[0][0]({});
   expect(orderData).toHaveProperty('customer');
   expect(orderData.customer.first_name).toBe('bob');

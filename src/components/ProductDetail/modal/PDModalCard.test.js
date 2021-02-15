@@ -1,12 +1,12 @@
 /** PDModalCard tests */
-import { act, fireEvent, queryByTestId } from '@testing-library/react';
+import { act, fireEvent } from '@testing-library/react';
 
 // local imports
 import PDModalCard from './PDModalCard';
-import resetCart from '../../redux/actions/cart/resetCart';
-import { renderWithStore } from '../../utils/testHelpers';
-import { testStore } from '../../redux/store/reduxStore';
-import { TEST_DATA, populateTestDataHook } from '../../utils/testConfig';
+import resetCart from '../../../redux/actions/cart/resetCart';
+import { renderWithStore } from '../../../utils/testHelpers';
+import { testStore } from '../../../redux/store/reduxStore';
+import { TEST_DATA, populateTestDataHook } from '../../../utils/testConfig';
 
 const handleClose = jest.fn();
 

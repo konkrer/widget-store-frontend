@@ -66,45 +66,6 @@ test('Quantity input in document', async () => {
   expect(quantityInput.value).toBe('1');
 });
 
-test('Add to cart adds to store.cart data', async () => {
-  let getByText;
-  await act(async () => {
-    const resp = renderWithStore(<ProductDetail2 />);
-    getByText = resp.getByText;
-  });
-  // click add to cart button
-  const addBtn = getByText('Add To Cart');
-  act(() => {
-    fireEvent.click(addBtn);
-  });
-  // test item data in store.cart
-  const cart = testStore.getState().cart;
-  expect(cart.items).toHaveProperty('1');
-  expect(cart.items[1].quantity).toBe(1);
-  expect(cart.items[1].price).toBe('400.40');
-});
-
-test('Add to cart can add multiple quantity to store.cart data', async () => {
-  let getByText, getByLabelText;
-  await act(async () => {
-    const resp = renderWithStore(<ProductDetail2 />);
-    getByText = resp.getByText;
-    getByLabelText = resp.getByLabelText;
-  });
-  // set item quantity to add to cart to "3"
-  const quantityInput = getByLabelText('Quantity');
-  fireEvent.change(quantityInput, { target: { value: '3' } });
-  // add to cart
-  const addBtn = getByText('Add To Cart');
-  act(() => {
-    fireEvent.click(addBtn);
-  });
-  // check store.cart item quantity
-  const cart = testStore.getState().cart;
-  expect(cart.items).toHaveProperty('1');
-  expect(cart.items[1].quantity).toEqual(3);
-});
-
 test('closing modal ok', async () => {
   let getByRole;
   await act(async () => {
@@ -112,13 +73,30 @@ test('closing modal ok', async () => {
     getByRole = resp.getByRole;
   });
   const cancelButton = getByRole('button', { name: /cancel/i });
-  act(() => {
+  await act(async () => {
     fireEvent.click(cancelButton);
+    // await delay to allow animation then page url change
+    await new Promise(res => setTimeout(res, 500));
   });
-  // await delay to allow animation then page url change
-  await new Promise(res => setTimeout(res, 500));
+
   expect(mockUseHistoryPush.mock.calls.length).toBe(1);
   expect(mockUseHistoryPush.mock.calls[0][0]).toBe('/');
+});
+
+test("clicking in modal doesn't close modal", async () => {
+  let getByLabelText;
+  await act(async () => {
+    const resp = renderWithStore(<ProductDetail2 />);
+    getByLabelText = resp.getByLabelText;
+  });
+  const quantityInput = getByLabelText(/quantity/i);
+  await act(async () => {
+    fireEvent.click(quantityInput);
+    // await delay to allow animation then page url change
+    await new Promise(res => setTimeout(res, 500));
+  });
+
+  expect(mockUseHistoryPush.mock.calls.length).toBe(0);
 });
 
 test('API error returns null', async () => {

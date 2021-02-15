@@ -2,7 +2,7 @@
   "name": "widget-store",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/shop",
+  "homepage": "/",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
     "@fortawesome/free-brands-svg-icons": "^5.15.1",
@@ -63,7 +63,8 @@
     "coveragePathIgnorePatterns": [
       "<rootDir>/node_modules/",
       "<rootDir>/src/index.js",
-      "<rootDir>/src/reportWebVitals.js"
+      "<rootDir>/src/reportWebVitals.js",
+      "<rootDir>/src/redux/reducers/root.js"
     ]
   }
 }

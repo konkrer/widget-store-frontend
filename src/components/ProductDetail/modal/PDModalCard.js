@@ -12,10 +12,10 @@ import { motion } from 'framer-motion';
 
 // local imports
 import ModalCard from './ModalCard';
-import Pricing1 from '../common/Pricing/Pricing1';
-import CartIconBadge from '../common/CartIconBadge/CartIconBadge';
-import addProduct from '../../redux/actions/cart/addProduct';
-import { getPathRoot, animateVariant } from '../../utils/helpers';
+import Pricing1 from '../../common/Pricing/Pricing1';
+import CartIconBadge from '../../common/CartIconBadge/CartIconBadge';
+import addProduct from '../../../redux/actions/cart/addProduct';
+import { getPathRoot, animateVariant } from '../../../utils/helpers';
 
 /**
  * Product Detail Modal Card

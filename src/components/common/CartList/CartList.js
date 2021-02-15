@@ -125,7 +125,7 @@ const CartList = ({ disabled, orderData, setSelectedId }) => {
   const animVariants = {
     active: {
       scale: 1.2,
-      rotate: [0, 2, -2, 2, -2, 2, -2, 2, -2, 2, -2, 2, -2, 0],
+      rotate: [0, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 0],
     },
     default: { scale: 1, rotate: 0 },
   };

@@ -42,16 +42,16 @@ export const FramerRedirect = props => (
  *
  * @param {any} props
  *
- * prefix props with wrapper_ to have props apply to motion.div outer wrapper.
- * i.e. - wrapper_classname.
+ * prefix props with "wrapper_" to have props apply to Link wrapper.
+ * i.e. - wrapper_classname="d-inline-block".
  *
  * returns: motion.div wrapped redirect component
  */
 
 export const FramerLink = props => {
-  // seperate wrapper props from link props
   const wrapperProps = {},
     linkProps = {};
+  // seperate wrapper props from link props
   Object.entries(props).forEach(([key, val]) => {
     if (key.startsWith('wrapper_')) wrapperProps[key.slice(8)] = val;
     else linkProps[key] = val;
@@ -74,7 +74,7 @@ export const FramerLink = props => {
  * setting the animation state "active" instead set it to "default".
  *
  * If a callback is provided it will be called with any arguments
- * after setting state back to "default".
+ * after setting state back to "default" in the timeout.
  *
  *
  * @param {function} setterFunct - useState setter funct to set animation state

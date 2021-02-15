@@ -12,8 +12,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import APIRequest from '../../../hooks/apiHook';
 import { getPathRoot } from '../../../utils/helpers';
 import toggleDir from '../../../redux/actions/animation/toggleDir';
-import ScreenBackground from '../ModalBackground';
-import PDModal from '../PDModalCard';
+import ScreenBackground from '../modal/ModalBackground';
+import PDModal from '../modal/PDModalCard';
 import '../ProductDetail.css';
 
 const ProductDetail2 = () => {
@@ -23,6 +23,7 @@ const ProductDetail2 = () => {
   const location = useLocation();
   const pathRoot = getPathRoot(location.pathname);
   const [modal, setModal] = useState(true);
+  const [bgAnimState, setBgAnimState] = useState('fadeIn');
   const slideoutDir = useSelector(state => state.animation.flipFlop);
   const body = useRef(document.body);
 
@@ -40,7 +41,8 @@ const ProductDetail2 = () => {
   const handleClose = e => {
     // only allow elements with class of clode-modal to close modal
     if (!e.target.classList.contains('close-modal')) return;
-    setModal(false);
+    setBgAnimState('fadeOut');
+    setTimeout(() => setModal(false), 0);
     setTimeout(() => history.push(pathRoot), 500);
   };
 
@@ -59,49 +61,45 @@ const ProductDetail2 = () => {
   return (
     <AnimatePresence>
       {modal && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: [0, 0.94, 0.95, 0.98, 1] }}
-          exit={{ opacity: [1, 0.2, 0] }}
-          transition={{ type: 'linear', ease: 'easeOut', delay: 0.1 }}
+        <ScreenBackground
+          onClick={handleClose}
+          className={`${bgAnimState} close-modal`}
         >
-          <ScreenBackground onClick={handleClose} className="close-modal">
-            <motion.div
-              initial={{
-                x: 400 * (slideoutDir ? 1 : -1),
-                y: -200,
-                scale: 0.35,
-                skewX: 9 * (slideoutDir ? 1 : -1) * -1,
-                rotateX: '60deg',
-                opacity: 0,
-              }}
-              animate={{
-                x: 0,
-                y: 0,
-                scale: 1,
-                skewX: 0,
-                rotateX: '0deg',
-                opacity: 1,
-              }}
-              exit={{
-                x: 1100 * (slideoutDir ? 1 : -1) * -1,
-                y: 0,
-                scale: 0.2,
-                skewX: 0,
-                rotateX: '0deg',
-                opacity: 0,
-              }}
-              transition={{
-                duration: 0.8,
-                type: 'spring',
-                ease: 'easeIn',
-                delay: 0.1,
-              }}
-            >
-              <PDModal handleClose={handleClose} product={product} />
-            </motion.div>
-          </ScreenBackground>
-        </motion.div>
+          <motion.div
+            initial={{
+              x: 400 * (slideoutDir ? 1 : -1),
+              y: -200,
+              scale: 0.35,
+              skewX: 9 * (slideoutDir ? 1 : -1) * -1,
+              rotateX: '60deg',
+              opacity: 0,
+            }}
+            animate={{
+              x: 0,
+              y: 0,
+              scale: 1,
+              skewX: 0,
+              rotateX: '0deg',
+              opacity: 1,
+            }}
+            exit={{
+              x: 1100 * (slideoutDir ? 1 : -1) * -1,
+              y: 0,
+              scale: 0.2,
+              skewX: 0,
+              rotateX: '0deg',
+              opacity: 0,
+            }}
+            transition={{
+              duration: 0.8,
+              type: 'spring',
+              ease: 'easeIn',
+              delay: 0.1,
+            }}
+          >
+            <PDModal handleClose={handleClose} product={product} />
+          </motion.div>
+        </ScreenBackground>
       )}
     </AnimatePresence>
   );
