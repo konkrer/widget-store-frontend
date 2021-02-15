@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = process.env.BACKEND_URL || 'http://localhost:3002';
+const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:3001';
 
 export const asyncAxiosRequest = async (
   url,
