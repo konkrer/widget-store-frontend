@@ -13,6 +13,7 @@ import OrderSuccess from '../views/OrderSuccess/OrderSuccess';
 import Admin from '../views/Admin/Admin';
 import NotFoundPage from '../views/NotFoundPage/NotFoundPage';
 import { getPathRoot, FramerRedirect } from '../utils/helpers';
+import CommingSoon from '../views/CommingSoon/CommingSoon';
 
 function Routes() {
   const location = useLocation();
@@ -47,16 +48,19 @@ function Routes() {
         </Route>
 
         <Route path="/user">
-          <Home />
+          <CommingSoon />
+        </Route>
+        <Route path="/orders">
+          <CommingSoon />
         </Route>
         <Route exact path="/about">
-          <Home />
+          <CommingSoon />
         </Route>
         <Route exact path="/contact">
-          <Home />
+          <CommingSoon />
         </Route>
         <Route exact path="/faq">
-          <Home />
+          <CommingSoon />
         </Route>
         <Route path="/">
           <NotFoundPage />

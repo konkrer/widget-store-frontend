@@ -9,6 +9,7 @@ import ProductPanel from '../../components/ProductPanel/ProductPanel';
 import toggleDir from '../../redux/actions/animation/toggleDir';
 import StorePageRoutes from '../../routes/storePageRoutes';
 import { getPathRoot } from '../../utils/helpers';
+import ProductList from '../../components/ProductList/ProductList';
 
 function NewProducts() {
   const location = useLocation();
@@ -37,6 +38,7 @@ function NewProducts() {
         <ProductPanel
           title={'New Products'}
           byline={'Check out our newest items!'}
+          component={<ProductList />}
         />
       </motion.div>
       {/* End animate page transition. */}

@@ -40,6 +40,7 @@ const NavbarOne = () => {
   /* istanbul ignore next */
   const toggle = () => setIsOpen(!isOpen);
   const numCartItems = useSelector(state => state.cart.numCartItems) || null;
+  const user = useSelector(state => state.user.token);
   const location = useLocation();
   const pathRoot = getPathRoot(location.pathname);
 
@@ -65,13 +66,18 @@ const NavbarOne = () => {
                 More
               </DropdownToggle>
               <DropdownMenu>
-                <DropdownItem>
-                  <NavLink to="/user">Account</NavLink>
-                </DropdownItem>
-                <DropdownItem>
-                  <NavLink to="/orders">Orders</NavLink>
-                </DropdownItem>
-                <DropdownItem divider />
+                {user && (
+                  <>
+                    <DropdownItem>
+                      <NavLink to="/user">Account</NavLink>
+                    </DropdownItem>
+                    <DropdownItem>
+                      <NavLink to="/orders">Orders</NavLink>
+                    </DropdownItem>
+                    <DropdownItem divider />
+                  </>
+                )}
+
                 <DropdownItem>
                   <NavLink to="/about">About</NavLink>
                 </DropdownItem>

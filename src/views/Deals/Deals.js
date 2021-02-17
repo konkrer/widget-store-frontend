@@ -10,6 +10,7 @@ import toggleDir from '../../redux/actions/animation/toggleDir';
 import StorePageRoutes from '../../routes/storePageRoutes';
 import { getPathRoot } from '../../utils/helpers';
 import './Deals.css';
+import ProductList from '../../components/ProductList/ProductList';
 
 function Deals() {
   const location = useLocation();
@@ -35,7 +36,11 @@ function Deals() {
         }}
         transition={{ duration: 0.5 }}
       >
-        <ProductPanel title={'Deals'} byline={"Here's what's on sale!"} />
+        <ProductPanel
+          title={'Deals'}
+          byline={"Here's what's on sale!"}
+          component={<ProductList />}
+        />
       </motion.div>
       {/* End animate page transition. */}
 
