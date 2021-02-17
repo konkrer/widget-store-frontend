@@ -1,10 +1,10 @@
 import React from 'react';
 import { CardDeck } from 'reactstrap';
-import RingLoader from 'react-spinners/RingLoader';
 
 // local imports
 import APIRequest from '../../hooks/apiHook';
 import ProductCard from '../ProductCard/ProductCard';
+import WidgetLoader from '../common/WidgetLoader/WidgetLoader';
 
 function ProductList({ params }) {
   const { loading, error, response } = APIRequest(
@@ -16,21 +16,7 @@ function ProductList({ params }) {
 
   /* istanbul ignore next */
   if (error) return <div>Error</div>;
-  if (loading)
-    return (
-      <div
-        style={{
-          height: '100px',
-          width: '100px',
-          display: 'inline-block',
-          marginLeft: '-100px',
-        }}
-      >
-        <RingLoader size={100} color={'blue'} />
-        <RingLoader size={100} color={'blue'} />
-        <RingLoader size={100} color={'blue'} />
-      </div>
-    );
+  if (loading) return <WidgetLoader />;
 
   return (
     <CardDeck className="justify-content-center pb-2">

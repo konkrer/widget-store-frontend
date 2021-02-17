@@ -15,6 +15,7 @@ const ScreenBackground = styled.div`
   align-items: center;
   overflow-y: auto;
   overflow-x: hidden;
+  perspective: 1000px;
 
   @media screen and (max-width: 991.9px) {
     justify-content: flex-start;

@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
 
 // local imports
-import ScreenBackground from '../modal/ModalBackground';
+import ModalBackground from '../modal/ModalBackground';
 import PDModal from '../modal/PDModalCard';
 import '../ProductDetail.css';
 
@@ -30,7 +30,7 @@ const ProductDetail3 = ({ selectedId, setSelectedId, disabled }) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <ScreenBackground onClick={handleClose} className="close-modal">
+      <ModalBackground onClick={handleClose} className="close-modal">
         <motion.div layoutId={selectedId}>
           <PDModal
             handleClose={handleClose}
@@ -38,7 +38,7 @@ const ProductDetail3 = ({ selectedId, setSelectedId, disabled }) => {
             disabled={disabled}
           />
         </motion.div>
-      </ScreenBackground>
+      </ModalBackground>
     </motion.div>
   );
 };

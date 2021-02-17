@@ -3,10 +3,10 @@
 exports[`ProductDetail2 snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="sc-bdfBwQ hlJzBg fadeIn close-modal"
+    class="sc-bdfBwQ itNZRq fadeIn close-modal"
   >
     <div
-      style="opacity: 0; transform: translateX(-400px) translateY(-200px) scale(0.35) rotateX(60deg) skewX(9deg) translateZ(0);"
+      style="opacity: 0; transform: translateX(400px) translateY(-200px) scale(0.01) rotateX(-60deg) skewX(-9deg) translateZ(0);"
     >
       <div
         class="sc-gsTCUz gyKeDX ProductDetail"

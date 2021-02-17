@@ -12,7 +12,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import APIRequest from '../../../hooks/apiHook';
 import { getPathRoot } from '../../../utils/helpers';
 import toggleDir from '../../../redux/actions/animation/toggleDir';
-import ScreenBackground from '../modal/ModalBackground';
+import ModalBackground from '../modal/ModalBackground';
+import WidgetLoader from '../../common/WidgetLoader/WidgetLoader';
 import PDModal from '../modal/PDModalCard';
 import '../ProductDetail.css';
 
@@ -28,13 +29,15 @@ const ProductDetail2 = () => {
   const body = useRef(document.body);
 
   useEffect(() => {
-    // toggle animation direction
-    dispatch(toggleDir());
     // add 'modal-open' class to <body> to remove scrolling
     const copy = body.current;
     copy.classList.add('modal-open');
 
-    return () => copy.classList.remove('modal-open');
+    return () => {
+      copy.classList.remove('modal-open');
+      // toggle animation direction
+      dispatch(toggleDir());
+    };
   }, [dispatch]);
 
   // close modal function
@@ -47,21 +50,25 @@ const ProductDetail2 = () => {
   };
 
   // load product data
-  const { loading, error, response } = APIRequest(`/products/${id}`, 'get');
+  let { loading, error, response } = APIRequest(`/products/${id}`, 'get');
 
   // if no product found go to path root i.e. /shop, /new, /deals
   if (error) {
     history.replace(pathRoot);
     return null;
   }
-  if (loading) return null;
 
-  const product = response.product;
+  /* If loading return spinner else Product Detail Modal */
+  const modalContent = loading ? (
+    <WidgetLoader />
+  ) : (
+    <PDModal handleClose={handleClose} product={response.product} />
+  );
 
   return (
     <AnimatePresence>
       {modal && (
-        <ScreenBackground
+        <ModalBackground
           onClick={handleClose}
           className={`${bgAnimState} close-modal`}
         >
@@ -69,9 +76,9 @@ const ProductDetail2 = () => {
             initial={{
               x: 400 * (slideoutDir ? 1 : -1),
               y: -200,
-              scale: 0.35,
+              scale: 0.01,
               skewX: 9 * (slideoutDir ? 1 : -1) * -1,
-              rotateX: '60deg',
+              rotateX: '-60deg',
               opacity: 0,
             }}
             animate={{
@@ -83,23 +90,23 @@ const ProductDetail2 = () => {
               opacity: 1,
             }}
             exit={{
-              x: 1100 * (slideoutDir ? 1 : -1) * -1,
-              y: 0,
-              scale: 0.2,
-              skewX: 0,
-              rotateX: '0deg',
+              x: -400 * (slideoutDir ? 1 : -1),
+              y: -200,
+              scale: 0.01,
+              skewX: 9 * (slideoutDir ? 1 : -1),
+              rotateX: '-60deg',
               opacity: 0,
             }}
             transition={{
-              duration: 0.6,
+              duration: 0.7,
               type: 'spring',
               ease: 'easeIn',
               delay: 0.1,
             }}
           >
-            <PDModal handleClose={handleClose} product={product} />
+            {modalContent}
           </motion.div>
-        </ScreenBackground>
+        </ModalBackground>
       )}
     </AnimatePresence>
   );
