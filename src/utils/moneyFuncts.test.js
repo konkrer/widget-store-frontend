@@ -5,7 +5,7 @@ import {
   calculateSubtotal,
   calculateTax,
   calculateTotal,
-} from './monies';
+} from './moneyFuncts';
 
 let product, product2;
 

@@ -8,7 +8,7 @@ import {
   REMOVE_PRODUCT,
   SHED_EMPTY,
 } from '../actions/types';
-import { calculateSubtotal } from '../../utils/monies';
+import { calculateSubtotal } from '../../utils/moneyFuncts';
 
 const INITIAL_STATE = {
   items: {},

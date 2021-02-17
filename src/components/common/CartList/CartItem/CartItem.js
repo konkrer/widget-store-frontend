@@ -13,7 +13,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 // local imports
-import { calculateDiscountPrice } from '../../../../utils/monies';
+import { calculateDiscountPrice } from '../../../../utils/moneyFuncts';
 import { animateVariant, getPathRoot } from '../../../../utils/helpers';
 import './CartItem.css';
 

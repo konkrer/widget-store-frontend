@@ -14,7 +14,7 @@ import {
 // local imports
 import shedEmpty from '../../../../redux/actions/cart/shedEmpty';
 import { CustomerInfoSchema } from '../../../../utils/schemas/CustomerInfoSchema';
-import { calculateTax, calculateTotal } from '../../../../utils/monies';
+import { calculateTax, calculateTotal } from '../../../../utils/moneyFuncts';
 import { animateVariant } from '../../../../utils/helpers';
 import { asyncAxiosRequest } from '../../../../utils/asyncAxiosRequest';
 

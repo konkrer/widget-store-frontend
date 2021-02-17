@@ -1,6 +1,19 @@
+/** Asynchronous axios request function. */
+
 import axios from 'axios';
 
 const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:3001';
+
+/** asyncAxiosRequest()
+ *
+ * Function to abstract error handling of axios requests.
+ *
+ * @param {string} url
+ * @param {string} method
+ * @param {object} data
+ * @param {object} params
+ * @param {string} baseURL
+ */
 
 export const asyncAxiosRequest = async (
   url,

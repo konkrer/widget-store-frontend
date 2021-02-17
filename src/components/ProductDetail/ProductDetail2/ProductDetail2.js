@@ -91,7 +91,7 @@ const ProductDetail2 = () => {
               opacity: 0,
             }}
             transition={{
-              duration: 0.8,
+              duration: 0.6,
               type: 'spring',
               ease: 'easeIn',
               delay: 0.1,

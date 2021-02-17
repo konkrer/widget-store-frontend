@@ -5,7 +5,7 @@ import { Button, FormGroup, Label, Alert } from 'reactstrap';
 
 // local imports
 import AddressBox from '../AddressBox/AddressBox';
-import { calculateTotal } from '../../../utils/monies';
+import { calculateTotal } from '../../../utils/moneyFuncts';
 import { animateVariant } from '../../../utils/helpers';
 
 /**

@@ -9,7 +9,7 @@ import Navbar from '../../components/Navbar/Navbar';
 import LoginSignup from '../../components/LoginSignup/LoginSignup';
 import CartList from '../../components/common/CartList/CartList';
 import CheckoutForms from '../../components/CheckoutForms/CheckoutForms';
-import { calculateTax, calculateTotal } from '../../utils/monies';
+import { calculateTax, calculateTotal } from '../../utils/moneyFuncts';
 import ProductDetail3 from '../../components/ProductDetail/ProductDetail3/ProductDetail3';
 import PanelClose from '../../components/common/PanelClose/PanelClose';
 import './Checkout.css';

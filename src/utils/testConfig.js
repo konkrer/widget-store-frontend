@@ -1,4 +1,4 @@
-/** Test data setup/teardown helper hooks */
+/** Test data setup/teardown helper hooks. */
 
 export const TEST_DATA = {};
 

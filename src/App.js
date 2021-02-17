@@ -1,5 +1,5 @@
 import Background from './components/Background/Background';
-import Routes from './routes';
+import Routes from './routes/appRoutes';
 import img from './assets/images/clockwork-gears.jpg';
 import './App.css';
 

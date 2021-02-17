@@ -1,10 +1,11 @@
+/** Helper functions for widget-store. */
+
 import { Redirect, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
-/**
- * getPathRoot()
+/** getPathRoot()
  *
- * Given a path return the "root" argument.
+ * Given a URL path return the "root" argument of the URL path.
  * For example the "root" of /shop/product/206 would be "/shop".
  *
  * @param {string} path
@@ -14,8 +15,7 @@ export const getPathRoot = path => {
   return path.match(/^(\/\w*)\/?.*$/)[1];
 };
 
-/**
- * <FramerRedirect to="" />
+/** <FramerRedirect to="" />
  *
  * Component to force react-router-dom redirect when framer-motion
  * prevents a redirect from executing.
@@ -26,14 +26,14 @@ export const getPathRoot = path => {
  *
  * returns: motion.div wrapped redirect component
  */
+
 export const FramerRedirect = props => (
   <motion.div exit="undefined">
     <Redirect {...props} />
   </motion.div>
 );
 
-/**
- * <FramerLink to="" />
+/** <FramerLink to="" />
  *
  * Component to force react-router-dom link when framer-motion
  * prevents a link from working.
@@ -64,8 +64,7 @@ export const FramerLink = props => {
   );
 };
 
-/**
- * animateVariant()
+/** animateVariant()
  *
  * Animation function to turn on an animation state then turn it back
  * off after a delay. The state will be set "active" then back to "default".
