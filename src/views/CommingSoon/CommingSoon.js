@@ -39,7 +39,7 @@ function CommingSoon() {
         transition={{ duration: 0.5 }}
       >
         <ProductPanel
-          title={'Commin Soon'}
+          title={'Comming Soon'}
           byline={'This page is under construction!'}
         >
           <WidgetLoader />
