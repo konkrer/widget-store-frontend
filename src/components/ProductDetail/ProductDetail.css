@@ -1,3 +1,7 @@
+.ProductDetail-img {
+  max-height: 55vh;
+}
+
 .ProductDetail .modal-body .details {
   display: flex;
   justify-content: space-between;

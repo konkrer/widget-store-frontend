@@ -1,3 +1,4 @@
+/** Product Detail Modal Card -> PDModalCard */
 import { useState, useRef, useEffect } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
