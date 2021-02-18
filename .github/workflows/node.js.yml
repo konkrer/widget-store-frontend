@@ -1,0 +1,26 @@
+name: Push to Surge workflow
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    name: Build app and push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - run: npm ci
+      - run: REACT_APP_BASE_URL=https://widget-store-backend.herokuapp.com
+      - run: npm run build
+      - run: cp ./build/index.html ./build/200.html
+      - name: Deploy to https://melted-sidewalk.surge.sh
+        uses: dswistowski/surge-sh-action@v1
+        with:
+          domain: 'melted-sidewalk.surge.sh'
+          project: './build'
+          login: ${{ secrets.surge_login }}
+          token: ${{ secrets.surge_token }}

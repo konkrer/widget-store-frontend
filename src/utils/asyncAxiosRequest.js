@@ -24,7 +24,6 @@ export const asyncAxiosRequest = async (
 ) => {
   try {
     const resp = await axios({ url, method, data, params, baseURL });
-    // console.log(resp);
     return resp;
   } catch (error) {
     return { error };

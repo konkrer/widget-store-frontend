@@ -13,7 +13,6 @@ const APIRequest = (url, method, data, params, baseURL = BASE_URL) => {
       try {
         const resp = await axios({ url, method, data, params, baseURL });
         setResponse(resp.data);
-        // console.log(resp.data);
       } catch (error) {
         setError(error);
       }
