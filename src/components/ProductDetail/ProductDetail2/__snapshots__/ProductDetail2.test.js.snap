@@ -9,7 +9,7 @@ exports[`ProductDetail2 snapshot 1`] = `
       style="opacity: 0; transform: translateX(400px) translateY(-200px) scale(0.01) rotateX(-60deg) skewX(-9deg) translateZ(0);"
     >
       <div
-        class="sc-gsTCUz gyKeDX ProductDetail"
+        class="sc-gsTCUz ldfCwt ProductDetail"
         color="var(--dark)"
         data-testid="ModalCard"
       >

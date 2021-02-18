@@ -15,6 +15,15 @@
 
 Try: Credit Card #4111 1111 1111 1111 | Expiration Date 2/22 | CVV #222
 
+##### Use
+####### Install
+		npm i
+###### Project Scripts
+		1. npm start               - run react development server.
+		2. npm test                - run test suite.
+		3. npm run test:coverage   - run test suite with istanbul coverage report.
+		4. npm run test:debug     - debug tests with inspector - e.g.-> chorme:inspector.
+		5. 
 ##### Tech Stack:
 
 React - Redux - React-Router-Dom - Jest - Istanbul - Braintree Payments - Bootstrap - Styled Components - Formik - Yup - Framer Motion - Decimal.js - Redux Persist
