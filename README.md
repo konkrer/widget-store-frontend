@@ -16,7 +16,7 @@
 Try: Credit Card #4111 1111 1111 1111 | Expiration Date 2/22 | CVV #222
 
 ##### Use
-####### Install
+###### Install
 		npm i
 ###### Project Scripts
 		1. npm start               - run react development server.
