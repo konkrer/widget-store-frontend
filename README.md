@@ -3,6 +3,7 @@
 ## Generic Storefront with payment integration.
 
 [![Node.js CI](https://github.com/konkrer/widget-store-frontend/actions/workflows/node2.js.yml/badge.svg)](https://github.com/konkrer/widget-store-frontend/actions/workflows/node2.js.yml)
+[![Push to Surge workflow](https://github.com/konkrer/widget-store-frontend/actions/workflows/node.js.yml/badge.svg)](https://github.com/konkrer/widget-store-frontend/actions/workflows/node.js.yml)
 
 [https://melted-sidewalk.surge.sh](https://melted-sidewalk.surge.sh 'Widget Store')
 

@@ -108,6 +108,7 @@ const CartItem = ({
 
       <div className="CartItem-total font-weight-bold">
         <motion.div
+          initial={{ marginTop: 0, opacity: 1 }}
           variants={{
             active: {
               scale: 1.2,

@@ -105,7 +105,9 @@ exports[`Cart snapshot 1`] = `
               <td
                 class="text-right"
               >
-                <div>
+                <div
+                  style="margin-top: 0px; opacity: 1;"
+                >
                   $0
                 </div>
               </td>

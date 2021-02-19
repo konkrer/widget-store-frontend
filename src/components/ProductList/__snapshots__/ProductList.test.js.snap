@@ -27,12 +27,11 @@ exports[`ProductList snapshot 1`] = `
           <div
             class="card-body"
           >
-            <div
-              class="card-title h5"
-              tag="h5"
+            <h5
+              class="card-title"
             >
               Samsung XG-900 55 inch LCD TV
-            </div>
+            </h5>
             <div
               class="mb-2 text-muted card-subtitle h6"
               tag="h6"

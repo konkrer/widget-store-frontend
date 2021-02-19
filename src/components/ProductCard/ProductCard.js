@@ -31,7 +31,7 @@ const ProductCard = ({ product }) => {
         </div>
 
         <Card.Body>
-          <Card.Title tag={product.name.length > 60 ? 'h6' : 'h5'}>
+          <Card.Title as={product.name.length > 60 ? 'h6' : 'h5'}>
             {product.name}
           </Card.Title>
           <Card.Subtitle tag="h6" className="mb-2 text-muted">
