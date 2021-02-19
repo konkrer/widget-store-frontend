@@ -1,7 +1,7 @@
-import { Table } from 'reactstrap';
+import Table from 'react-bootstrap/Table';
 
 const OrderSuccessTable = ({ order, id }) => (
-  <Table dark className="rounded">
+  <Table variant="dark" className="rounded">
     <tbody>
       <tr>
         <th scope="row" className="border-top-0">

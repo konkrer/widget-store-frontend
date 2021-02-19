@@ -16,9 +16,10 @@ const ProductDetail3 = ({ selectedId, setSelectedId, disabled }) => {
   const product = useSelector(state => state.cart.items[selectedId]);
 
   // close modal function
-  const handleClose = e => {
+  const handleClose = (e, filterTarget) => {
     // only allow elements with class of clode-modal to close modal
-    if (!e.target.classList.contains('close-modal')) return;
+    // unless forcing close.
+    if (filterTarget && !e.target.classList.contains('close-modal')) return;
     setSelectedId(null);
   };
 
@@ -30,7 +31,10 @@ const ProductDetail3 = ({ selectedId, setSelectedId, disabled }) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <ModalBackground onClick={handleClose} className="close-modal">
+      <ModalBackground
+        onClick={e => handleClose(e, true)}
+        className="close-modal"
+      >
         <motion.div layoutId={selectedId}>
           <PDModal
             handleClose={handleClose}

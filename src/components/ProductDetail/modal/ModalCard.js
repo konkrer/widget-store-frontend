@@ -6,10 +6,12 @@ const ModalCard = styled.div`
   opacity: 1;
   border-radius: 7px;
   margin-bottom: 5vh;
+
   color: ${p => p.color || 'inherit'};
 
   @media screen and (max-width: 991.9px) {
     width: 80vw;
+    margin-top: 3vh;
   }
   @media screen and (max-width: 767.9px) {
     width: 90vw;

@@ -16,7 +16,7 @@ exports[`Login snapshot 1`] = `
         class="form-group"
       >
         <label
-          class=""
+          class="form-label"
           for="email1"
         >
           Email
@@ -34,7 +34,7 @@ exports[`Login snapshot 1`] = `
         class="form-group"
       >
         <label
-          class=""
+          class="form-label"
           for="password1"
         >
           Password
@@ -65,6 +65,7 @@ exports[`Login snapshot 1`] = `
         </button>
         <button
           class="btn btn-secondary ml-2"
+          type="button"
         >
           Cancel
         </button>

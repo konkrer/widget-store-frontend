@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { Button, Alert } from 'reactstrap';
+import { Button, Alert } from 'react-bootstrap';
 import dropin from 'braintree-web-drop-in';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -96,7 +96,7 @@ const PaymentForm = ({ orderData, goTo2 }) => {
         />
 
         <Button
-          color="secondary"
+          variant="secondary"
           onClick={goTo2}
           className="mt-4 mt-sm-0 mt-md-4"
         >
@@ -112,13 +112,13 @@ const PaymentForm = ({ orderData, goTo2 }) => {
       ></div>
 
       {responseError && btnDisabled && (
-        <Alert color="danger" className="mt-2" aria-label={'error'}>
+        <Alert variant="danger" className="mt-2" aria-label={'error'}>
           {responseError}
         </Alert>
       )}
 
       <Button
-        color="primary"
+        variant="primary"
         size="lg"
         className="form-control my-3 rounded-pill"
         onClick={paymentSubmitFunction}

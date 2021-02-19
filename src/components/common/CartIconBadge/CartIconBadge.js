@@ -1,4 +1,4 @@
-import { Badge } from 'reactstrap';
+import Badge from 'react-bootstrap/Badge';
 
 // get our fontawesome imports
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,7 +11,7 @@ const CartIconBadge = ({ numCartItems, className, size = '2x' }) => {
     <span className={`CartIconBadge position-relative ${className}`}>
       <FontAwesomeIcon icon={faShoppingCart} size={size} />
       {numCartItems > 0 && (
-        <Badge className="cart-count-badge badge-pill" color="primary">
+        <Badge className="cart-count-badge badge-pill" variant="primary">
           {numCartItems}
           <span className="sr-only">cart items</span>
         </Badge>

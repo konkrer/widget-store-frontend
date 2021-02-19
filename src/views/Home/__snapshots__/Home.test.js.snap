@@ -6,7 +6,7 @@ exports[`Home snapshot 1`] = `
     class="sc-bdfBwQ fijioT"
   >
     <nav
-      class="Navbar navbar navbar-expand-md navbar-dark"
+      class="Navbar navbar-dark navbar navbar-expand-md navbar-light"
     >
       <span
         class="navbar-text"
@@ -19,8 +19,9 @@ exports[`Home snapshot 1`] = `
         </a>
       </span>
       <button
+        aria-controls="basic-navbar-nav"
         aria-label="Toggle navigation"
-        class="navbar-toggler"
+        class="navbar-toggler collapsed"
         type="button"
       >
         <span
@@ -28,9 +29,9 @@ exports[`Home snapshot 1`] = `
         />
       </button>
       <div
-        class="pr-4 collapse navbar-collapse"
+        class="pr-4 navbar-collapse collapse"
       >
-        <ul
+        <div
           class="mr-auto navbar-nav"
         >
           <span
@@ -51,62 +52,20 @@ exports[`Home snapshot 1`] = `
               Deals
             </a>
           </span>
-          <li
-            class="dropdown nav-item"
+          <div
+            class="nav-item dropdown"
           >
             <a
               aria-expanded="false"
               aria-haspopup="true"
               class="dropdown-toggle nav-link"
               href="#"
+              role="button"
             >
               More
             </a>
-            <div
-              aria-hidden="true"
-              class="dropdown-menu"
-              role="menu"
-              tabindex="-1"
-            >
-              <button
-                class="dropdown-item"
-                role="menuitem"
-                tabindex="0"
-                type="button"
-              >
-                <a
-                  href="/about"
-                >
-                  About
-                </a>
-              </button>
-              <button
-                class="dropdown-item"
-                role="menuitem"
-                tabindex="0"
-                type="button"
-              >
-                <a
-                  href="/contact"
-                >
-                  Contact
-                </a>
-              </button>
-              <button
-                class="dropdown-item"
-                role="menuitem"
-                tabindex="0"
-                type="button"
-              >
-                <a
-                  href="/faq"
-                >
-                  FAQ
-                </a>
-              </button>
-            </div>
-          </li>
-        </ul>
+          </div>
+        </div>
         <a
           href="//login"
         >
@@ -172,25 +131,27 @@ exports[`Home snapshot 1`] = `
               >
                 <img
                   alt="Samsung XG-900 55 inch LCD TV"
-                  class="card-img-top"
+                  class="card-img"
                   src="https://www.lg.com/sg/images/tvs/md05271244/gallery/LG-43LH600T-L.jpg"
                 />
               </div>
               <div
                 class="card-body"
               >
-                <h5
-                  class="card-title"
+                <div
+                  class="card-title h5"
+                  tag="h5"
                 >
                   Samsung XG-900 55 inch LCD TV
-                </h5>
-                <h6
-                  class="mb-2 text-muted card-subtitle"
+                </div>
+                <div
+                  class="mb-2 text-muted card-subtitle h6"
+                  tag="h6"
                 >
                   <em>
                     Latest generation smart televison 2021
                   </em>
-                </h6>
+                </div>
                 <p
                   class="card-text"
                 >

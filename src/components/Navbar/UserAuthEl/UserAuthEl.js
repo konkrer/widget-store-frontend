@@ -5,7 +5,7 @@
  */
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { NavbarText } from 'reactstrap';
+import Navbar from 'react-bootstrap/Navbar';
 
 // local imports
 import logout from '../../../redux/actions/user/logout';
@@ -21,11 +21,11 @@ const UserAuthElement = ({ pathRoot }) => {
   // if user logged in show logout button
   if (user) {
     return (
-      <NavbarText>
+      <Navbar.Text>
         <button className="btn-noStyle navbtn" onClick={handleLogout}>
           Logout
         </button>
-      </NavbarText>
+      </Navbar.Text>
     );
   }
   // if not user logged in show login link

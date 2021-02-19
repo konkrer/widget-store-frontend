@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { Button } from 'reactstrap';
+import Button from 'react-bootstrap/Button';
 
 // local imports
 import { asyncAxiosRequest } from '../../../utils/asyncAxiosRequest';
@@ -139,10 +139,9 @@ const CustomerInfoForms = ({
         setShippingFormDisabled(true);
         setFormDisabled(formDisabled => !formDisabled);
       }}
-      color="primary"
+      variant="outline-primary"
       className="mb-4"
       size="sm"
-      outline
     >
       Edit Customer Info
     </Button>
@@ -154,10 +153,9 @@ const CustomerInfoForms = ({
         setFormDisabled(true);
         setShippingFormDisabled(shippigFormDisabled => !shippigFormDisabled);
       }}
-      color="primary"
+      variant="outline-primary"
       className="mb-4"
       size="sm"
-      outline
     >
       Edit Shipping Info
     </Button>

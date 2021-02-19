@@ -1,4 +1,4 @@
-import { Container } from 'reactstrap';
+import Container from 'react-bootstrap/Container';
 
 const ProductPanel = props => (
   <Container

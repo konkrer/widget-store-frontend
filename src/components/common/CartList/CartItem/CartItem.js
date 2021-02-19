@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Badge } from 'reactstrap';
+import Badge from 'react-bootstrap/Badge';
 import Decimal from 'decimal.js';
 import { motion } from 'framer-motion';
 
@@ -76,7 +76,7 @@ const CartItem = ({
       <div className="CartItem-quant-adj pt-4 pt-sm-0">
         <Badge
           className="mr-2 border quantDisplay"
-          color="light"
+          variant="light"
           data-testid={'quantDisplay'}
         >
           {item.quantity}

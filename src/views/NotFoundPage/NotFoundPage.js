@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Button } from 'reactstrap';
+import Button from 'react-bootstrap/Button';
 
 // local imports
 import { FramerLink } from '../../utils/helpers';
@@ -19,7 +19,7 @@ const NotFoundPage = () => {
       <section className="lead text-light">
         <h1>404 Page Not Found</h1>
         <FramerLink to="/shop">
-          <Button color="primary" size="lg">
+          <Button variant="primary" size="lg">
             Go Home
           </Button>
         </FramerLink>

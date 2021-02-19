@@ -5,7 +5,7 @@
  */
 
 import { NavLink } from 'react-router-dom';
-import { NavbarText } from 'reactstrap';
+import Navbar from 'react-bootstrap/Navbar';
 
 // local imports
 import CartIconBadge from '../../common/CartIconBadge/CartIconBadge';
@@ -21,9 +21,9 @@ const NavbarCartElement = ({ pathRoot, numCartItems }) => {
   }
   // otherwise show Icon
   return (
-    <NavbarText className="navitem">
+    <Navbar.Text className="navitem">
       <CartIconBadge numCartItems={numCartItems} />
-    </NavbarText>
+    </Navbar.Text>
   );
 };
 

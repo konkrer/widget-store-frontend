@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardDeck } from 'reactstrap';
+import CardDeck from 'react-bootstrap/CardDeck';
 
 // local imports
 import APIRequest from '../../hooks/apiHook';

@@ -22,17 +22,6 @@ test('LoginSignup snapshot', async () => {
   expect(asFragment()).toMatchSnapshot();
 });
 
-/** this test need to be improved - no assertions */
-test('changing tabs login/signup ok', () => {
-  const { getByTestId } = renderWithStore(<LoginSignup />);
-
-  const loginLink = getByTestId('login tab link');
-  const signupLink = getByTestId('signup tab link');
-
-  fireEvent.click(loginLink);
-  fireEvent.click(signupLink);
-});
-
 test('close button calls history goBack', () => {
   const { getAllByRole } = renderWithStore(<LoginSignup />);
 

@@ -1,4 +1,4 @@
-import { Button } from 'reactstrap';
+import Button from 'react-bootstrap/Button';
 
 // local
 import PaymentOptions from '../../common/PaymentOptions/PaymentOptions';
@@ -8,7 +8,7 @@ const CartFooter = ({ numCartItems, goToCheckout }) => {
     <>
       <div className="px-4 mt-lg-4">
         <Button
-          color="primary"
+          variant="primary"
           className={`w-100 mt-2 text-xl ${numCartItems > 0 ? '' : 'disabled'}`}
           onClick={goToCheckout}
         >

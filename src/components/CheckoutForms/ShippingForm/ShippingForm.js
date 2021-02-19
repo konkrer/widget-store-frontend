@@ -1,7 +1,7 @@
 import { useRef, useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { Button, FormGroup, Label, Alert } from 'reactstrap';
+import { Button, Form as bootForm, Alert } from 'react-bootstrap';
 
 // local imports
 import AddressBox from '../AddressBox/AddressBox';
@@ -104,13 +104,13 @@ const ShippingForm = ({
                   }
                 }}
               >
-                <FormGroup>
-                  <Label
+                <bootForm.Group>
+                  <bootForm.Label
                     htmlFor="shipping_method"
                     className="text-lg font-italic"
                   >
                     Shipping Options
-                  </Label>
+                  </bootForm.Label>
                   <Field
                     as="select"
                     name="shipping_method"
@@ -134,16 +134,16 @@ const ShippingForm = ({
                     component="div"
                     className="text-danger mt-1"
                   />
-                </FormGroup>
+                </bootForm.Group>
 
                 {responseError && (
-                  <Alert color="danger" aria-label={'error'}>
+                  <Alert variant="danger" aria-label={'error'}>
                     {responseError}
                   </Alert>
                 )}
                 <Button
                   type="submit"
-                  color="primary"
+                  variant="primary"
                   disabled={formik.isSubmitting}
                   className="form-control rounded-pill"
                 >
@@ -153,7 +153,7 @@ const ShippingForm = ({
             )}
           </Formik>
         )}
-        <Button color="secondary" size="sm" className="mt-3" onClick={goTo1}>
+        <Button variant="secondary" size="sm" className="mt-3" onClick={goTo1}>
           Back to Edit Address
         </Button>
       </div>

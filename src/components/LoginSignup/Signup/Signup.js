@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect, useLocation } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { Button, FormGroup, Label, Alert, FormText } from 'reactstrap';
+import { Button, Form as bootForm, Alert, FormText } from 'react-bootstrap';
 
 // local imports
 import { asyncAxiosRequest } from '../../../utils/asyncAxiosRequest';
@@ -43,8 +43,8 @@ const Signup = ({ handleClose }) => {
       >
         {formik => (
           <Form className="text-left">
-            <FormGroup>
-              <Label htmlFor="username">Username</Label>
+            <bootForm.Group>
+              <bootForm.Label htmlFor="username">Username</bootForm.Label>
               <Field
                 type="text"
                 name="username"
@@ -61,9 +61,9 @@ const Signup = ({ handleClose }) => {
                 component="div"
                 className="text-danger mt-1 text-sm"
               />
-            </FormGroup>
-            <FormGroup>
-              <Label htmlFor="email2">Email</Label>
+            </bootForm.Group>
+            <bootForm.Group>
+              <bootForm.Label htmlFor="email2">Email</bootForm.Label>
               <Field
                 type="email"
                 name="email"
@@ -78,13 +78,12 @@ const Signup = ({ handleClose }) => {
                 component="div"
                 className="text-danger mt-1 text-sm"
               />
-            </FormGroup>
-            <FormGroup>
-              <Label htmlFor="password2">Password</Label>
+            </bootForm.Group>
+            <bootForm.Group>
+              <bootForm.Label htmlFor="password2">Password</bootForm.Label>
               <Button
                 className=" ml-1 text-sm py-0 border-0 font-italic"
-                color="primary"
-                outline
+                variant="outline-primary"
                 size="sm"
                 onClick={() => setPasswordShow(state => !state)}
               >
@@ -115,17 +114,17 @@ const Signup = ({ handleClose }) => {
                   </li>
                 </ul>
               </FormText>
-            </FormGroup>
-            {responseError && <Alert color="danger">{responseError}</Alert>}
+            </bootForm.Group>
+            {responseError && <Alert variant="danger">{responseError}</Alert>}
             <div className="mt-4">
               <Button
                 type="submit"
-                color="primary"
+                variant="primary"
                 disabled={formik.isSubmitting}
               >
                 Signup
               </Button>
-              <Button color="secondary ml-2" onClick={handleClose}>
+              <Button variant="secondary ml-2" onClick={handleClose}>
                 Cancel
               </Button>
             </div>

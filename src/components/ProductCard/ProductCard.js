@@ -1,13 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import {
-  Card,
-  CardImg,
-  CardText,
-  CardBody,
-  CardTitle,
-  CardSubtitle,
-} from 'reactstrap';
+import Card from 'react-bootstrap/Card';
 
 //local imports
 import Pricing1 from '../common/Pricing/Pricing1';
@@ -34,20 +27,20 @@ const ProductCard = ({ product }) => {
     >
       <Card className="ProductCard mb-3">
         <div className="img-wrapper">
-          <CardImg top src={product.image_url} alt={product.name} />
+          <Card.Img src={product.image_url} alt={product.name} />
         </div>
 
-        <CardBody>
-          <CardTitle tag={product.name.length > 60 ? 'h6' : 'h5'}>
+        <Card.Body>
+          <Card.Title tag={product.name.length > 60 ? 'h6' : 'h5'}>
             {product.name}
-          </CardTitle>
-          <CardSubtitle tag="h6" className="mb-2 text-muted">
+          </Card.Title>
+          <Card.Subtitle tag="h6" className="mb-2 text-muted">
             <em>{productByline}</em>
-          </CardSubtitle>
-          <CardText>
+          </Card.Subtitle>
+          <Card.Text>
             <Pricing1 product={product} />
-          </CardText>
-        </CardBody>
+          </Card.Text>
+        </Card.Body>
       </Card>
     </FramerLink>
   );

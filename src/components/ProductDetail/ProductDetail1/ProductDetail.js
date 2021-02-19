@@ -1,11 +1,11 @@
 /** Product Detail Modal Type 1
  *
- * Shows product details on a Bootstrap (reactstrap) modal.
+ * Shows product details on a Bootstrap (react-bootstrap) modal.
  */
 
 import { useParams, useHistory, useLocation } from 'react-router-dom';
 import React, { useState } from 'react';
-import { Modal } from 'reactstrap';
+import Modal from 'react-bootstrap/Modal';
 import styled from 'styled-components';
 
 // local imports
@@ -62,8 +62,8 @@ const ProductDetail = () => {
 
   return (
     <Modal
-      isOpen={modal}
-      toggle={handleClose}
+      show={modal}
+      onHide={handleClose}
       className="ProductDetail"
       size="xl"
       centered

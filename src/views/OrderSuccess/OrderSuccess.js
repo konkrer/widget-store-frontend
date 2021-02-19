@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { useParams, useHistory, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Container, Col, Button } from 'reactstrap';
+import { Container, Col, Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
@@ -56,7 +56,7 @@ const OrderSuccess = () => {
                 </span>
               </h4>
               <Link to="/shop">
-                <Button color="primary mt-5">Continue Shopping</Button>
+                <Button variant="primary mt-5">Continue Shopping</Button>
               </Link>
             </Col>
           </FlexDiv>

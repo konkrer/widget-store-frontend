@@ -25,420 +25,436 @@ exports[`CustomerInfoForms snapshot 1`] = `
       class="text-left CustomerInfoForm"
     >
       <div
-        class="collapse show"
+        class="accordion"
       >
-        <h6
-          class="font-weight-bold"
-        >
-          Customer Info
-        </h6>
         <div
-          class="form-row"
+          class="collapse show"
         >
           <div
-            class="col-sm-6"
+            class="col"
           >
+            <h6
+              class="font-weight-bold"
+            >
+              Customer Info
+            </h6>
+            <div
+              class="row"
+            >
+              <div
+                class="col-sm-6"
+              >
+                <div
+                  class="form-group"
+                >
+                  <label
+                    class="form-label"
+                    for="first_name"
+                  >
+                    First Name
+                  </label>
+                  <input
+                    autocomplete="given-name"
+                    class="form-control form-control-sm undefined"
+                    id="first_name"
+                    name="first_name"
+                    type="text"
+                    value=""
+                  />
+                </div>
+              </div>
+              <div
+                class="col-sm-6"
+              >
+                <div
+                  class="form-group"
+                >
+                  <label
+                    class="form-label"
+                    for="last_name"
+                  >
+                    Last Name
+                  </label>
+                  <input
+                    autocomplete="family-name"
+                    class="form-control form-control-sm undefined"
+                    id="last_name"
+                    name="last_name"
+                    type="text"
+                    value=""
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="row"
+            >
+              <div
+                class="col-sm-6"
+              >
+                <div
+                  class="form-group"
+                >
+                  <label
+                    class="form-label"
+                    for="email"
+                  >
+                    Email
+                  </label>
+                  <input
+                    autocomplete="email"
+                    class="form-control form-control-sm undefined"
+                    id="email"
+                    name="email"
+                    type="email"
+                    value=""
+                  />
+                </div>
+              </div>
+              <div
+                class="col-sm-6"
+              >
+                <div
+                  class="form-group"
+                >
+                  <label
+                    class="form-label"
+                    for="phone_number"
+                  >
+                    Phone Number
+                  </label>
+                  <input
+                    autocomplete="tel-national"
+                    class="form-control form-control-sm undefined"
+                    id="phone_number"
+                    name="phone_number"
+                    type="text"
+                    value=""
+                  />
+                </div>
+              </div>
+            </div>
             <div
               class="form-group"
             >
               <label
-                class=""
-                for="first_name"
+                class="form-label"
+                for="address"
               >
-                First Name
+                Street Address
               </label>
               <input
-                autocomplete="given-name"
+                autocomplete="address-line1"
                 class="form-control form-control-sm undefined"
-                id="first_name"
-                name="first_name"
+                id="address"
+                name="address"
                 type="text"
                 value=""
               />
             </div>
-          </div>
-          <div
-            class="col-sm-6"
-          >
             <div
-              class="form-group"
+              class="row"
             >
-              <label
-                class=""
-                for="last_name"
+              <div
+                class="col-sm-6"
               >
-                Last Name
-              </label>
-              <input
-                autocomplete="family-name"
-                class="form-control form-control-sm undefined"
-                id="last_name"
-                name="last_name"
-                type="text"
-                value=""
-              />
+                <div
+                  class="form-group"
+                >
+                  <label
+                    class="form-label"
+                    for="address_line2"
+                  >
+                    Address Line Two
+                  </label>
+                  <input
+                    autocomplete="address-line2"
+                    class="form-control form-control-sm undefined"
+                    id="address_line2"
+                    name="address_line2"
+                    type="text"
+                    value=""
+                  />
+                </div>
+              </div>
+              <div
+                class="col-sm-6"
+              >
+                <div
+                  class="form-group"
+                >
+                  <label
+                    class="form-label"
+                    for="city"
+                  >
+                    City
+                  </label>
+                  <input
+                    autocomplete="address-level2"
+                    class="form-control form-control-sm undefined"
+                    id="city"
+                    name="city"
+                    type="text"
+                    value=""
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="row"
+            >
+              <div
+                class="col-sm-6"
+              >
+                <div
+                  class="form-group"
+                >
+                  <label
+                    class="form-label"
+                    for="state"
+                  >
+                    State
+                  </label>
+                  <input
+                    autocomplete="address-level1"
+                    class="form-control form-control-sm undefined"
+                    id="state"
+                    name="state"
+                    type="text"
+                    value=""
+                  />
+                </div>
+              </div>
+              <div
+                class="col-sm-6"
+              >
+                <div
+                  class="form-group"
+                >
+                  <label
+                    class="form-label"
+                    for="postal_code"
+                  >
+                    Postal Code
+                  </label>
+                  <input
+                    autocomplete="postal-code"
+                    class="form-control form-control-sm undefined"
+                    id="postal_code"
+                    name="postal_code"
+                    type="text"
+                    value=""
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div
-          class="form-row"
+        <button
+          class="form-control rounded-pill mt-0 mt-lg-4 mb-2 btn btn-primary"
+          type="submit"
         >
-          <div
-            class="col-sm-6"
-          >
-            <div
-              class="form-group"
-            >
-              <label
-                class=""
-                for="email"
-              >
-                Email
-              </label>
-              <input
-                autocomplete="email"
-                class="form-control form-control-sm undefined"
-                id="email"
-                name="email"
-                type="email"
-                value=""
-              />
-            </div>
-          </div>
-          <div
-            class="col-sm-6"
-          >
-            <div
-              class="form-group"
-            >
-              <label
-                class=""
-                for="phone_number"
-              >
-                Phone Number
-              </label>
-              <input
-                autocomplete="tel-national"
-                class="form-control form-control-sm undefined"
-                id="phone_number"
-                name="phone_number"
-                type="text"
-                value=""
-              />
-            </div>
-          </div>
-        </div>
-        <div
-          class="form-group"
-        >
-          <label
-            class=""
-            for="address"
-          >
-            Street Address
-          </label>
-          <input
-            autocomplete="address-line1"
-            class="form-control form-control-sm undefined"
-            id="address"
-            name="address"
-            type="text"
-            value=""
-          />
-        </div>
-        <div
-          class="form-row"
-        >
-          <div
-            class="col-sm-6"
-          >
-            <div
-              class="form-group"
-            >
-              <label
-                class=""
-                for="address_line2"
-              >
-                Address Line Two
-              </label>
-              <input
-                autocomplete="address-line2"
-                class="form-control form-control-sm undefined"
-                id="address_line2"
-                name="address_line2"
-                type="text"
-                value=""
-              />
-            </div>
-          </div>
-          <div
-            class="col-sm-6"
-          >
-            <div
-              class="form-group"
-            >
-              <label
-                class=""
-                for="city"
-              >
-                City
-              </label>
-              <input
-                autocomplete="address-level2"
-                class="form-control form-control-sm undefined"
-                id="city"
-                name="city"
-                type="text"
-                value=""
-              />
-            </div>
-          </div>
-        </div>
-        <div
-          class="form-row"
-        >
-          <div
-            class="col-sm-6"
-          >
-            <div
-              class="form-group"
-            >
-              <label
-                class=""
-                for="state"
-              >
-                State
-              </label>
-              <input
-                autocomplete="address-level1"
-                class="form-control form-control-sm undefined"
-                id="state"
-                name="state"
-                type="text"
-                value=""
-              />
-            </div>
-          </div>
-          <div
-            class="col-sm-6"
-          >
-            <div
-              class="form-group"
-            >
-              <label
-                class=""
-                for="postal_code"
-              >
-                Postal Code
-              </label>
-              <input
-                autocomplete="postal-code"
-                class="form-control form-control-sm undefined"
-                id="postal_code"
-                name="postal_code"
-                type="text"
-                value=""
-              />
-            </div>
-          </div>
-        </div>
+          Next
+        </button>
       </div>
-      <button
-        class="form-control rounded-pill mt-0 mt-lg-4 mb-2 btn btn-primary"
-        type="submit"
-      >
-        Next
-      </button>
     </form>
     <form
       action="#"
       class="text-left ShippingAddressForm"
     >
       <div
-        class="collapse"
+        class="accordion"
       >
-        <h6
-          class="font-weight-bold"
-        >
-          Shipping Address
-        </h6>
         <div
-          class="form-row"
+          class="collapse"
         >
           <div
-            class="col-sm-6"
+            class="col"
           >
+            <h6
+              class="font-weight-bold"
+            >
+              Shipping Address
+            </h6>
+            <div
+              class="row"
+            >
+              <div
+                class="col-sm-6"
+              >
+                <div
+                  class="form-group"
+                >
+                  <label
+                    class="form-label"
+                    for="first_name_shipping"
+                  >
+                    First Name
+                  </label>
+                  <input
+                    class="form-control form-control-sm undefined"
+                    disabled=""
+                    id="first_name_shipping"
+                    name="first_name"
+                    type="text"
+                    value=""
+                  />
+                </div>
+              </div>
+              <div
+                class="col-sm-6"
+              >
+                <div
+                  class="form-group"
+                >
+                  <label
+                    class="form-label"
+                    for="last_name_shipping"
+                  >
+                    Last Name
+                  </label>
+                  <input
+                    class="form-control form-control-sm undefined"
+                    disabled=""
+                    id="last_name_shipping"
+                    name="last_name"
+                    type="text"
+                    value=""
+                  />
+                </div>
+              </div>
+            </div>
             <div
               class="form-group"
             >
               <label
-                class=""
-                for="first_name_shipping"
+                class="form-label"
+                for="address_shipping"
               >
-                First Name
+                Street Address
               </label>
               <input
                 class="form-control form-control-sm undefined"
                 disabled=""
-                id="first_name_shipping"
-                name="first_name"
+                id="address_shipping"
+                name="address"
                 type="text"
                 value=""
               />
             </div>
-          </div>
-          <div
-            class="col-sm-6"
-          >
             <div
-              class="form-group"
+              class="row"
             >
-              <label
-                class=""
-                for="last_name_shipping"
+              <div
+                class="col-sm-6"
               >
-                Last Name
-              </label>
-              <input
-                class="form-control form-control-sm undefined"
-                disabled=""
-                id="last_name_shipping"
-                name="last_name"
-                type="text"
-                value=""
-              />
+                <div
+                  class="form-group"
+                >
+                  <label
+                    class="form-label"
+                    for="address_line2_shipping"
+                  >
+                    Address Line Two
+                  </label>
+                  <input
+                    class="form-control form-control-sm undefined"
+                    disabled=""
+                    id="address_line2_shipping"
+                    name="address_line2"
+                    type="text"
+                    value=""
+                  />
+                </div>
+              </div>
+              <div
+                class="col-sm-6"
+              >
+                <div
+                  class="form-group"
+                >
+                  <label
+                    class="form-label"
+                    for="city_shipping"
+                  >
+                    City
+                  </label>
+                  <input
+                    class="form-control form-control-sm undefined"
+                    disabled=""
+                    id="city_shipping"
+                    name="city"
+                    type="text"
+                    value=""
+                  />
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        <div
-          class="form-group"
-        >
-          <label
-            class=""
-            for="address_shipping"
-          >
-            Street Address
-          </label>
-          <input
-            class="form-control form-control-sm undefined"
-            disabled=""
-            id="address_shipping"
-            name="address"
-            type="text"
-            value=""
-          />
-        </div>
-        <div
-          class="form-row"
-        >
-          <div
-            class="col-sm-6"
-          >
             <div
-              class="form-group"
+              class="row"
             >
-              <label
-                class=""
-                for="address_line2_shipping"
+              <div
+                class="col-sm-6"
               >
-                Address Line Two
-              </label>
-              <input
-                class="form-control form-control-sm undefined"
-                disabled=""
-                id="address_line2_shipping"
-                name="address_line2"
-                type="text"
-                value=""
-              />
+                <div
+                  class="form-group"
+                >
+                  <label
+                    class="form-label"
+                    for="state_shipping"
+                  >
+                    State
+                  </label>
+                  <input
+                    class="form-control form-control-sm undefined"
+                    disabled=""
+                    id="state_shipping"
+                    name="state"
+                    type="text"
+                    value=""
+                  />
+                </div>
+              </div>
+              <div
+                class="col-sm-6"
+              >
+                <div
+                  class="form-group"
+                >
+                  <label
+                    class="form-label"
+                    for="postal_code_shipping"
+                  >
+                    Postal Code
+                  </label>
+                  <input
+                    class="form-control form-control-sm undefined"
+                    disabled=""
+                    id="postal_code_shipping"
+                    name="postal_code"
+                    type="text"
+                    value=""
+                  />
+                </div>
+              </div>
             </div>
-          </div>
-          <div
-            class="col-sm-6"
-          >
             <div
-              class="form-group"
+              class="text-right"
             >
-              <label
-                class=""
-                for="city_shipping"
+              <button
+                class="rounded-pill btn btn-primary"
+                type="submit"
               >
-                City
-              </label>
-              <input
-                class="form-control form-control-sm undefined"
-                disabled=""
-                id="city_shipping"
-                name="city"
-                type="text"
-                value=""
-              />
+                Update Shipping Address
+              </button>
+              <button
+                class="ml-2 btn btn-secondary"
+                type="button"
+              >
+                Cancel
+              </button>
             </div>
           </div>
-        </div>
-        <div
-          class="form-row"
-        >
-          <div
-            class="col-sm-6"
-          >
-            <div
-              class="form-group"
-            >
-              <label
-                class=""
-                for="state_shipping"
-              >
-                State
-              </label>
-              <input
-                class="form-control form-control-sm undefined"
-                disabled=""
-                id="state_shipping"
-                name="state"
-                type="text"
-                value=""
-              />
-            </div>
-          </div>
-          <div
-            class="col-sm-6"
-          >
-            <div
-              class="form-group"
-            >
-              <label
-                class=""
-                for="postal_code_shipping"
-              >
-                Postal Code
-              </label>
-              <input
-                class="form-control form-control-sm undefined"
-                disabled=""
-                id="postal_code_shipping"
-                name="postal_code"
-                type="text"
-                value=""
-              />
-            </div>
-          </div>
-        </div>
-        <div
-          class="text-right"
-        >
-          <button
-            class="rounded-pill btn btn-primary"
-            type="submit"
-          >
-            Update Shipping Address
-          </button>
-          <button
-            class="ml-2 btn btn-secondary"
-            type="button"
-          >
-            Cancel
-          </button>
         </div>
       </div>
     </form>

@@ -41,9 +41,10 @@ const ProductDetail2 = () => {
   }, [dispatch]);
 
   // close modal function
-  const handleClose = e => {
+  const handleClose = (e, filterTarget) => {
     // only allow elements with class of clode-modal to close modal
-    if (!e.target.classList.contains('close-modal')) return;
+    // unless forcing close.
+    if (filterTarget && !e.target.classList.contains('close-modal')) return;
     setBgAnimState('fadeOut');
     setTimeout(() => setModal(false), 0);
     setTimeout(() => history.push(pathRoot), 500);
@@ -69,7 +70,7 @@ const ProductDetail2 = () => {
     <AnimatePresence>
       {modal && (
         <ModalBackground
-          onClick={handleClose}
+          onClick={e => handleClose(e, true)}
           className={`${bgAnimState} close-modal`}
         >
           <motion.div

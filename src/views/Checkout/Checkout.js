@@ -1,4 +1,4 @@
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import { Route, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';

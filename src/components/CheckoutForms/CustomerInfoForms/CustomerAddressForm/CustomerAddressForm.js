@@ -3,13 +3,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import {
   Button,
-  FormGroup,
-  Label,
+  Form as bootForm,
   Col,
   Row,
-  Collapse,
+  Accordion,
   Alert,
-} from 'reactstrap';
+} from 'react-bootstrap';
 
 // local imports
 import shedEmpty from '../../../../redux/actions/cart/shedEmpty';
@@ -128,14 +127,14 @@ const CustomerAddressForm = ({
         <div className="text-right">
           <Button
             type="submit"
-            color="primary"
+            variant="primary"
             disabled={formik.isSubmitting}
             className="rounded-pill"
           >
             Update Customer Info
           </Button>
           <Button
-            color="secondary"
+            variant="secondary"
             className="ml-2"
             onClick={() => setFormDisabled(formDisabled => !formDisabled)}
           >
@@ -148,7 +147,7 @@ const CustomerAddressForm = ({
       return (
         <Button
           type="submit"
-          color="primary"
+          variant="primary"
           disabled={formik.isSubmitting}
           className="form-control rounded-pill mt-0 mt-lg-4 mb-2"
         >
@@ -168,214 +167,232 @@ const CustomerAddressForm = ({
     >
       {formik => (
         <Form className="text-left CustomerInfoForm">
-          <Collapse isOpen={!formDisabled}>
-            <h6 className="font-weight-bold">Customer Info</h6>
-            <Row form>
-              <Col sm={6}>
-                <FormGroup>
-                  <Label htmlFor="first_name">First Name</Label>
-                  <Field
-                    type="text"
-                    name="first_name"
-                    id="first_name"
-                    className={`form-control form-control-sm ${
-                      formik.touched.first_name &&
-                      formik.errors.first_name &&
-                      'is-invalid'
-                    }`}
-                    disabled={formDisabled}
-                    autoComplete="given-name"
-                  />
-                  <ErrorMessage
-                    name="first_name"
-                    component="div"
-                    className="text-danger mt-1 text-sm"
-                  />
-                </FormGroup>
-              </Col>
-              <Col sm={6}>
-                <FormGroup>
-                  <Label htmlFor="last_name">Last Name</Label>
-                  <Field
-                    type="text"
-                    name="last_name"
-                    id="last_name"
-                    className={`form-control form-control-sm ${
-                      formik.touched.last_name &&
-                      formik.errors.last_name &&
-                      'is-invalid'
-                    }`}
-                    disabled={formDisabled}
-                    autoComplete="family-name"
-                  />
-                  <ErrorMessage
-                    name="last_name"
-                    component="div"
-                    className="text-danger mt-1 text-sm"
-                  />
-                </FormGroup>
-              </Col>
-            </Row>
-            <Row form>
-              <Col sm={6}>
-                <FormGroup>
-                  <Label htmlFor="email">Email</Label>
-                  <Field
-                    type="email"
-                    name="email"
-                    id="email"
-                    autoComplete="email"
-                    className={`form-control form-control-sm ${
-                      formik.touched.email &&
-                      formik.errors.email &&
-                      'is-invalid'
-                    }`}
-                    disabled={formDisabled || token}
-                  />
-                  <ErrorMessage
-                    name="email"
-                    component="div"
-                    className="text-danger mt-1 text-sm"
-                  />
-                </FormGroup>
-              </Col>
-              <Col sm={6}>
-                <FormGroup>
-                  <Label htmlFor="phone_number">Phone Number</Label>
-                  <Field
-                    type="text"
-                    name="phone_number"
-                    id="phone_number"
-                    autoComplete="tel-national"
-                    className={`form-control form-control-sm ${
-                      formik.touched.phone_number &&
-                      formik.errors.phone_number &&
-                      'is-invalid'
-                    }`}
-                    disabled={formDisabled}
-                  />
-                  <ErrorMessage
-                    name="phone_number"
-                    component="div"
-                    className="text-danger mt-1 text-sm"
-                  />
-                </FormGroup>
-              </Col>
-            </Row>
+          <Accordion activeKey={`${formDisabled ? 0 : 1}`}>
+            <Accordion.Collapse eventKey="1">
+              <Col>
+                <h6 className="font-weight-bold">Customer Info</h6>
+                <Row>
+                  <Col sm={6}>
+                    <bootForm.Group>
+                      <bootForm.Label htmlFor="first_name">
+                        First Name
+                      </bootForm.Label>
+                      <Field
+                        type="text"
+                        name="first_name"
+                        id="first_name"
+                        className={`form-control form-control-sm ${
+                          formik.touched.first_name &&
+                          formik.errors.first_name &&
+                          'is-invalid'
+                        }`}
+                        disabled={formDisabled}
+                        autoComplete="given-name"
+                      />
+                      <ErrorMessage
+                        name="first_name"
+                        component="div"
+                        className="text-danger mt-1 text-sm"
+                      />
+                    </bootForm.Group>
+                  </Col>
+                  <Col sm={6}>
+                    <bootForm.Group>
+                      <bootForm.Label htmlFor="last_name">
+                        Last Name
+                      </bootForm.Label>
+                      <Field
+                        type="text"
+                        name="last_name"
+                        id="last_name"
+                        className={`form-control form-control-sm ${
+                          formik.touched.last_name &&
+                          formik.errors.last_name &&
+                          'is-invalid'
+                        }`}
+                        disabled={formDisabled}
+                        autoComplete="family-name"
+                      />
+                      <ErrorMessage
+                        name="last_name"
+                        component="div"
+                        className="text-danger mt-1 text-sm"
+                      />
+                    </bootForm.Group>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col sm={6}>
+                    <bootForm.Group>
+                      <bootForm.Label htmlFor="email">Email</bootForm.Label>
+                      <Field
+                        type="email"
+                        name="email"
+                        id="email"
+                        autoComplete="email"
+                        className={`form-control form-control-sm ${
+                          formik.touched.email &&
+                          formik.errors.email &&
+                          'is-invalid'
+                        }`}
+                        disabled={formDisabled || token}
+                      />
+                      <ErrorMessage
+                        name="email"
+                        component="div"
+                        className="text-danger mt-1 text-sm"
+                      />
+                    </bootForm.Group>
+                  </Col>
+                  <Col sm={6}>
+                    <bootForm.Group>
+                      <bootForm.Label htmlFor="phone_number">
+                        Phone Number
+                      </bootForm.Label>
+                      <Field
+                        type="text"
+                        name="phone_number"
+                        id="phone_number"
+                        autoComplete="tel-national"
+                        className={`form-control form-control-sm ${
+                          formik.touched.phone_number &&
+                          formik.errors.phone_number &&
+                          'is-invalid'
+                        }`}
+                        disabled={formDisabled}
+                      />
+                      <ErrorMessage
+                        name="phone_number"
+                        component="div"
+                        className="text-danger mt-1 text-sm"
+                      />
+                    </bootForm.Group>
+                  </Col>
+                </Row>
 
-            <FormGroup>
-              <Label htmlFor="address">Street Address</Label>
-              <Field
-                type="text"
-                name="address"
-                id="address"
-                autoComplete="address-line1"
-                className={`form-control form-control-sm ${
-                  formik.touched.address &&
-                  formik.errors.address &&
-                  'is-invalid'
-                }`}
-                disabled={formDisabled}
-              />
-              <ErrorMessage
-                name="address"
-                component="div"
-                className="text-danger mt-1 text-sm"
-              />
-            </FormGroup>
-            <Row form>
-              <Col sm={6}>
-                <FormGroup>
-                  <Label htmlFor="address_line2">Address Line Two</Label>
+                <bootForm.Group>
+                  <bootForm.Label htmlFor="address">
+                    Street Address
+                  </bootForm.Label>
                   <Field
                     type="text"
-                    name="address_line2"
-                    id="address_line2"
+                    name="address"
+                    id="address"
+                    autoComplete="address-line1"
                     className={`form-control form-control-sm ${
-                      formik.touched.address_line2 &&
-                      formik.errors.address_line2 &&
+                      formik.touched.address &&
+                      formik.errors.address &&
                       'is-invalid'
                     }`}
                     disabled={formDisabled}
-                    autoComplete="address-line2"
                   />
                   <ErrorMessage
-                    name="address_line2"
+                    name="address"
                     component="div"
                     className="text-danger mt-1 text-sm"
                   />
-                </FormGroup>
+                </bootForm.Group>
+                <Row>
+                  <Col sm={6}>
+                    <bootForm.Group>
+                      <bootForm.Label htmlFor="address_line2">
+                        Address Line Two
+                      </bootForm.Label>
+                      <Field
+                        type="text"
+                        name="address_line2"
+                        id="address_line2"
+                        className={`form-control form-control-sm ${
+                          formik.touched.address_line2 &&
+                          formik.errors.address_line2 &&
+                          'is-invalid'
+                        }`}
+                        disabled={formDisabled}
+                        autoComplete="address-line2"
+                      />
+                      <ErrorMessage
+                        name="address_line2"
+                        component="div"
+                        className="text-danger mt-1 text-sm"
+                      />
+                    </bootForm.Group>
+                  </Col>
+                  <Col sm={6}>
+                    <bootForm.Group>
+                      <bootForm.Label htmlFor="city">City</bootForm.Label>
+                      <Field
+                        type="text"
+                        name="city"
+                        id="city"
+                        className={`form-control form-control-sm ${
+                          formik.touched.city &&
+                          formik.errors.city &&
+                          'is-invalid'
+                        }`}
+                        disabled={formDisabled}
+                        autoComplete="address-level2"
+                      />
+                      <ErrorMessage
+                        name="city"
+                        component="div"
+                        className="text-danger mt-1 text-sm"
+                      />
+                    </bootForm.Group>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col sm={6}>
+                    <bootForm.Group>
+                      <bootForm.Label htmlFor="state">State</bootForm.Label>
+                      <Field
+                        type="text"
+                        name="state"
+                        id="state"
+                        className={`form-control form-control-sm ${
+                          formik.touched.state &&
+                          formik.errors.state &&
+                          'is-invalid'
+                        }`}
+                        disabled={formDisabled}
+                        autoComplete="address-level1"
+                      />
+                      <ErrorMessage
+                        name="state"
+                        component="div"
+                        className="text-danger mt-1 text-sm"
+                      />
+                    </bootForm.Group>
+                  </Col>
+                  <Col sm={6}>
+                    <bootForm.Group>
+                      <bootForm.Label htmlFor="postal_code">
+                        Postal Code
+                      </bootForm.Label>
+                      <Field
+                        type="text"
+                        name="postal_code"
+                        id="postal_code"
+                        className={`form-control form-control-sm ${
+                          formik.touched.postal_code &&
+                          formik.errors.postal_code &&
+                          'is-invalid'
+                        }`}
+                        disabled={formDisabled}
+                        autoComplete="postal-code"
+                      />
+                      <ErrorMessage
+                        name="postal_code"
+                        component="div"
+                        className="text-danger mt-1 text-sm"
+                      />
+                    </bootForm.Group>
+                  </Col>
+                </Row>
               </Col>
-              <Col sm={6}>
-                <FormGroup>
-                  <Label htmlFor="city">City</Label>
-                  <Field
-                    type="text"
-                    name="city"
-                    id="city"
-                    className={`form-control form-control-sm ${
-                      formik.touched.city && formik.errors.city && 'is-invalid'
-                    }`}
-                    disabled={formDisabled}
-                    autoComplete="address-level2"
-                  />
-                  <ErrorMessage
-                    name="city"
-                    component="div"
-                    className="text-danger mt-1 text-sm"
-                  />
-                </FormGroup>
-              </Col>
-            </Row>
-            <Row form>
-              <Col sm={6}>
-                <FormGroup>
-                  <Label htmlFor="state">State</Label>
-                  <Field
-                    type="text"
-                    name="state"
-                    id="state"
-                    className={`form-control form-control-sm ${
-                      formik.touched.state &&
-                      formik.errors.state &&
-                      'is-invalid'
-                    }`}
-                    disabled={formDisabled}
-                    autoComplete="address-level1"
-                  />
-                  <ErrorMessage
-                    name="state"
-                    component="div"
-                    className="text-danger mt-1 text-sm"
-                  />
-                </FormGroup>
-              </Col>
-              <Col sm={6}>
-                <FormGroup>
-                  <Label htmlFor="postal_code">Postal Code</Label>
-                  <Field
-                    type="text"
-                    name="postal_code"
-                    id="postal_code"
-                    className={`form-control form-control-sm ${
-                      formik.touched.postal_code &&
-                      formik.errors.postal_code &&
-                      'is-invalid'
-                    }`}
-                    disabled={formDisabled}
-                    autoComplete="postal-code"
-                  />
-                  <ErrorMessage
-                    name="postal_code"
-                    component="div"
-                    className="text-danger mt-1 text-sm"
-                  />
-                </FormGroup>
-              </Col>
-            </Row>
-          </Collapse>
-          {responseError && <Alert color="danger">{responseError}</Alert>}
-          {customerSubmitButtons(formik)}
+            </Accordion.Collapse>
+            {responseError && <Alert variant="danger">{responseError}</Alert>}
+            {customerSubmitButtons(formik)}
+          </Accordion>
         </Form>
       )}
     </Formik>

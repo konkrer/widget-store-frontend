@@ -3,17 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useHistory, Redirect } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { LoginSchema } from '../../utils/schemas/loginSchema';
-import {
-  FormGroup,
-  Row,
-  Col,
-  Container,
-  Modal,
-  ModalBody,
-  Label,
-  Button,
-  Alert,
-} from 'reactstrap';
+import { Modal, Button, Alert, Form as bootForm } from 'react-bootstrap';
 
 // local imports
 import { asyncAxiosRequest } from '../../utils/asyncAxiosRequest';
@@ -43,79 +33,67 @@ const AdminLogin = ({ adminUser, setAdminUser }) => {
   };
 
   return (
-    <Container className="AdminLogin">
-      <Row>
-        <Col sm="12" md={{ size: 6, offset: 3 }} className="rounded">
-          <div>
-            <Modal isOpen={true} toggle={handleClose} className="">
-              <ModalBody>
-                <div className="AdminLogin-form">
-                  <h1>Admin Login</h1>
-                  <Formik
-                    initialValues={{ email: '', password: '' }}
-                    validationSchema={LoginSchema}
-                    onSubmit={(values, { setSubmitting }) => {
-                      handleSubmit(values);
-                      setSubmitting(false);
-                    }}
-                  >
-                    {({ isSubmitting }) => (
-                      <Form className="text-left">
-                        <FormGroup>
-                          <Label htmlFor="email">Email</Label>
-                          <Field
-                            type="email"
-                            name="email"
-                            id="email"
-                            autoComplete="email"
-                            className="form-control"
-                          />
-                          <ErrorMessage
-                            name="email"
-                            component="div"
-                            className="text-danger mt-1"
-                          />
-                        </FormGroup>
-                        <FormGroup>
-                          <Label htmlFor="password">Password</Label>
-                          <Field
-                            type="password"
-                            name="password"
-                            id="password"
-                            autoComplete="current-password"
-                            className="form-control"
-                          />
-                          <ErrorMessage
-                            name="password"
-                            component="div"
-                            className="text-danger mt-1"
-                          />
-                        </FormGroup>
-                        {responseError && (
-                          <Alert color="danger" aria-label={'error'}>
-                            {responseError}
-                          </Alert>
-                        )}
-                        <Button
-                          type="submit"
-                          color="primary"
-                          disabled={isSubmitting}
-                        >
-                          Login
-                        </Button>
-                        <Button color="secondary ml-2" onClick={handleClose}>
-                          Cancel
-                        </Button>
-                      </Form>
-                    )}
-                  </Formik>
-                </div>
-              </ModalBody>
-            </Modal>
-          </div>
-        </Col>
-      </Row>
-    </Container>
+    <Modal show={true} onHide={handleClose}>
+      <Modal.Body>
+        <div className="AdminLogin-form p-5">
+          <h1>Admin Login</h1>
+          <Formik
+            initialValues={{ email: '', password: '' }}
+            validationSchema={LoginSchema}
+            onSubmit={(values, { setSubmitting }) => {
+              handleSubmit(values);
+              setSubmitting(false);
+            }}
+          >
+            {({ isSubmitting }) => (
+              <Form className="text-left">
+                <bootForm.Group>
+                  <bootForm.Label htmlFor="email">Email</bootForm.Label>
+                  <Field
+                    type="email"
+                    name="email"
+                    id="email"
+                    autoComplete="email"
+                    className="form-control"
+                  />
+                  <ErrorMessage
+                    name="email"
+                    component="div"
+                    className="text-danger mt-1"
+                  />
+                </bootForm.Group>
+                <bootForm.Group>
+                  <bootForm.Label htmlFor="password">Password</bootForm.Label>
+                  <Field
+                    type="password"
+                    name="password"
+                    id="password"
+                    autoComplete="current-password"
+                    className="form-control"
+                  />
+                  <ErrorMessage
+                    name="password"
+                    component="div"
+                    className="text-danger mt-1"
+                  />
+                </bootForm.Group>
+                {responseError && (
+                  <Alert variant="danger" aria-label={'error'}>
+                    {responseError}
+                  </Alert>
+                )}
+                <Button type="submit" variant="primary" disabled={isSubmitting}>
+                  Login
+                </Button>
+                <Button variant="secondary ml-2" onClick={handleClose}>
+                  Cancel
+                </Button>
+              </Form>
+            )}
+          </Formik>
+        </div>
+      </Modal.Body>
+    </Modal>
   );
 };
 

@@ -12,7 +12,7 @@ import ProductPanel from '../../components/ProductPanel/ProductPanel';
 import WidgetLoader from '../../components/common/WidgetLoader/WidgetLoader';
 import StorePageRoutes from '../../routes/storePageRoutes';
 import { FramerLink, getPathRoot } from '../../utils/helpers';
-import { Button } from 'reactstrap';
+import Button from 'react-bootstrap/Button';
 
 function CommingSoon() {
   const dispatch = useDispatch();
@@ -44,7 +44,7 @@ function CommingSoon() {
         >
           <WidgetLoader />
           <FramerLink to="/shop">
-            <Button color="primary" size="sm" className="mt-4">
+            <Button variant="primary" size="sm" className="mt-4">
               Go Home
             </Button>
           </FramerLink>

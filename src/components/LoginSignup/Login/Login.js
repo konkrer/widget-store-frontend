@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect, useLocation } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { Button, FormGroup, Label, Alert } from 'reactstrap';
+import { Button, Form as bootForm, Alert } from 'react-bootstrap';
 
 // local imports
 import { asyncAxiosRequest } from '../../../utils/asyncAxiosRequest';
@@ -41,8 +41,8 @@ const Login = ({ handleClose }) => {
       >
         {formik => (
           <Form className="text-left">
-            <FormGroup>
-              <Label htmlFor="email1">Email</Label>
+            <bootForm.Group>
+              <bootForm.Label htmlFor="email1">Email</bootForm.Label>
               <Field
                 type="email"
                 name="email"
@@ -57,13 +57,12 @@ const Login = ({ handleClose }) => {
                 component="div"
                 className="text-danger mt-1 text-sm"
               />
-            </FormGroup>
-            <FormGroup>
-              <Label htmlFor="password1">Password</Label>
+            </bootForm.Group>
+            <bootForm.Group>
+              <bootForm.Label htmlFor="password1">Password</bootForm.Label>
               <Button
                 className=" ml-1 text-sm py-0 border-0 font-italic"
-                color="primary"
-                outline
+                variant="outline-primary"
                 size="sm"
                 onClick={() => setPasswordShow(state => !state)}
               >
@@ -85,17 +84,17 @@ const Login = ({ handleClose }) => {
                 component="div"
                 className="text-danger mt-1 text-sm"
               />
-            </FormGroup>
-            {responseError && <Alert color="danger">{responseError}</Alert>}
+            </bootForm.Group>
+            {responseError && <Alert variant="danger">{responseError}</Alert>}
             <div className="mt-4">
               <Button
                 type="submit"
-                color="primary"
+                variant="primary"
                 disabled={formik.isSubmitting}
               >
                 Login
               </Button>
-              <Button color="secondary ml-2" onClick={handleClose}>
+              <Button variant="secondary ml-2" onClick={handleClose}>
                 Cancel
               </Button>
             </div>

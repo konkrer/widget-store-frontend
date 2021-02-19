@@ -2,14 +2,12 @@
 import { useState, useRef, useEffect } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  Button,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  UncontrolledTooltip,
-} from 'reactstrap';
+import { Button, Modal, Tooltip, OverlayTrigger } from 'react-bootstrap';
 import { motion } from 'framer-motion';
+
+// fontawesome imports
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
 
 // local imports
 import ModalCard from './ModalCard';
@@ -62,15 +60,19 @@ const PDModalCard = ({ handleClose, product, innerContentOnly, disabled }) => {
     };
   }, []);
 
-  // modal close btn
-  const closeBtn = <button className="close-modal close">&times;</button>;
-
   const modalInner = (
     <>
-      <ModalHeader toggle={handleClose} close={closeBtn}>
-        <div>{product.name}</div>
-      </ModalHeader>
-      <ModalBody className="p-0 row">
+      <Modal.Header>
+        <h5>{product.name}</h5>
+
+        <Button
+          className="close-modal btn-noStyle text-dark"
+          onClick={handleClose}
+        >
+          <FontAwesomeIcon icon={faWindowClose} size={'lg'} />
+        </Button>
+      </Modal.Header>
+      <Modal.Body className="p-0 row">
         <div className="col-12 col-lg-6">
           <img
             className={`ProductDetail-img img-fluid`}
@@ -88,8 +90,8 @@ const PDModalCard = ({ handleClose, product, innerContentOnly, disabled }) => {
             </div>
           </div>
         </div>
-      </ModalBody>
-      <ModalFooter>
+      </Modal.Body>
+      <Modal.Footer>
         {/* Add to cart form */}
         <form onSubmit={handleSubmit}>
           <label htmlFor="quantity">Quantity</label>
@@ -103,7 +105,7 @@ const PDModalCard = ({ handleClose, product, innerContentOnly, disabled }) => {
             value={formData.quantity}
             disabled={disabled}
           />
-          <Button color="primary" disabled={disabled}>
+          <Button type="submit" variant="primary" disabled={disabled}>
             Add To Cart
           </Button>
         </form>
@@ -123,31 +125,39 @@ const PDModalCard = ({ handleClose, product, innerContentOnly, disabled }) => {
           animate={animClass}
           style={{ '--btnAnimColor': 'white' }}
         >
-          <Button
-            color="secondary"
-            className={animClass}
-            style={{ color: 'var(--btnAnimColor)' }}
-            id="cart-button"
-            onClick={() => history.push(`${pathRoot}/cart`)}
-            disabled={disabled || pathRoot === '/checkout'}
-            aria-label={'go to cart'}
+          <OverlayTrigger
+            placement={'top'}
+            overlay={
+              <Tooltip id="tooltip-carBtn">Go To Shopping Cart.</Tooltip>
+            }
           >
-            <CartIconBadge
-              numCartItems={numCartItems}
-              size="lg"
-              className={`large`}
-            />
-          </Button>
-          <UncontrolledTooltip placement="top" target="cart-button">
-            Go To Shopping Cart
-          </UncontrolledTooltip>
+            {({ ref, ...triggerHandler }) => (
+              <Button
+                {...triggerHandler}
+                variant="secondary"
+                ref={ref}
+                className={animClass}
+                style={{ color: 'var(--btnAnimColor)' }}
+                id="cart-button"
+                onClick={() => history.push(`${pathRoot}/cart`)}
+                disabled={disabled || pathRoot === '/checkout'}
+                aria-label={'go to cart'}
+              >
+                <CartIconBadge
+                  numCartItems={numCartItems}
+                  size="lg"
+                  className={`large`}
+                />
+              </Button>
+            )}
+          </OverlayTrigger>
         </motion.div>
         {/* End go to cart button w/ animation */}
 
-        <Button color="secondary" className="close-modal">
+        <Button variant="secondary" className="close-modal">
           Cancel
         </Button>
-      </ModalFooter>
+      </Modal.Footer>
     </>
   );
 

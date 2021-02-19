@@ -1,18 +1,7 @@
-import React, { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  Nav,
-  NavbarText,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-} from 'reactstrap';
+import { NavDropdown, Navbar, Nav } from 'react-bootstrap';
 
 // local imports
 import { STORE_NAME } from '../../storeSetup';
@@ -36,9 +25,6 @@ const NavbarWrapper = styled.div`
 `;
 
 const NavbarOne = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  /* istanbul ignore next */
-  const toggle = () => setIsOpen(!isOpen);
   const numCartItems = useSelector(state => state.cart.numCartItems) || null;
   const user = useSelector(state => state.user.token);
   const location = useLocation();
@@ -46,54 +32,49 @@ const NavbarOne = () => {
 
   return (
     <NavbarWrapper pathRoot={pathRoot}>
-      <Navbar dark expand="md" className="Navbar">
-        <NavbarText>
+      <Navbar expand="md" className="Navbar navbar-dark">
+        <Navbar.Text>
           <NavLink exact to="/shop" className="navbar-brand brand-style">
             {STORE_NAME}
           </NavLink>
-        </NavbarText>
-        <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar className="pr-4">
+        </Navbar.Text>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse className="pr-4">
           <Nav className="mr-auto" navbar>
-            <NavbarText>
+            <Navbar.Text>
               <NavLink to="/new">New Products</NavLink>
-            </NavbarText>
-            <NavbarText>
+            </Navbar.Text>
+            <Navbar.Text>
               <NavLink to="/deals">Deals</NavLink>
-            </NavbarText>
-            <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle nav caret>
-                More
-              </DropdownToggle>
-              <DropdownMenu>
-                {user && (
-                  <>
-                    <DropdownItem>
-                      <NavLink to="/user">Account</NavLink>
-                    </DropdownItem>
-                    <DropdownItem>
-                      <NavLink to="/orders">Orders</NavLink>
-                    </DropdownItem>
-                    <DropdownItem divider />
-                  </>
-                )}
+            </Navbar.Text>
+            <NavDropdown title="More">
+              {user && (
+                <>
+                  <NavDropdown.Item>
+                    <NavLink to="/user">Account</NavLink>
+                  </NavDropdown.Item>
+                  <NavDropdown.Item>
+                    <NavLink to="/orders">Orders</NavLink>
+                  </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                </>
+              )}
 
-                <DropdownItem>
-                  <NavLink to="/about">About</NavLink>
-                </DropdownItem>
-                <DropdownItem>
-                  <NavLink to="/contact">Contact</NavLink>
-                </DropdownItem>
-                <DropdownItem>
-                  <NavLink to="/faq">FAQ</NavLink>
-                </DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
+              <NavDropdown.Item>
+                <NavLink to="/about">About</NavLink>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                <NavLink to="/contact">Contact</NavLink>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                <NavLink to="/faq">FAQ</NavLink>
+              </NavDropdown.Item>
+            </NavDropdown>
           </Nav>
 
           <UserAuthElement pathRoot={pathRoot} />
           <NavbarCartElement pathRoot={pathRoot} numCartItems={numCartItems} />
-        </Collapse>
+        </Navbar.Collapse>
       </Navbar>
     </NavbarWrapper>
   );
