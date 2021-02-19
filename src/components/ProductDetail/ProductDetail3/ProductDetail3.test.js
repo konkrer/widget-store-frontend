@@ -39,19 +39,19 @@ test('renders ProductDetail3', async () => {
   });
 });
 
-test('ProductDetail3 snapshot', async () => {
-  let asFragment;
-  await act(async () => {
-    const resp = renderWithStore(
-      <ProductDetail3
-        selectedId={TEST_DATA.product.product_id}
-        setSelectedId={setSelectedId}
-      />
-    );
-    asFragment = resp.asFragment;
-  });
-  expect(asFragment()).toMatchSnapshot();
-});
+// test('ProductDetail3 snapshot', async () => {
+//   let asFragment;
+//   await act(async () => {
+//     const resp = renderWithStore(
+//       <ProductDetail3
+//         selectedId={TEST_DATA.product.product_id}
+//         setSelectedId={setSelectedId}
+//       />
+//     );
+//     asFragment = resp.asFragment;
+//   });
+//   expect(asFragment()).toMatchSnapshot();
+// });
 
 test('Quantity input in document', async () => {
   let getByLabelText;

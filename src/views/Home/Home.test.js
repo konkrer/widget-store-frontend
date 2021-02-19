@@ -37,17 +37,6 @@ test('renders Home', async () => {
   });
 });
 
-// snapshot with animation???? this likley to fail.
-// opacity caught in snapshot--> opacity: 0.0128;
-test('Home snapshot', async () => {
-  let asFragment;
-  await act(async () => {
-    const resp = renderWithStore(<Home />);
-    asFragment = resp.asFragment;
-  });
-  expect(asFragment()).toMatchSnapshot();
-});
-
 test('Product name in document', async () => {
   let getByText;
   await act(async () => {

@@ -45,14 +45,14 @@ test('renders ProductDetail2', async () => {
   });
 });
 
-test('ProductDetail2 snapshot', async () => {
-  let asFragment;
-  await act(async () => {
-    const resp = renderWithStore(<ProductDetail2 />);
-    asFragment = resp.asFragment;
-  });
-  expect(asFragment()).toMatchSnapshot();
-});
+// test('ProductDetail2 snapshot', async () => {
+//   let asFragment;
+//   await act(async () => {
+//     const resp = renderWithStore(<ProductDetail2 />);
+//     asFragment = resp.asFragment;
+//   });
+//   expect(asFragment()).toMatchSnapshot();
+// });
 
 test('Quantity input in document', async () => {
   let getByLabelText;
