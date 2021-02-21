@@ -9,6 +9,7 @@ import UserAuthElement from './UserAuthEl/UserAuthEl';
 import NavbarCartElement from './NavbarCartEl/NavbarCartEl';
 import { getPathRoot } from '../../utils/helpers';
 import './Navbar.css';
+import img from '../../assets/images/brandIcon.png';
 
 /** Navbar wrapper allows navbar to be sticky. Provides background color. */
 /* istanbul ignore next */
@@ -35,6 +36,7 @@ const NavbarOne = () => {
       <Navbar expand="md" className="Navbar navbar-dark">
         <Navbar.Text>
           <NavLink exact to="/shop" className="navbar-brand brand-style">
+            <img src={img} height="30px" width="30px" alt="widget gyro" />{' '}
             {STORE_NAME}
           </NavLink>
         </Navbar.Text>
