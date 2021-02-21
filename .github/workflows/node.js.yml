@@ -15,8 +15,7 @@ jobs:
         with:
           node-version: 15.x
       - run: npm ci
-      - run: REACT_APP_BASE_URL=https://widget-store-backend.herokuapp.com
-      - run: npm run build
+      - run: REACT_APP_BASE_URL=https://widget-store-backend.herokuapp.com npm run build
       - run: cp ./build/index.html ./build/200.html
       - name: Deploy to https://melted-sidewalk.surge.sh
         uses: dswistowski/surge-sh-action@v1
