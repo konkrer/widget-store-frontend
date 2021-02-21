@@ -1,4 +1,4 @@
-import { act, fireEvent, getByLabelText } from '@testing-library/react';
+import { act, fireEvent } from '@testing-library/react';
 import axios from 'axios';
 
 // local imports

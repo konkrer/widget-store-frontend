@@ -3,7 +3,7 @@
 exports[`CustomerInfoForms snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="CustomerInfoForms px-1 px-md-4 pt-2 pb-3 bg-light text-dark rounded border"
+    class="CustomerInfoForms px-2 px-md-4 pt-2 pb-3 bg-light text-dark rounded border"
   >
     <div>
       <a
@@ -439,16 +439,16 @@ exports[`CustomerInfoForms snapshot 1`] = `
               </div>
             </div>
             <div
-              class="text-right"
+              class="text-right mt-1"
             >
               <button
-                class="rounded-pill btn btn-primary"
+                class="rounded-pill mb-2 btn btn-primary"
                 type="submit"
               >
                 Update Shipping Address
               </button>
               <button
-                class="ml-2 btn btn-secondary"
+                class="ml-2 mb-2 btn btn-secondary"
                 type="button"
               >
                 Cancel
