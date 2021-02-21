@@ -96,14 +96,7 @@ const ShippingForm = ({
             }}
           >
             {formik => (
-              <Form
-                className="text-left"
-                onClick={e => {
-                  if (e.target.tagName === 'OPTION') {
-                    setShippingData(formik.values.shipping_method[0]);
-                  }
-                }}
-              >
+              <Form className="text-left">
                 <bootForm.Group>
                   <bootForm.Label
                     htmlFor="shipping_method"
@@ -122,6 +115,7 @@ const ShippingForm = ({
                     }`}
                     multiple
                     size={Object.keys(shippingMethods).length}
+                    onClick={e => setShippingData(e.target.value)}
                   >
                     {Object.entries(shippingMethods).map(([key, value]) => (
                       <option value={key} key={key}>

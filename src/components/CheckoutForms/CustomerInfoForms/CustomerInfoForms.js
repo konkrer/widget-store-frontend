@@ -190,8 +190,8 @@ const CustomerInfoForms = ({
           >
             Login / Signup
           </NavLink>
-          <span className="pl-3">
-            <i>- or checkout as guest below</i>
+          <span className="pl-0 pl-sm-3">
+            <i> - or checkout as guest below</i>
           </span>
         </div>
       )}
