@@ -10,7 +10,7 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 
 const PaymentOptions = () => (
-  <div className="d-flex justify-content-center text-dark mt-4">
+  <div className="d-flex justify-content-center text-dark mt-4 mb-4">
     <div className="mx-2">
       <FontAwesomeIcon icon={faPaypal} size={'lg'} />
     </div>

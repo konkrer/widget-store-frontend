@@ -90,7 +90,7 @@ exports[`Cart snapshot 1`] = `
         </div>
       </div>
       <div
-        class="sc-hKgILt cozQkG"
+        class="sc-hKgILt hFsDic"
       >
         <table
           class="sc-eCssSg cdvDQm TabulationTable ml-auto"
@@ -139,7 +139,7 @@ exports[`Cart snapshot 1`] = `
         </li>
       </ul>
       <div
-        class="d-flex justify-content-center text-dark mt-4"
+        class="d-flex justify-content-center text-dark mt-4 mb-4"
       >
         <div
           class="mx-2"

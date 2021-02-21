@@ -9,9 +9,10 @@ import Navbar from '../../components/Navbar/Navbar';
 import LoginSignup from '../../components/LoginSignup/LoginSignup';
 import CartList from '../../components/common/CartList/CartList';
 import CheckoutForms from '../../components/CheckoutForms/CheckoutForms';
-import { calculateTax, calculateTotal } from '../../utils/moneyFuncts';
 import ProductDetail3 from '../../components/ProductDetail/ProductDetail3/ProductDetail3';
 import PanelClose from '../../components/common/PanelClose/PanelClose';
+import pageScrollTopHook from '../../hooks/pageScrollTopHook';
+import { calculateTax, calculateTotal } from '../../utils/moneyFuncts';
 import './Checkout.css';
 
 const Checkout = () => {
@@ -24,6 +25,10 @@ const Checkout = () => {
 
   const subtotal = useSelector(state => state.cart.subtotal);
   const history = useHistory();
+
+  // scroll to top of page with load.
+  // needed for mobile behavior.
+  pageScrollTopHook();
 
   // When cart state changes...
   //

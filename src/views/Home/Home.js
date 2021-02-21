@@ -12,6 +12,7 @@ import toggleDir from '../../redux/actions/animation/toggleDir';
 import StorePageRoutes from '../../routes/storePageRoutes';
 import ProductList from '../../components/ProductList/ProductList';
 import SearchBar from '../../components/SearchBar/SearchBar';
+import pageScrollTopHook from '../../hooks/pageScrollTopHook';
 import { getPathRoot } from '../../utils/helpers';
 import './Home.css';
 
@@ -23,6 +24,10 @@ function Home() {
   // searchbar / productlist filtering
   const [params, setParams] = useState(null);
   const initFormState = useRef({});
+
+  // scroll to top of page with load.
+  // needed for mobile behavior.
+  pageScrollTopHook();
 
   // toggle animation direction for page transitions.
   useEffect(() => {

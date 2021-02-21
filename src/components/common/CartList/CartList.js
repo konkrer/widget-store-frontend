@@ -43,7 +43,6 @@ const CartListDivHeader = styled.div`
 
 const TabulationDiv = styled.div`
   width: 95vw;
-  margin-top: 10px;
   margin-left: auto;
   margin-right: auto;
   padding-right: 10px;
