@@ -110,7 +110,10 @@ const ShippingForm = ({
                     }`}
                     multiple
                     size={Object.keys(shippingMethods).length}
-                    onClick={e => setShippingData(e.target.value)}
+                    onClick={e => {
+                      if (e.target.tagName === 'OPTION')
+                        setShippingData(e.target.value);
+                    }}
                   >
                     {Object.entries(shippingMethods).map(([key, value]) => (
                       <option value={key} key={key}>
