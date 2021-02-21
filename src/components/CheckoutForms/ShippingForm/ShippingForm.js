@@ -31,6 +31,7 @@ const ShippingForm = ({
   const setShippingData = shippingMethod => {
     // get details of shipping choice
     const details = shippingMethods[shippingMethod];
+
     // calculate new total with chosen shipping cost
     const total = calculateTotal(
       subtotal,
@@ -46,7 +47,6 @@ const ShippingForm = ({
       },
       total,
     }));
-
     // animate shipping button checkmark if shipping cost was just set
     if (!orderData.shipping)
       animationTimer.current = animateVariant(
@@ -55,16 +55,11 @@ const ShippingForm = ({
         goTo3,
         [true]
       );
+    else goTo3();
   };
 
   const handleSubmit = values => {
-    // if shipping data has already been set from the
-    // form onChange handler no need to set again here
-    if (!orderData.shipping) {
-      setShippingData(values.shipping_method[0]);
-    }
-    // go to payment form
-    else goTo3(true);
+    setShippingData(values.shipping_method[0]);
   };
 
   // clear animation timer on dismount

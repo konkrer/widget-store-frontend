@@ -126,10 +126,10 @@ test('check mark does not animate if shipping already set', async () => {
     fireEvent.click(upsOption);
   });
 
-  // expect animation cycle not happened. does not goTo3
+  // expect animation cycle not happened. does goTo3
   await new Promise(res => setTimeout(res, 550));
   expect(setShippingCheckmark.mock.calls.length).toBe(0);
-  expect(goTo3.mock.calls.length).toBe(0);
+  expect(goTo3.mock.calls.length).toBe(1);
 
   // click next
   const nextButton = getByRole('button', { name: /next/i });
@@ -138,7 +138,7 @@ test('check mark does not animate if shipping already set', async () => {
   });
   // no additonal animation. called goTo3.
   expect(setShippingCheckmark.mock.calls.length).toBe(0);
-  expect(goTo3.mock.calls.length).toBe(1);
+  expect(goTo3.mock.calls.length).toBe(2);
 });
 
 test('clicking next calls setOrderData if shipping data not set', async () => {

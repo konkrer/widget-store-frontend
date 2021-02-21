@@ -13,10 +13,10 @@ exports[`CustomerInfoForms snapshot 1`] = `
         Login / Signup
       </a>
       <span
-        class="pl-3"
+        class="pl-0 pl-sm-3"
       >
         <i>
-          - or checkout as guest below
+           - or checkout as guest below
         </i>
       </span>
     </div>
