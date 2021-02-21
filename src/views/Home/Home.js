@@ -1,6 +1,6 @@
 /** Home page view. */
 
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useSelector, useDispatch } from 'react-redux';
@@ -11,6 +11,7 @@ import ProductPanel from '../../components/ProductPanel/ProductPanel';
 import toggleDir from '../../redux/actions/animation/toggleDir';
 import StorePageRoutes from '../../routes/storePageRoutes';
 import ProductList from '../../components/ProductList/ProductList';
+import SearchBar from '../../components/SearchBar/SearchBar';
 import { getPathRoot } from '../../utils/helpers';
 import './Home.css';
 
@@ -19,6 +20,9 @@ function Home() {
   const location = useLocation();
   const pathRoot = getPathRoot(location.pathname);
   const slideoutDir = useSelector(state => state.animation.flipFlop);
+  // searchbar / productlist filtering
+  const [params, setParams] = useState(null);
+  const initFormState = useRef({});
 
   // toggle animation direction for page transitions.
   useEffect(() => {
@@ -38,11 +42,10 @@ function Home() {
         }}
         transition={{ duration: 0.5 }}
       >
-        <ProductPanel
-          title={'Widget Store'}
-          byline={'We have what you need!'}
-          component={<ProductList />}
-        />
+        <ProductPanel title={'Widget Store'} byline={'We have what you need!'}>
+          <SearchBar setParams={setParams} initFormState={initFormState} />
+          <ProductList params={params} />
+        </ProductPanel>
       </motion.div>
       {/* End animate page transition. */}
 
