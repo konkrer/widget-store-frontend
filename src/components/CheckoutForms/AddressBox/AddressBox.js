@@ -5,25 +5,30 @@ const AddressSecton = styled.section`
   display: inline-flex;
   flex-direction: column;
   justify-content: space-between;
-  --addressHeading: inital;
+  --addressHeadingSize: inital;
   max-width: 40%;
-  margin-right: 2.5rem;
-  min-width: 160px;
+  margin-right: 2rem;
+  min-width: 200px;
 
-  @media screen and (max-width: 575px) {
+  @media screen and (max-width: 991.9px) {
+    max-width: 30%;
+  }
+
+  @media screen and (max-width: 767.9px) {
+    max-width: 25%;
+    min-width: 180px;
+    margin-right: 1rem;
+  }
+
+  @media screen and (max-width: 575.9px) {
     font-size: small;
-    --addHeadingress: small;
+    --addressHeadingSize: small;
     margin-right: 1.5rem;
-    min-width: 110px;
+    min-width: 140px;
   }
 
-  @media screen and (max-width: 992px) and (orientation: landscape) {
-    max-width: 28%;
-    margin-right: 2rem;
-  }
-
-  @media screen and (min-width: 1200px) {
-    min-width: 200px;
+  @media screen and (min-width: 1199.9px) {
+    margin-right: 2.5rem;
   }
 `;
 
@@ -43,7 +48,7 @@ const AddressBox = ({
       <div>
         <h6
           className="text-info font-weight-bold"
-          style={{ fontSize: 'var(--addHeadingress)' }}
+          style={{ fontSize: 'var(--addressHeadingSize)' }}
         >
           {title}
         </h6>

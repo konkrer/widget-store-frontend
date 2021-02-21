@@ -180,7 +180,7 @@ const CustomerInfoForms = ({
   };
 
   return (
-    <div className="CustomerInfoForms px-1 px-md-4 pt-2 pb-3 bg-light text-dark rounded border">
+    <div className="CustomerInfoForms px-2 px-md-4 pt-2 pb-3 bg-light text-dark rounded border">
       {/* If user not logged in show login button */}
       {!user && (
         <div>
@@ -202,14 +202,14 @@ const CustomerInfoForms = ({
             title={'Customer Info'}
             customer={FORM_DATA.current}
             button={editCustomerInfoButton}
-            className="mx-0"
+            className="mx-0 mt-2"
           />
           <AddressBox
             title={'Shipping Address'}
             customer={orderData.shippingAddress || FORM_DATA.current}
             isShippingAddress="true"
             button={editShipAddressButton}
-            className="mx-0"
+            className="mx-0 mt-2"
           />
         </div>
       )}

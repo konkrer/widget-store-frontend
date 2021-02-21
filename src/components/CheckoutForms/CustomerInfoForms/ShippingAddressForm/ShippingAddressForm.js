@@ -206,18 +206,18 @@ const ShippingForm = ({
                   </Col>
                 </Row>
 
-                <div className="text-right">
+                <div className="text-right mt-1">
                   <Button
                     type="submit"
                     variant="primary"
                     disabled={formik.isSubmitting}
-                    className="rounded-pill"
+                    className="rounded-pill mb-2"
                   >
                     Update Shipping Address
                   </Button>
                   <Button
                     variant="secondary"
-                    className="ml-2"
+                    className="ml-2 mb-2"
                     onClick={() =>
                       setShippingFormDisabled(
                         shippigFormDisabled => !shippigFormDisabled
