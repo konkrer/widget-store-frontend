@@ -163,7 +163,7 @@ const CartList = ({ disabled, orderData, setSelectedId }) => {
               <td className="text-left">Subtotal</td>
               <td className="text-right">
                 <motion.div
-                  initial={{ marginTop: 0, opacity: 1 }}
+                  initial={{ y: 0, opacity: 1 }}
                   variants={animVariants}
                   animate={animSubtotal}
                   transition={{ ease: 'easeInOut' }}
@@ -177,7 +177,7 @@ const CartList = ({ disabled, orderData, setSelectedId }) => {
                 <td className="text-left">Tax</td>
                 <td className="text-right">
                   <motion.div
-                    initial={{ marginTop: 0, opacity: 1 }}
+                    initial={{ y: 0, opacity: 1 }}
                     variants={animVariants}
                     animate={animTax}
                     transition={{ ease: 'easeInOut' }}
@@ -192,7 +192,7 @@ const CartList = ({ disabled, orderData, setSelectedId }) => {
                 <td className="text-left">Shipping</td>
                 <td className="text-right">
                   <motion.div
-                    initial={{ marginTop: 0, opacity: 1 }}
+                    initial={{ y: 0, opacity: 1 }}
                     variants={animVariants}
                     animate={animShipping}
                     transition={{ ease: 'easeInOut' }}
@@ -209,7 +209,7 @@ const CartList = ({ disabled, orderData, setSelectedId }) => {
                 <td className="text-left">Total</td>
                 <td className="text-right">
                   <motion.div
-                    initial={{ marginTop: 0, opacity: 1 }}
+                    initial={{ y: 0, opacity: 1 }}
                     variants={animVariants}
                     animate={animTotal}
                     transition={{ ease: 'easeInOut' }}

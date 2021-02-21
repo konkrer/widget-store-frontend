@@ -5,9 +5,11 @@ import { useEffect } from 'react';
  */
 const PageScrollTopHook = () => {
   useEffect(() => {
-    setTimeout(() => {
+    let timerID = setTimeout(() => {
       window.scrollTo({ top: 0 });
-    }, 400);
+    }, 500);
+
+    return () => clearTimeout(timerID);
   }, []);
 };
 

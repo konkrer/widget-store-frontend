@@ -42,7 +42,7 @@ function Home() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{
-          marginLeft: `${slideoutDir ? '' : '-'}200vw`,
+          x: `${slideoutDir ? '' : '-'}200vw`,
           opacity: 0,
         }}
         transition={{ duration: 0.5 }}

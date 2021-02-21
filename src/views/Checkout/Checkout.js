@@ -55,9 +55,9 @@ const Checkout = () => {
     <div className="Checkout text-light">
       <Navbar />
       <motion.div
-        initial={{ marginTop: '-100vh', opacity: 0 }}
-        animate={{ marginTop: '0vh', opacity: 1 }}
-        exit={{ marginTop: '100vh', opacity: 0 }}
+        initial={{ y: '-100vh', opacity: 0 }}
+        animate={{ y: '0vh', opacity: 1 }}
+        exit={{ y: '100vh', opacity: 0 }}
         transition={{ duration: 0.5 }}
       >
         <Container

@@ -90,7 +90,7 @@ exports[`CartItem snapshot 1`] = `
       class="CartItem-total font-weight-bold"
     >
       <div
-        style="margin-top: 0px; opacity: 1;"
+        style="opacity: 1; transform: none;"
       >
         $800.80
       </div>
