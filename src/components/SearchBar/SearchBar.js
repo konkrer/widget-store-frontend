@@ -48,7 +48,7 @@ const SearchBar = ({ setParams, initFormState }) => {
   const handleSubmit = e => {
     e.preventDefault();
     setParams(formData);
-    window.scrollTo({ top: 0 });
+    window.scrollTo({ top: 125 });
   };
 
   const setSort = (orderBy, orderBySort, orderByName) => {
@@ -63,7 +63,7 @@ const SearchBar = ({ setParams, initFormState }) => {
       order_by: orderBy,
       order_by_sort: orderBySort,
     }));
-    window.scrollTo({ top: 0 });
+    window.scrollTo({ top: 125 });
   };
 
   return (

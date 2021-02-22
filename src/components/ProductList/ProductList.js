@@ -16,7 +16,15 @@ function ProductList({ params }) {
 
   /* istanbul ignore next */
   if (error) return <div>Error</div>;
-  if (loading) return <WidgetLoader />;
+  if (loading)
+    return (
+      <>
+        <WidgetLoader />
+        <h5 className="text-light">
+          <em>Loading...</em>
+        </h5>
+      </>
+    );
 
   return (
     <CardDeck className="justify-content-center pb-2">

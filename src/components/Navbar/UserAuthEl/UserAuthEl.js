@@ -21,15 +21,19 @@ const UserAuthElement = ({ pathRoot }) => {
   // if user logged in show logout button
   if (user) {
     return (
-      <Navbar.Text>
+      <Navbar.Brand>
         <button className="btn-noStyle navbtn" onClick={handleLogout}>
           Logout
         </button>
-      </Navbar.Text>
+      </Navbar.Brand>
     );
   }
   // if not user logged in show login link
-  return <NavLink to={`${pathRoot}/login`}>Login</NavLink>;
+  return (
+    <Navbar.Text>
+      <NavLink to={`${pathRoot}/login`}>Login</NavLink>
+    </Navbar.Text>
+  );
 };
 
 export default UserAuthElement;

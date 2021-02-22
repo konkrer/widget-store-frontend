@@ -3,7 +3,7 @@
 }
 
 .dark-gradient1 {
-  background: linear-gradient(rgb(47, 47, 47, 0.98), rgb(41, 14, 14));
+  background: linear-gradient(0deg, rgb(47, 47, 47, 0.98), rgb(41, 14, 14));
 }
 
 .Panel-close {

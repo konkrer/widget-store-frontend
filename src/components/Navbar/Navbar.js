@@ -14,7 +14,7 @@ import img from '../../assets/images/brandIcon.png';
 /** Navbar wrapper allows navbar to be sticky. Provides background color. */
 /* istanbul ignore next */
 const NavbarWrapper = styled.div`
-  background-color: rgb(47, 47, 47, 0.98);
+  background-color: rgb(44, 44, 44, 0.99);
   position: ${p => (p.pathRoot === '/checkout' ? 'static' : 'sticky')};
   top: 0;
   z-index: 50;
@@ -33,13 +33,13 @@ const NavbarOne = () => {
 
   return (
     <NavbarWrapper pathRoot={pathRoot}>
-      <Navbar expand="md" className="Navbar navbar-dark">
-        <Navbar.Text>
+      <Navbar expand="md" className="Navbar" variant="dark">
+        <Navbar.Brand>
           <NavLink exact to="/shop" className="navbar-brand brand-style">
             <img src={img} height="30px" width="30px" alt="widget gyro" />{' '}
             {STORE_NAME}
           </NavLink>
-        </Navbar.Text>
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse className="pr-4">
           <Nav className="mr-auto" navbar>
