@@ -52,21 +52,22 @@ const Checkout = () => {
   };
 
   return (
-    <div className="Checkout text-light">
-      <Navbar />
-      <motion.div
-        initial={{ y: '-100vh', opacity: 0 }}
-        animate={{ y: '0vh', opacity: 1 }}
-        exit={{ y: '100vh', opacity: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <Container
-          fluid="xl"
-          className="dark-gradient1 my-4 px-0 pt-3 rounded position-relative"
+    <AnimateSharedLayout type="crossfade">
+      <div className="Checkout text-light">
+        <Navbar />
+        <motion.div
+          initial={{ y: '-100vh', opacity: 0 }}
+          animate={{ y: '0vh', opacity: 1 }}
+          exit={{ y: '100vh', opacity: 0 }}
+          transition={{ duration: 0.5 }}
         >
-          <PanelClose closeFunct={handleClose} />
-          <h1>Checkout</h1>
-          <AnimateSharedLayout type="crossfade">
+          <Container
+            fluid="xl"
+            className="Checkout-panel dark-gradient1 my-4 px-0 pt-3 rounded position-relative"
+          >
+            <PanelClose closeFunct={handleClose} />
+            <h1 className="brand-style display-1 textShadowLarge">Checkout</h1>
+
             <Row className="mx-0">
               <Col xs="12" lg="6" className="cart-col py-2 py-lg-3 px-0">
                 <CartList
@@ -83,23 +84,23 @@ const Checkout = () => {
                 />
               </Col>
             </Row>
-            <AnimatePresence>
-              {selectedId && (
-                <ProductDetail3
-                  selectedId={selectedId}
-                  setSelectedId={setSelectedId}
-                  disabled={disabled}
-                />
-              )}
-            </AnimatePresence>
-          </AnimateSharedLayout>
-        </Container>
-      </motion.div>
+          </Container>
+        </motion.div>
 
-      <Route exact path={`/checkout/login`}>
-        <LoginSignup />
-      </Route>
-    </div>
+        <Route exact path={`/checkout/login`}>
+          <LoginSignup />
+        </Route>
+      </div>
+      <AnimatePresence>
+        {selectedId && (
+          <ProductDetail3
+            selectedId={selectedId}
+            setSelectedId={setSelectedId}
+            disabled={disabled}
+          />
+        )}
+      </AnimatePresence>
+    </AnimateSharedLayout>
   );
 };
 

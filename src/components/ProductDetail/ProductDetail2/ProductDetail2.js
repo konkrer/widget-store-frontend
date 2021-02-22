@@ -28,6 +28,7 @@ const ProductDetail2 = () => {
   const slideoutDir = useSelector(state => state.animation.flipFlop);
   const body = useRef(document.body);
 
+  // remove <body> scrolling hook
   useEffect(() => {
     // add 'modal-open' class to <body> to remove scrolling
     const copy = body.current;

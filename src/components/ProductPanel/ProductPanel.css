@@ -1,0 +1,9 @@
+.ProductPanel {
+  border-radius: 100px 100px 5px 5px;
+}
+
+@media screen and (min-width: 1199.9px) {
+  .ProductPanel {
+    border-radius: 250px 250px 5px 5px / 350px 350px 5px 5px;
+  }
+}

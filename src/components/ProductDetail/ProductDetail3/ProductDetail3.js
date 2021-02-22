@@ -4,6 +4,7 @@
  * is part of a framer-motion animated shared layout.
  */
 
+import { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
 
@@ -14,6 +15,18 @@ import '../ProductDetail.css';
 
 const ProductDetail3 = ({ selectedId, setSelectedId, disabled }) => {
   const product = useSelector(state => state.cart.items[selectedId]);
+  const body = useRef(document.body);
+
+  // remove <body> scrolling hook
+  useEffect(() => {
+    // add 'modal-open' class to <body> to remove scrolling
+    const copy = body.current;
+    copy.classList.add('modal-open');
+
+    return () => {
+      copy.classList.remove('modal-open');
+    };
+  }, []);
 
   // close modal function
   const handleClose = (e, filterTarget) => {
