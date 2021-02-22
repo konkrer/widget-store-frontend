@@ -5,8 +5,8 @@ const ProductPanel = props => (
     className="my-4 py-4 Home dark-gradient1 rounded px-2 px-xl-5"
     fluid="xl"
   >
-    <h1 className="brand-style">{props.title} </h1>
-    <h2 className="lead font-italic mb-4 Home-byline">{props.byline}</h2>
+    <h1 className="brand-style textShadowLarge display-1">{props.title} </h1>
+    <h2 className="lead font-italic mb-4 Home-byline mt-3">{props.byline}</h2>
     {props.component || props.children}
   </Container>
 );

@@ -14,7 +14,12 @@ import img from '../../assets/images/brandIcon.png';
 /** Navbar wrapper allows navbar to be sticky. Provides background color. */
 /* istanbul ignore next */
 const NavbarWrapper = styled.div`
-  background-color: rgb(44, 44, 44, 0.99);
+  background: linear-gradient(
+    90deg,
+    rgb(77 77 77 / 96%),
+    rgb(149 2 2),
+    rgb(77 77 77 / 96%)
+  );
   position: ${p => (p.pathRoot === '/checkout' ? 'static' : 'sticky')};
   top: 0;
   z-index: 50;
@@ -35,8 +40,14 @@ const NavbarOne = () => {
     <NavbarWrapper pathRoot={pathRoot}>
       <Navbar expand="md" className="Navbar" variant="dark">
         <Navbar.Brand>
-          <NavLink exact to="/shop" className="navbar-brand brand-style">
-            <img src={img} height="30px" width="30px" alt="widget gyro" />{' '}
+          <NavLink exact to="/shop" className="brand-style textShadowSmall">
+            <img
+              src={img}
+              height="30px"
+              width="30px"
+              alt="widget gyro"
+              className="Navbar-brand-img"
+            />{' '}
             {STORE_NAME}
           </NavLink>
         </Navbar.Brand>

@@ -2,8 +2,27 @@
   text-align: center;
 }
 
+.brand-style {
+  font-family: 'Lobster', cursive;
+  color: gold !important;
+}
+
+.textShadowSmall {
+  text-shadow: 1px 1px 3px black, -1px 1px 3px black, 1px -1px 3px black,
+    -1px -1px 3px black;
+}
+
+.textShadowLarge {
+  text-shadow: 1px 1px 3px black, -1px 1px 3px black, 1px -1px 3px black,
+    -1px -1px 3px black;
+}
+
 .dark-gradient1 {
-  background: linear-gradient(0deg, rgb(47, 47, 47, 0.98), rgb(41, 14, 14));
+  background: linear-gradient(
+    0deg,
+    rgba(44, 28, 28, 0.98),
+    rgba(46, 15, 15, 0.985)
+  );
 }
 
 .Panel-close {
@@ -21,3 +40,5 @@ a.darkLink:hover {
   text-decoration: none;
   /* color: darkblue; */
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');

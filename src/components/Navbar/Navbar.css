@@ -1,15 +1,7 @@
 /* Navbar css  */
 
-.brand-style {
-  color: gold !important;
-  text-shadow: 1px 1px 3px black, -1px 1px 3px black, 1px -1px 3px black,
-    -1px -1px 3px black;
-}
-
-.navbar-brand {
-  padding-left: 0.4rem;
-  padding-right: 0.4rem;
-  border-radius: 5px;
+.Navbar .Navbar-brand-img {
+  transform: translateY(-2px);
 }
 
 .navbar-text {
