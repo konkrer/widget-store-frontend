@@ -1,18 +1,5 @@
 /* Navbar css  */
 
-/* .Navbar {
-  background-color: rgb(47, 47, 47, 0.98);
-  position: sticky;
-  top: 0;
-  z-index: 50;
-} */
-
-/* @media screen and (max-width: 991px) and (orientation: landscape) {
-  .Navbar {
-    position: static;
-  }
-} */
-
 .brand-style {
   color: gold !important;
   text-shadow: 1px 1px 3px black, -1px 1px 3px black, 1px -1px 3px black,

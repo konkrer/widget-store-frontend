@@ -20,15 +20,20 @@ import {
   faFilter,
 } from '@fortawesome/free-solid-svg-icons';
 
+// local imports
+import './SearchBar.css';
+
 const FilterDiv = styled.div`
   height: 50px;
   color: var(--light);
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: start;
+  font-size: small;
 
   @media screen and (max-width: 991.9px) {
-    height: 25px;
+    height: 30px;
+    font-size: x-small;
   }
 `;
 
@@ -43,7 +48,7 @@ const SearchBar = ({ setParams, initFormState }) => {
   const handleSubmit = e => {
     e.preventDefault();
     setParams(formData);
-    console.log(formData);
+    window.scrollTo({ top: 0 });
   };
 
   const setSort = (orderBy, orderBySort, orderByName) => {
@@ -58,14 +63,15 @@ const SearchBar = ({ setParams, initFormState }) => {
       order_by: orderBy,
       order_by_sort: orderBySort,
     }));
+    window.scrollTo({ top: 0 });
   };
 
   return (
-    <Col md={10} className="mx-auto">
-      <Form className="mx-sm-5" onSubmit={handleSubmit}>
+    <Col md={10} className="SearchBar mx-auto">
+      <Form className="SearchBar-Form mx-sm-5" onSubmit={handleSubmit}>
         <InputGroup>
           <InputGroup.Prepend>
-            <InputGroup.Text className="bg-light text-dark px-1 px-sm-3 py-0">
+            <InputGroup.Text className="bg-light text-dark px-1 px-sm-3 py-0 border border-secondary">
               <DropdownButton
                 id="dropdown-sort"
                 title={<FontAwesomeIcon icon={faCogs} size="lg" />}
@@ -145,14 +151,17 @@ const SearchBar = ({ setParams, initFormState }) => {
               </DropdownButton>
             </InputGroup.Text>
           </InputGroup.Prepend>
+
           <FormControl
             id="query"
             name="query"
             placeholder="Search For..."
             onChange={handleChange}
+            className="border border-secondary"
           />
+
           <InputGroup.Append>
-            <InputGroup.Text className="bg-primary text-light p-0">
+            <InputGroup.Text className="bg-primary text-light p-0 border border-secondary">
               <button className="btn-noStyle px-3 px-sm-5 py-1" type="submit">
                 <FontAwesomeIcon icon={faSearch} size="lg" />
               </button>
@@ -162,8 +171,8 @@ const SearchBar = ({ setParams, initFormState }) => {
       </Form>
       <FilterDiv>
         {formData.order_by && (
-          <div className="mb-1">
-            <FontAwesomeIcon className="text-info" icon={faFilter} />{' '}
+          <div className="mb-1 bg-secondary px-2 rounded-bottom border border-dark border-top-0">
+            <FontAwesomeIcon className="text-warning" icon={faFilter} />{' '}
             <span>
               {formData.order_by.toUpperCase()}{' '}
               {formData.orderByName.toUpperCase()}

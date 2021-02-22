@@ -94,6 +94,38 @@ test('clicking option calls setOrderData', async () => {
   expect(goTo3.mock.calls.length).toBe(1);
 });
 
+test("clicking the select input (not option) doesn't call setOrderData", async () => {
+  let getByLabelText;
+  await act(async () => {
+    const resp = render(
+      <ShippingForm
+        orderData={orderData}
+        setOrderData={setOrderData}
+        goTo1={goTo1}
+        goTo3={goTo3}
+        responseError={null}
+        loadingShipping={false}
+        shippingMethods={TEST_DATA.shippingMethods}
+        subtotal={'10.00'}
+        setShippingCheckmark={setShippingCheckmark}
+      />
+    );
+    getByLabelText = resp.getByLabelText;
+  });
+  // click input
+  const shippingInput = getByLabelText(/shipping options/i);
+  await act(async () => {
+    fireEvent.click(shippingInput);
+  });
+  // expect no orderData update
+  expect(setOrderData.mock.calls.length).toBe(0);
+
+  // expect no animation cycle happened
+  await new Promise(res => setTimeout(res, 550));
+  expect(setShippingCheckmark.mock.calls.length).toBe(0);
+  expect(goTo3.mock.calls.length).toBe(0);
+});
+
 test('check mark does not animate if shipping already set', async () => {
   let getByRole, getByLabelText;
   await act(async () => {
@@ -114,11 +146,12 @@ test('check mark does not animate if shipping already set', async () => {
     getByLabelText = resp.getByLabelText;
   });
 
-  // select shipping option
+  // set shipping_method value
   const shippingInput = getByLabelText(/shipping options/i);
   await act(async () => {
     fireEvent.change(shippingInput, { target: { value: ['ups_ground'] } });
   });
+  // click shipping option
   const upsOption = getByRole('option', {
     name: /UPS ground shipping \(3-6 days\)/i,
   });

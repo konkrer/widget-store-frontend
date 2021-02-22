@@ -1,0 +1,12 @@
+.SearchBar {
+  position: sticky;
+  top: 74px;
+  z-index: 45;
+}
+
+/* landscape on phone no sticky navbar */
+@media screen and (max-width: 991px) and (orientation: landscape) {
+  .SearchBar {
+    position: static;
+  }
+}
