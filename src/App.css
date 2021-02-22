@@ -8,20 +8,29 @@
 }
 
 .textShadowSmall {
+  text-shadow: 1px 1px 1px black, -1px 1px 1px black, 1px -1px 1px black,
+    -1px -1px 1px black;
+}
+
+.textShadowMedium {
   text-shadow: 1px 1px 3px black, -1px 1px 3px black, 1px -1px 3px black,
     -1px -1px 3px black;
 }
 
 .textShadowLarge {
-  text-shadow: 1px 1px 3px black, -1px 1px 3px black, 1px -1px 3px black,
-    -1px -1px 3px black;
+  text-shadow: -4px 4px 7px black, 2px 2px 2px black, 2px -2px 2px black,
+    -2px -2px 2px black;
+}
+
+.boxShadowLarge {
+  box-shadow: 0px 8px 14px 4px black;
 }
 
 .dark-gradient1 {
   background: linear-gradient(
     0deg,
-    rgba(44, 28, 28, 0.98),
-    rgba(46, 15, 15, 0.985)
+    rgb(66, 40, 40, 0.98),
+    rgb(18, 22, 140, 0.98)
   );
 }
 

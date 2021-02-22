@@ -23,8 +23,6 @@ const ProductDetail3 = ({ selectedId, setSelectedId, disabled }) => {
     setSelectedId(null);
   };
 
-  // const product = cart.items[selectedId];
-
   return (
     <motion.div
       initial={{ opacity: 0 }}

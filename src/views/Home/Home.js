@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useSelector, useDispatch } from 'react-redux';
+import styled from 'styled-components';
 
 // local imports
 import Navbar from '../../components/Navbar/Navbar';
@@ -15,6 +16,10 @@ import SearchBar from '../../components/SearchBar/SearchBar';
 import pageScrollTopHook from '../../hooks/pageScrollTopHook';
 import { getPathRoot } from '../../utils/helpers';
 import './Home.css';
+
+const SpacerDiv = styled.div`
+  height: ${p => p.height};
+`;
 
 function Home() {
   const dispatch = useDispatch();
@@ -51,6 +56,7 @@ function Home() {
           <SearchBar setParams={setParams} initFormState={initFormState} />
           <ProductList params={params} />
         </ProductPanel>
+        <SpacerDiv height={'100px'} />
       </motion.div>
       {/* End animate page transition. */}
 

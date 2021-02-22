@@ -17,7 +17,7 @@ const NavbarWrapper = styled.div`
   background: linear-gradient(
     90deg,
     rgb(77 77 77 / 96%),
-    rgb(149 2 2),
+    rgb(122 2 2),
     rgb(77 77 77 / 96%)
   );
   position: ${p => (p.pathRoot === '/checkout' ? 'static' : 'sticky')};
@@ -40,7 +40,7 @@ const NavbarOne = () => {
     <NavbarWrapper pathRoot={pathRoot}>
       <Navbar expand="md" className="Navbar" variant="dark">
         <Navbar.Brand>
-          <NavLink exact to="/shop" className="brand-style textShadowSmall">
+          <NavLink exact to="/shop" className="brand-style textShadowMedium">
             <img
               src={img}
               height="30px"
