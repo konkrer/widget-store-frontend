@@ -17,9 +17,6 @@
   margin-right: 5px;
 }
 
-.Navbar .dropdown-item {
-  color: white;
-}
 .Navbar .dropdown-menu a {
   color: inherit;
 }
@@ -44,9 +41,4 @@
 
 .Navbar .dropdown a.active {
   background-color: unset;
-}
-
-.Navbar .dropdown-menu {
-  /* background-color: rgb(47, 47, 47); */
-  background-color: var(--secondary);
 }

@@ -1,8 +1,6 @@
-/* @media screen and (max-width: 991px) {
-  .Checkout1 .cart-col {
-    display: none;
-  }
-} */
+.Checkout-panel {
+  border-radius: 20px;
+}
 
 /* shippingForm */
 select#shipping_method {

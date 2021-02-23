@@ -1,9 +1,16 @@
 .ProductPanel {
-  border-radius: 100px 100px 5px 5px;
+  border-radius: 100px 100px 20px 20px;
+}
+
+.panel-border {
+  border: #b8b8de;
+  border-width: 6px;
+  border-style: double;
 }
 
 @media screen and (min-width: 1199.9px) {
   .ProductPanel {
-    border-radius: 250px 250px 5px 5px / 350px 350px 5px 5px;
+    border-radius: 250px 250px 20px 20px / 350px 350px 20px 20px;
+    border-width: 9px;
   }
 }

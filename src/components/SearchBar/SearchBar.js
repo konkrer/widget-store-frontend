@@ -71,84 +71,85 @@ const SearchBar = ({ setParams, initFormState }) => {
       <Form className="SearchBar-Form mx-sm-5" onSubmit={handleSubmit}>
         <InputGroup>
           <InputGroup.Prepend>
-            <InputGroup.Text className="bg-light text-dark px-1 px-sm-3 py-0 border border-secondary">
-              <DropdownButton
-                id="dropdown-sort"
-                title={<FontAwesomeIcon icon={faCogs} size="lg" />}
-                variant="light"
-                size={'sm'}
-                drop="down"
-                menuAlign="right"
-              >
-                <Dropdown.Header className="text-info">
-                  Sort by Price
-                </Dropdown.Header>
-                <Dropdown.Item
-                  as="button"
-                  type="button"
-                  onClick={() => setSort('price', 'desc', 'High to Low')}
+            <InputGroup.Text className="bg-light px-1 px-sm-3 py-0 border border-secondary">
+              <Dropdown>
+                <Dropdown.Toggle id="dropdown-sort" variant="light" size={'sm'}>
+                  <FontAwesomeIcon icon={faCogs} size="lg" />
+                </Dropdown.Toggle>
+                <Dropdown.Menu
+                  className="border border-dark boxShadowSmall"
+                  align="right"
                 >
-                  <FontAwesomeIcon icon={faArrowDown} size="xs" />
-                  {'  '}High to Low
-                </Dropdown.Item>
-                <Dropdown.Item
-                  as="button"
-                  type="button"
-                  onClick={() => setSort('price', 'asc', 'Low to High')}
-                >
-                  <FontAwesomeIcon icon={faArrowUp} size="xs" />
-                  {'  '}Low to High
-                </Dropdown.Item>
-                <Dropdown.Divider />
-                <Dropdown.Header className="text-info">
-                  Sort by Rating
-                </Dropdown.Header>
-                <Dropdown.Item
-                  as="button"
-                  type="button"
-                  onClick={() => setSort('rating', 'desc', 'High to Low')}
-                >
-                  <FontAwesomeIcon icon={faArrowDown} size="xs" />
-                  {'  '}High to Low
-                </Dropdown.Item>
-                <Dropdown.Item
-                  as="button"
-                  type="button"
-                  onClick={() => setSort('rating', 'asc', 'Low to High')}
-                >
-                  <FontAwesomeIcon icon={faArrowUp} size="xs" />
-                  {'  '}Low to High
-                </Dropdown.Item>
-                <Dropdown.Divider />
-                <Dropdown.Header className="text-info">
-                  Sort by Name
-                </Dropdown.Header>
-                <Dropdown.Item
-                  as="button"
-                  type="button"
-                  onClick={() => setSort('name', 'asc', 'A to Z')}
-                >
-                  <FontAwesomeIcon icon={faArrowDown} size="xs" />
-                  {'  '}A to Z
-                </Dropdown.Item>
-                <Dropdown.Item
-                  as="button"
-                  type="button"
-                  onClick={() => setSort('name', 'desc', 'Z to A')}
-                >
-                  <FontAwesomeIcon icon={faArrowUp} size="xs" />
-                  {'  '}Z to A
-                </Dropdown.Item>
-                <Dropdown.Divider />
-                <Dropdown.Item
-                  as="button"
-                  type="button"
-                  onClick={() => setSort('', '')}
-                >
-                  <FontAwesomeIcon icon={faRecycle} size="xs" />
-                  {'  '}Reset
-                </Dropdown.Item>
-              </DropdownButton>
+                  <Dropdown.Header className="text-info">
+                    Sort by Price
+                  </Dropdown.Header>
+                  <Dropdown.Item
+                    as="button"
+                    type="button"
+                    onClick={() => setSort('price', 'desc', 'High to Low')}
+                  >
+                    <FontAwesomeIcon icon={faArrowDown} size="xs" />
+                    {'  '}High to Low
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    as="button"
+                    type="button"
+                    onClick={() => setSort('price', 'asc', 'Low to High')}
+                  >
+                    <FontAwesomeIcon icon={faArrowUp} size="xs" />
+                    {'  '}Low to High
+                  </Dropdown.Item>
+                  <Dropdown.Divider />
+                  <Dropdown.Header className="text-info">
+                    Sort by Rating
+                  </Dropdown.Header>
+                  <Dropdown.Item
+                    as="button"
+                    type="button"
+                    onClick={() => setSort('rating', 'desc', 'High to Low')}
+                  >
+                    <FontAwesomeIcon icon={faArrowDown} size="xs" />
+                    {'  '}High to Low
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    as="button"
+                    type="button"
+                    onClick={() => setSort('rating', 'asc', 'Low to High')}
+                  >
+                    <FontAwesomeIcon icon={faArrowUp} size="xs" />
+                    {'  '}Low to High
+                  </Dropdown.Item>
+                  <Dropdown.Divider />
+                  <Dropdown.Header className="text-info">
+                    Sort by Name
+                  </Dropdown.Header>
+                  <Dropdown.Item
+                    as="button"
+                    type="button"
+                    onClick={() => setSort('name', 'asc', 'A to Z')}
+                  >
+                    <FontAwesomeIcon icon={faArrowDown} size="xs" />
+                    {'  '}A to Z
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    as="button"
+                    type="button"
+                    onClick={() => setSort('name', 'desc', 'Z to A')}
+                  >
+                    <FontAwesomeIcon icon={faArrowUp} size="xs" />
+                    {'  '}Z to A
+                  </Dropdown.Item>
+                  <Dropdown.Divider />
+                  <Dropdown.Item
+                    as="button"
+                    type="button"
+                    onClick={() => setSort('', '')}
+                  >
+                    <FontAwesomeIcon icon={faRecycle} size="xs" />
+                    {'  '}Reset
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
             </InputGroup.Text>
           </InputGroup.Prepend>
 
