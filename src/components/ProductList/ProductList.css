@@ -1,1 +1,21 @@
+@media (min-width: 576px) {
+  .card-deck {
+    margin-right: 0px;
+    margin-left: 0px;
+  }
+  .card-deck .card {
+    margin-right: 5px;
+    margin-left: 5px;
+  }
+}
 
+@media (min-width: 1200px) {
+  .card-deck {
+    margin-right: -15px;
+    margin-left: -15px;
+  }
+  .card-deck .card {
+    margin-right: 15px;
+    margin-left: 15px;
+  }
+}

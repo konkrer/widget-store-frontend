@@ -5,6 +5,7 @@ import CardDeck from 'react-bootstrap/CardDeck';
 import APIRequest from '../../hooks/apiHook';
 import ProductCard from '../ProductCard/ProductCard';
 import WidgetLoader from '../common/WidgetLoader/WidgetLoader';
+import './ProductList.css';
 
 function ProductList({ params }) {
   const { loading, error, response } = APIRequest(

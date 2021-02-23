@@ -41,6 +41,7 @@ function CommingSoon() {
         <ProductPanel
           title={'Comming Soon'}
           byline={'This page is under construction!'}
+          display={3}
         >
           <WidgetLoader />
           <FramerLink to="/shop">
