@@ -66,7 +66,7 @@ const Checkout = () => {
             className="Checkout-panel panel-border dark-gradient1 my-4 px-0 pt-3 position-relative"
           >
             <PanelClose closeFunct={handleClose} />
-            <h1 className="brand-style display-1 textShadowLarge">Checkout</h1>
+            <h1 className="brand-style display-3 textShadowLarge">Checkout</h1>
 
             <Row className="mx-0">
               <Col xs="12" lg="6" className="cart-col py-2 py-lg-3 px-0">
