@@ -13,16 +13,7 @@ body {
   /* reduce jumpy-ness by maintaining width w/ or wo/ scrollbar */
   width: 100vw;
   overflow-y: scroll;
-  /* overflow-x: hidden; */
-}
-
-#root {
   overflow-x: hidden;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
 }
 
 .text-xxs {
