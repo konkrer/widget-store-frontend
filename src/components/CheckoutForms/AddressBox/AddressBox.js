@@ -10,24 +10,30 @@ const AddressSecton = styled.section`
   margin-right: 2rem;
   min-width: 200px;
 
+  @media screen and (max-width: 1199.9px) {
+    max-width: 40%;
+    margin-right: 1.8rem;
+  }
+
   @media screen and (max-width: 991.9px) {
     max-width: 30%;
+    margin-right: 1.9rem;
   }
 
   @media screen and (max-width: 767.9px) {
     max-width: 25%;
     min-width: 180px;
-    margin-right: 1rem;
+    margin-right: 0.8rem;
   }
 
   @media screen and (max-width: 575.9px) {
     font-size: small;
     --addressHeadingSize: small;
-    margin-right: 1.5rem;
+    margin-right: 1.1rem;
     min-width: 140px;
   }
 
-  @media screen and (min-width: 1199.9px) {
+  @media screen and (min-width: 1200px) {
     margin-right: 2.5rem;
   }
 `;
