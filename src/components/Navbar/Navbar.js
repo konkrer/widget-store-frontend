@@ -40,7 +40,11 @@ const NavbarOne = () => {
     <NavbarWrapper pathRoot={pathRoot}>
       <Navbar expand="md" className="Navbar" variant="dark">
         <Navbar.Brand>
-          <NavLink exact to="/shop" className="brand-style textShadowMedium">
+          <NavLink
+            exact
+            to="/shop"
+            className="brand-style textShadowMedium navbar-brand rounded px-2"
+          >
             <img
               src={img}
               height="30px"
