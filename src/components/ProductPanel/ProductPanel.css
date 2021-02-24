@@ -3,7 +3,7 @@
 }
 
 .panel-border {
-  border: #b8b8de;
+  border: rgb(133, 133, 133);
   border-width: 6px;
   border-style: double;
 }

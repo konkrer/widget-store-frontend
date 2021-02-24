@@ -41,7 +41,7 @@ const OrderSuccess = () => {
       >
         <Container
           fluid="xl"
-          className="dark-gradient1 my-4 px-2 pt-0 py-5 rounded position-relative"
+          className="dark-gradient-1 my-4 px-2 pt-0 py-5 rounded position-relative"
         >
           <PanelClose closeFunct={() => history.push('/shop')} />
 

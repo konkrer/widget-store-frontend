@@ -3,7 +3,7 @@ import './ProductPanel.css';
 
 const ProductPanel = props => (
   <Container
-    className="ProductPanel panel-border my-4 mt-xl-5 py-4 dark-gradient1 px-2 px-xl-5 boxShadowLarge"
+    className="ProductPanel panel-border my-4 mt-xl-5 py-4 dark-gradient-1 px-2 px-xl-5 boxShadowLarge"
     fluid="xl"
   >
     <h1

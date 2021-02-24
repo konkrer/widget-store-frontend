@@ -63,7 +63,7 @@ const Checkout = () => {
         >
           <Container
             fluid="xl"
-            className="Checkout-panel panel-border dark-gradient1 my-4 px-0 pt-3 position-relative"
+            className="Checkout-panel panel-border dark-gradient-1 my-4 px-0 pt-3 position-relative"
           >
             <PanelClose closeFunct={handleClose} />
             <h1 className="brand-style display-3 textShadowLarge">Checkout</h1>

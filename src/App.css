@@ -23,14 +23,22 @@
 }
 
 .boxShadowSmall {
-  box-shadow: 0px 0px 4px 0px black;
+  box-shadow: 1px 1px 0px 0px rgba(0, 0, 0, 0.593);
 }
 
 .boxShadowLarge {
   box-shadow: 0px 8px 10px 2px black;
 }
 
-.dark-gradient1 {
+.dark-gradient-1 {
+  background: linear-gradient(
+    0deg,
+    rgb(66, 40, 40, 0.98),
+    rgba(88, 13, 13, 0.9)
+  );
+}
+
+.dark-gradient-2 {
   background: linear-gradient(
     0deg,
     rgb(66, 40, 40, 0.98),
