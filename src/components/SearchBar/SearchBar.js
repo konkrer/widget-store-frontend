@@ -1,13 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import {
-  Form,
-  InputGroup,
-  FormControl,
-  Col,
-  Dropdown,
-  DropdownButton,
-} from 'react-bootstrap';
+import { Form, InputGroup, FormControl, Col, Dropdown } from 'react-bootstrap';
 
 // fontawesome imports
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

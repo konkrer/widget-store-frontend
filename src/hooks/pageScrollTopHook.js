@@ -7,7 +7,7 @@ const PageScrollTopHook = () => {
   useEffect(() => {
     let timerID = setTimeout(() => {
       window.scrollTo({ top: 0 });
-    }, 500);
+    }, 300);
 
     return () => clearTimeout(timerID);
   }, []);

@@ -5,11 +5,14 @@ import { motion } from 'framer-motion';
 
 // local imports
 import CartItem from './CartItem/CartItem';
+import DisabledWarningToast from './DisabledWarningToast/DisabledWarningToast';
 import incrementQuantity from '../../../redux/actions/cart/incrementQuantity';
 import decrementQuantity from '../../../redux/actions/cart/decrementQuantity';
 import removeProduct from '../../../redux/actions/cart/removeProduct';
+import useToggle from '../../../hooks/useToggle';
 import { animateVariant } from '../../../utils/helpers';
 
+// wrapper to ensure rounded corners on scrollbar
 const CartListDivWrapper = styled.div`
   display: inline-block;
   overflow: hidden;
@@ -78,20 +81,21 @@ const CartList = ({ disabled, orderData, setSelectedId }) => {
   const [animTax, setAnimTax] = useState(false);
   const [animShipping, setAnimShipping] = useState(false);
   const [animTotal, setAnimTotal] = useState(false);
+  const [showDisabledToast, toggleDisabledToast] = useToggle(false);
 
   // item functions
   const handleIncrement = id => {
-    if (disabled) return;
+    if (disabled) return toggleDisabledToast();
     dispatch(incrementQuantity(id));
   };
 
   const handleDecrement = id => {
-    if (disabled) return;
+    if (disabled) return toggleDisabledToast();
     dispatch(decrementQuantity(id));
   };
 
   const handleRemove = id => {
-    if (disabled) return;
+    if (disabled) return toggleDisabledToast();
     dispatch(removeProduct(id));
   };
 
@@ -157,6 +161,13 @@ const CartList = ({ disabled, orderData, setSelectedId }) => {
         </CartListDiv>
       </CartListDivWrapper>
       <TabulationDiv>
+        {/* Show warning toast when quantity adjustment is attempted
+        but quantity buttons are disabled */}
+        <DisabledWarningToast
+          show={showDisabledToast}
+          toggle={toggleDisabledToast}
+        />
+
         <TabulationTable className="TabulationTable ml-auto">
           <tbody>
             <tr>
