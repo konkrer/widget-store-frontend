@@ -31,7 +31,7 @@ const FilterDiv = styled.div`
 `;
 
 const SearchBar = ({ setParams, initFormState }) => {
-  const [formData, setformData] = useState(initFormState.current);
+  const [formData, setformData] = useState(initFormState);
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -51,11 +51,12 @@ const SearchBar = ({ setParams, initFormState }) => {
       order_by_sort: orderBySort,
       orderByName,
     }));
-    setParams(params => ({
-      ...params,
+    // set params that will be passed to ProductsList
+    setParams({
+      ...formData,
       order_by: orderBy,
       order_by_sort: orderBySort,
-    }));
+    });
     window.scrollTo({ top: 205 });
   };
 
@@ -66,7 +67,12 @@ const SearchBar = ({ setParams, initFormState }) => {
           <InputGroup.Prepend>
             <InputGroup.Text className="bg-light px-1 px-sm-3 py-0 border border-secondary">
               <Dropdown>
-                <Dropdown.Toggle id="dropdown-sort" variant="light" size={'sm'}>
+                <Dropdown.Toggle
+                  id="dropdown-sort"
+                  variant="light"
+                  size={'sm'}
+                  aria-label="sorting options"
+                >
                   <FontAwesomeIcon icon={faCogs} size="lg" />
                 </Dropdown.Toggle>
                 <Dropdown.Menu
@@ -80,6 +86,7 @@ const SearchBar = ({ setParams, initFormState }) => {
                     as="button"
                     type="button"
                     onClick={() => setSort('price', 'desc', 'High to Low')}
+                    aria-label="price high to low"
                   >
                     <FontAwesomeIcon icon={faArrowDown} size="xs" />
                     {'  '}High to Low
@@ -88,6 +95,7 @@ const SearchBar = ({ setParams, initFormState }) => {
                     as="button"
                     type="button"
                     onClick={() => setSort('price', 'asc', 'Low to High')}
+                    aria-label="price low to high"
                   >
                     <FontAwesomeIcon icon={faArrowUp} size="xs" />
                     {'  '}Low to High
@@ -100,6 +108,7 @@ const SearchBar = ({ setParams, initFormState }) => {
                     as="button"
                     type="button"
                     onClick={() => setSort('rating', 'desc', 'High to Low')}
+                    aria-label="rating high to low"
                   >
                     <FontAwesomeIcon icon={faArrowDown} size="xs" />
                     {'  '}High to Low
@@ -108,6 +117,7 @@ const SearchBar = ({ setParams, initFormState }) => {
                     as="button"
                     type="button"
                     onClick={() => setSort('rating', 'asc', 'Low to High')}
+                    aria-label="rating low to high"
                   >
                     <FontAwesomeIcon icon={faArrowUp} size="xs" />
                     {'  '}Low to High
@@ -120,6 +130,7 @@ const SearchBar = ({ setParams, initFormState }) => {
                     as="button"
                     type="button"
                     onClick={() => setSort('name', 'asc', 'A to Z')}
+                    aria-label="name A to Z"
                   >
                     <FontAwesomeIcon icon={faArrowDown} size="xs" />
                     {'  '}A to Z
@@ -128,6 +139,7 @@ const SearchBar = ({ setParams, initFormState }) => {
                     as="button"
                     type="button"
                     onClick={() => setSort('name', 'desc', 'Z to A')}
+                    aria-label="name Z to A"
                   >
                     <FontAwesomeIcon icon={faArrowUp} size="xs" />
                     {'  '}Z to A
@@ -137,6 +149,7 @@ const SearchBar = ({ setParams, initFormState }) => {
                     as="button"
                     type="button"
                     onClick={() => setSort('', '')}
+                    aria-label="reset sorting to default"
                   >
                     <FontAwesomeIcon icon={faRecycle} size="xs" />
                     {'  '}Reset
@@ -152,17 +165,23 @@ const SearchBar = ({ setParams, initFormState }) => {
             placeholder="Search For..."
             onChange={handleChange}
             className="border border-secondary"
+            aria-label="search query term"
           />
 
           <InputGroup.Append>
             <InputGroup.Text className="bg-primary text-light p-0 border border-secondary">
-              <button className="btn-noStyle px-3 px-sm-5 py-1" type="submit">
+              <button
+                className="btn-noStyle px-3 px-sm-5 py-1"
+                type="submit"
+                aria-label="Search"
+              >
                 <FontAwesomeIcon icon={faSearch} size="lg" />
               </button>
             </InputGroup.Text>
           </InputGroup.Append>
         </InputGroup>
       </Form>
+      {/* Display for any filtering or ordering being applied to results */}
       <FilterDiv>
         {formData.order_by && (
           <div className="mb-1 bg-secondary px-2 rounded-bottom border border-dark border-top-0">

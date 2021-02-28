@@ -27,8 +27,8 @@ function Home() {
   const pathRoot = getPathRoot(location.pathname);
   const slideoutDir = useSelector(state => state.animation.flipFlop);
   // searchbar / productlist filtering
-  const [params, setParams] = useState(null);
   const initFormState = useRef({});
+  const [params, setParams] = useState(initFormState.current);
 
   // scroll to top of page with load.
   // needed for mobile behavior.
@@ -53,7 +53,10 @@ function Home() {
         transition={{ duration: 0.5 }}
       >
         <ProductPanel title={'Widget Store'} byline={'We have what you need!'}>
-          <SearchBar setParams={setParams} initFormState={initFormState} />
+          <SearchBar
+            setParams={setParams}
+            initFormState={initFormState.current}
+          />
           <ProductList params={params} />
         </ProductPanel>
         <SpacerDiv height={'100px'} />

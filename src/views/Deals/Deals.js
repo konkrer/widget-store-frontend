@@ -51,7 +51,10 @@ function Deals() {
         transition={{ duration: 0.5 }}
       >
         <ProductPanel title={'Deals'} byline={"Here's what's on sale!"}>
-          <SearchBar setParams={setParams} initFormState={initFormState} />
+          <SearchBar
+            setParams={setParams}
+            initFormState={initFormState.current}
+          />
           <ProductList params={params} />
         </ProductPanel>
         <SpacerDiv height={'100px'} />

@@ -53,7 +53,10 @@ function NewProducts() {
           title={'New Products'}
           byline={'Check out our newest items!'}
         >
-          <SearchBar setParams={setParams} initFormState={initFormState} />
+          <SearchBar
+            setParams={setParams}
+            initFormState={initFormState.current}
+          />
           <ProductList params={params} />
         </ProductPanel>
         <SpacerDiv height={'100px'} />
