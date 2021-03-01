@@ -14,7 +14,7 @@ const ProductPanel = props => (
       >
         {props.title}{' '}
       </h1>
-      <h2 className="lead font-italic mb-4 ProductPanel-byline mt-3">
+      <h2 className="lead text-xl font-italic mb-3 ProductPanel-byline mt-3">
         {props.byline}
       </h2>
       {props.headerHTML}

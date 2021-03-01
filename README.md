@@ -17,9 +17,11 @@ For maximum application security and stability this app employs extensive test c
 
 To ensure a secure ordering flow this app employs a transaction based approach to order creation in the back-end server with only valid orders able to be completed. As soon as an order is received (in the back-end) the integrity of the order is checked. Tampering with the order data sent from the front-end, insufficient quantity (stock) of products, or any payment processing problems or errors all result in transaction failure. While proper logging of such events is not currently implemented it is duly noted that logging would be implemented if this app were to be further developed.
 
-To ensure accuracy of money related calculations this app employs Decimal.js in the front and back end to avoid pitfalls of floating point based calculations when dealing with discreet monetary values. The PostgreSQL database in the back-end declares the Numeric type for all monetary values ensuring database calculations also avoid any floating point pitfalls when dealing with monetary calculations.
+To ensure accuracy of money related calculations this app employs Decimal.js in the front and back end to avoid any pitfalls of floating-point based calculations when dealing with discreet monetary values. The PostgreSQL database in the back-end declares the Numeric type for all monetary values ensuring database calculations also avoid any floating-point issues when dealing with monetary calculations.
 
-This app employs custom animations to add application interactivity, feedback, and to make obvious the single page nature of this app as the application's various pages are navigated.
+Custom animations are employed to add application interactivity,
+feedback, and to make obvious the single page nature of this app as
+the application's various pages are navigated.
 
 ## Notable Features
 

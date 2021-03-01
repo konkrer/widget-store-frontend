@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 // get our fontawesome imports
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPaypal } from '@fortawesome/free-brands-svg-icons';
+import { faPaypal, faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faCreditCard } from '@fortawesome/free-solid-svg-icons';
 
 // local imports
@@ -16,7 +16,8 @@ import { SpacerDiv } from '../../components/common/utils/SpacerDiv';
 import { getPathRoot } from '../../utils/helpers';
 import './About.css';
 //images
-import SpringboardLogo from '../../assets/images/Springboard_logo.png';
+import springboardLogo from '../../assets/images/Springboard_logo.png';
+import widgetLogo from '../../assets/images/brandIcon.png';
 
 const StyledSection = styled.section`
   max-width: 75ch;
@@ -45,16 +46,27 @@ const AboutPage = () => {
   const pathRoot = getPathRoot(location.pathname);
 
   const headerHTML = (
-    <h5 className={'text-light mb-0'}>
-      <i className="text-info">Created by:</i> Richard Iannucelli
-    </h5>
+    <>
+      <h6 className={'text-light mb-0'}>
+        <i className="text-info">Created by:</i> Richard Iannucelli
+      </h6>
+      <a
+        className="btn btn-secondary btn-sm mt-4 px-5 py-1"
+        href="https://github.com/konkrer"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <FontAwesomeIcon icon={faGithub} size="2x" />{' '}
+      </a>
+    </>
   );
 
   return (
     <PageFadeSlideTransition>
       <ProductPanel
         title={'Widget Store'}
-        byline={'E-commerce website project'}
+        byline={'E-commerce Website Project'}
+        bylineAs={'h4'}
         headerHTML={headerHTML}
         className="AboutPage"
       >
@@ -63,7 +75,7 @@ const AboutPage = () => {
           <StyledP>
             This project was done as a final Capstone project for the
             <img
-              src={SpringboardLogo}
+              src={springboardLogo}
               height={30}
               widht={30}
               style={{ marginTop: '-5px' }}
@@ -106,11 +118,12 @@ const AboutPage = () => {
           </StyledP>
           <StyledP>
             To ensure accuracy of money related calculations this app employs
-            Decimal.js in the front and back end to avoid pitfalls of floating
-            point based calculations when dealing with discreet monetary values.
-            The PostgreSQL database in the back-end declares the Numeric type
-            for all monetary values ensuring database calculations also avoid
-            any floating point pitfalls when dealing with monetary calculations.
+            Decimal.js in the front and back end to avoid any pitfalls of
+            floating-point based calculations when dealing with discreet
+            monetary values. The PostgreSQL database in the back-end declares
+            the Numeric type for all monetary values ensuring database
+            calculations also avoid any floating-point issues when dealing with
+            monetary calculations.
           </StyledP>
           <StyledP>
             Custom animations are employed to add application interactivity,
@@ -118,6 +131,13 @@ const AboutPage = () => {
             the application's various pages are navigated.
           </StyledP>
         </StyledSection>
+        <img
+          src={widgetLogo}
+          height="100"
+          width="100"
+          alt="widget store brand logo"
+          className="my-3"
+        />
       </ProductPanel>
       <SpacerDiv height={'100px'} />
 

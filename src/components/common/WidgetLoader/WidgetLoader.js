@@ -12,20 +12,20 @@ const overide = css`
   border-style: dotted;
 `;
 
-const WidgetLoader = () => (
+const WidgetLoader = ({ size = 100 }) => (
   <div className={'position-relative d-inline-block m-5'}>
-    <ClipLoader size={175} css={overide} />
+    <ClipLoader size={size * 1.75} css={overide} />
     <div
       style={{
-        height: '100px',
-        width: '100px',
+        height: `${size}px`,
+        width: `${size}px`,
         display: 'inline-block',
-        marginLeft: '-100px',
+        marginLeft: `-${size}px`,
       }}
     >
-      <RingLoader size={100} color={'blue'} />
-      <RingLoader size={100} color={'red'} />
-      <RingLoader size={100} color={'yellow'} />
+      <RingLoader size={size} color={'blue'} />
+      <RingLoader size={size} color={'red'} />
+      <RingLoader size={size} color={'yellow'} />
     </div>
   </div>
 );

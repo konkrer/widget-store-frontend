@@ -11,15 +11,15 @@ import Navbar from 'react-bootstrap/Navbar';
 import CartIconBadge from '../../common/CartIconBadge/CartIconBadge';
 
 const NavbarCartElement = ({ pathRoot, numCartItems }) => {
-  // allow side-cart on appropriate pages
+  // allow side-cart on appropriate pages with NavLink
   if (!['/checkout'].includes(pathRoot)) {
     return (
-      <NavLink to={`${pathRoot}/cart`}>
+      <NavLink to={`${pathRoot}/cart`} aria-label="cart">
         <CartIconBadge numCartItems={numCartItems} />
       </NavLink>
     );
   }
-  // otherwise show Icon
+  // otherwise only show Icon
   return (
     <Navbar.Text className="navitem">
       <CartIconBadge numCartItems={numCartItems} />

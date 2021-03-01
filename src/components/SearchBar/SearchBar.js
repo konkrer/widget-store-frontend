@@ -61,7 +61,7 @@ const SearchBar = ({ setParams, initFormState }) => {
   };
 
   return (
-    <Col md={10} className="SearchBar mx-auto">
+    <Col md={10} className="SearchBar mx-auto mt-4 mt-xl-5">
       <Form className="SearchBar-Form mx-sm-5" onSubmit={handleSubmit}>
         <InputGroup>
           <InputGroup.Prepend>
