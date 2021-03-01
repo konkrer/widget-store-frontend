@@ -13,6 +13,7 @@ import logout from '../../redux/actions/user/logout';
 import Checkout from './Checkout';
 
 jest.mock('axios');
+window.scrollTo = jest.fn();
 
 // mock useHistory methods
 const mockUseHistoryPush = jest.fn();

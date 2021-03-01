@@ -65,7 +65,7 @@ const SearchBar = ({ setParams, initFormState }) => {
       <Form className="SearchBar-Form mx-sm-5" onSubmit={handleSubmit}>
         <InputGroup>
           <InputGroup.Prepend>
-            <InputGroup.Text className="bg-light px-1 px-sm-3 py-0 border border-secondary">
+            <InputGroup.Text className="bg-light px-1 px-sm-3 py-0 border border-secondary shadow-left">
               <Dropdown>
                 <Dropdown.Toggle
                   id="dropdown-sort"
@@ -164,12 +164,12 @@ const SearchBar = ({ setParams, initFormState }) => {
             name="query"
             placeholder="Search For..."
             onChange={handleChange}
-            className="border border-secondary"
+            className="border border-secondary shadow-middle"
             aria-label="search query term"
           />
 
           <InputGroup.Append>
-            <InputGroup.Text className="bg-primary text-light p-0 border border-secondary">
+            <InputGroup.Text className="bg-primary text-light p-0 border border-secondary shadow-right">
               <button
                 className="btn-noStyle px-3 px-sm-5 py-1"
                 type="submit"

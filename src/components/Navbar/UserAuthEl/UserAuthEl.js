@@ -32,6 +32,7 @@ const UserAuthElement = ({ pathRoot }) => {
   return (
     <Navbar.Text>
       <NavLink to={`${pathRoot}/login`}>Login</NavLink>
+      <NavLink to={`${pathRoot}/login`}>Signup</NavLink>
     </Navbar.Text>
   );
 };

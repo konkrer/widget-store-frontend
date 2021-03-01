@@ -36,7 +36,7 @@ const StorePageRoutes = ({ pathRoot, modalType }) => {
     }
     /* istanbul ignore next */
     default:
-      productDetailModal = <ProductDetail />;
+      productDetailModal = <ProductDetail2 />;
   }
 
   return (

@@ -67,24 +67,43 @@ const NavbarOne = () => {
             <NavDropdown title="More">
               {user && (
                 <>
-                  <NavDropdown.Item>
-                    <NavLink to="/user">Account</NavLink>
+                  <NavDropdown.Item as="button" className="px-0">
+                    <NavLink
+                      to="/user"
+                      className="p-0 pl-4 d-inline-block w-100"
+                    >
+                      Account
+                    </NavLink>
                   </NavDropdown.Item>
-                  <NavDropdown.Item>
-                    <NavLink to="/orders">Orders</NavLink>
+                  <NavDropdown.Item as="button" className="px-0">
+                    <NavLink
+                      to="/orders"
+                      className="p-0 pl-4 d-inline-block w-100"
+                    >
+                      Orders
+                    </NavLink>
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
                 </>
               )}
 
-              <NavDropdown.Item>
-                <NavLink to="/about">About</NavLink>
+              <NavDropdown.Item as="button" className="px-0">
+                <NavLink to="/about" className="p-0 pl-4 d-inline-block w-100">
+                  About
+                </NavLink>
               </NavDropdown.Item>
-              <NavDropdown.Item>
-                <NavLink to="/contact">Contact</NavLink>
+              <NavDropdown.Item as="button" className="px-0">
+                <NavLink
+                  to="/contact"
+                  className="p-0 pl-4 d-inline-block w-100"
+                >
+                  Contact
+                </NavLink>
               </NavDropdown.Item>
-              <NavDropdown.Item>
-                <NavLink to="/faq">FAQ</NavLink>
+              <NavDropdown.Item as="button" className="px-0">
+                <NavLink to="/faq" className="p-0 pl-4 d-inline-block w-100">
+                  FAQ
+                </NavLink>
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>

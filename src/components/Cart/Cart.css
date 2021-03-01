@@ -3,6 +3,9 @@
     opacity: 0;
     right: -520px;
   }
+  50% {
+    opacity: 0.9;
+  }
   to {
     opacity: 1;
     right: 0px;

@@ -3,7 +3,7 @@ import './ProductPanel.css';
 
 const ProductPanel = props => (
   <Container
-    className="ProductPanel panel-border my-4 mt-xl-5 py-4 dark-gradient-1 px-2 px-xl-5 boxShadowLarge"
+    className={`ProductPanel panel-border my-4 mt-xl-5 py-4 dark-gradient-1 px-2 px-xl-5 boxShadowLarge ${props.className}`}
     fluid="xl"
   >
     <header>
@@ -14,7 +14,10 @@ const ProductPanel = props => (
       >
         {props.title}{' '}
       </h1>
-      <h2 className="lead font-italic mb-4 Home-byline mt-3">{props.byline}</h2>
+      <h2 className="lead font-italic mb-4 ProductPanel-byline mt-3">
+        {props.byline}
+      </h2>
+      {props.headerHTML}
     </header>
 
     {props.component || props.children}

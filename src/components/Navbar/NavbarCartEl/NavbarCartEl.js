@@ -12,7 +12,7 @@ import CartIconBadge from '../../common/CartIconBadge/CartIconBadge';
 
 const NavbarCartElement = ({ pathRoot, numCartItems }) => {
   // allow side-cart on appropriate pages
-  if (['/shop', '/deals', '/new'].includes(pathRoot)) {
+  if (!['/checkout'].includes(pathRoot)) {
     return (
       <NavLink to={`${pathRoot}/cart`}>
         <CartIconBadge numCartItems={numCartItems} />
