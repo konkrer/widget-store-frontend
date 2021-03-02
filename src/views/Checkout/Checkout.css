@@ -31,3 +31,14 @@ select#shipping_method option:hover {
     top: 10vh;
   }
 }
+
+@media screen and (min-width: 2000px) {
+  .Checkout-panel.container-xl {
+    max-width: 1400px;
+    padding-left: 70px !important;
+    padding-right: 70px !important;
+  }
+  .Checkout-panel .CartListDiv {
+    width: 550px;
+  }
+}

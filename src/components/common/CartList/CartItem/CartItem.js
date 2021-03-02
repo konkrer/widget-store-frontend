@@ -29,7 +29,12 @@ const CartItem = ({
   const price = calculateDiscountPrice(item);
   const itemTotal = new Decimal(price).times(item.quantity).toFixed(2);
   const location = useLocation();
-  const pathRoot = getPathRoot(location.pathname);
+  let pathRoot = getPathRoot(location.pathname);
+  // if pathRoot is not a page that can show products set pathRoot to "/shop"
+  // so cart product link works as expected
+  pathRoot = ['/shop', '/deals', '/newProducts'].includes(pathRoot)
+    ? pathRoot
+    : '/shop';
 
   // animation effects based on item quantity
   const [animItemTotal, setAnimItemTotal] = useState(false);

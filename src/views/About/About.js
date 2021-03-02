@@ -5,7 +5,11 @@ import styled from 'styled-components';
 
 // get our fontawesome imports
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPaypal, faGithub } from '@fortawesome/free-brands-svg-icons';
+import {
+  faPaypal,
+  faGithub,
+  faLinkedin,
+} from '@fortawesome/free-brands-svg-icons';
 import { faCreditCard } from '@fortawesome/free-solid-svg-icons';
 
 // local imports
@@ -51,7 +55,15 @@ const AboutPage = () => {
         <i className="text-info">Created by:</i> Richard Iannucelli
       </h6>
       <a
-        className="btn btn-secondary btn-sm mt-4 px-5 py-1"
+        className="btn btn-secondary btn-sm mt-4 px-5 py-1 mx-2"
+        href="https://www.linkedin.com/in/richard-iannucelli/"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <FontAwesomeIcon icon={faLinkedin} size="2x" />{' '}
+      </a>
+      <a
+        className="btn btn-secondary btn-sm mt-4 px-5 py-1 mx-2"
         href="https://github.com/konkrer"
         target="_blank"
         rel="noreferrer"

@@ -38,7 +38,7 @@ exports[`CartList snapshot 1`] = `
         >
           <a
             class="CartItem-name"
-            href="//product/1"
+            href="/shop/product/1"
           >
             Samsung XG-900 55 inch LCD TV
           </a>

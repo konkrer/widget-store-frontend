@@ -135,7 +135,7 @@ const CartList = ({ disabled, orderData, setSelectedId }) => {
 
   return (
     <div>
-      <CartListDivWrapper className="">
+      <CartListDivWrapper>
         <CartListDiv
           orderData={!!orderData}
           className="CartListDiv mx-auto text-dark"
