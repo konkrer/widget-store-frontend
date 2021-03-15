@@ -137,6 +137,7 @@ const CustomerAddressForm = ({
             variant="secondary"
             className="ml-2 mb-2"
             onClick={() => setFormDisabled(formDisabled => !formDisabled)}
+            disabled={!defaultAddress.current}
           >
             Cancel
           </Button>

@@ -57,9 +57,13 @@ const CustomerInfoForms = ({
         }
       );
       if (resp.error) {
-        setResponseError(resp.error.response.data.message);
+        setResponseError(
+          resp.error.response?.data.message || resp.error.message
+        );
         setLoadingUser(false);
       } else {
+        // remove response error if present
+        if (responseError) setResponseError(null);
         // parse relevant data
         const userData = getCustomerDataFromResponse(resp);
 
