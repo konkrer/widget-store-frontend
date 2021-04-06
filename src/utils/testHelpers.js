@@ -9,6 +9,7 @@ import { testStore } from '../redux/store/reduxStore';
  * Use when a redux store is needed for component mounting.
  *
  */
+
 export const renderWithStore = component =>
   render(
     <Provider store={testStore}>

@@ -6,21 +6,12 @@
 import { useParams, useHistory, useLocation } from 'react-router-dom';
 import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
-import styled from 'styled-components';
 
 // local imports
 import APIRequest from '../../../hooks/apiHook';
 import { getPathRoot } from '../../../utils/helpers';
 import PDModalCard from '../modal/PDModalCard';
 import '../ProductDetail.css';
-import WidgetLoader from '../../common/WidgetLoader/WidgetLoader';
-
-const SpinnerDivWrapper = styled.div`
-  height: 200px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -49,9 +40,7 @@ const ProductDetail = () => {
 
   /* If loading return spinner else Product Detail Modal */
   const modalContent = loading ? (
-    <SpinnerDivWrapper>
-      <WidgetLoader />
-    </SpinnerDivWrapper>
+    <div />
   ) : (
     <PDModalCard
       handleClose={handleClose}

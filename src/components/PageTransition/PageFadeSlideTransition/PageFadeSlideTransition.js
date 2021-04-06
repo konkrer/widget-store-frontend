@@ -33,7 +33,7 @@ const PageFadeSlideTransition = props => {
           x: `${slideoutDir ? '' : '-'}200vw`,
           opacity: 0,
         }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.6 }}
       >
         {/* Page contents */}
         {props.component || props.children}
