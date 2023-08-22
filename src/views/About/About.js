@@ -107,6 +107,7 @@ const AboutPage = () => {
             (SPA) using React/Redux in the front-end, an Express based API
             service using a PostgreSQL database in the back-end including having
             Braintree payment processor integration in the front and back end.
+            <span> </span>
             <FontAwesomeIcon
               icon={faPaypal}
               className="float-left mr-2 font-size-50 text-secondary"
