@@ -2,20 +2,20 @@ name: Push to Surge workflow
 
 on:
   push:
-    branches: [main]
+    branches: [$default-branch]
 
 jobs:
   build:
     name: Build app and push
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Use Node.js 15.x
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: 15.x
       - run: npm ci
-      - run: REACT_APP_BASE_URL=https://widget-store-backend.herokuapp.com npm run build
+      - run: REACT_APP_BASE_URL=https://widget-store-backend.up.railway.app npm run build
       - run: cp ./build/index.html ./build/200.html
       - name: Deploy to https://melted-sidewalk.surge.sh
         uses: dswistowski/surge-sh-action@v1
