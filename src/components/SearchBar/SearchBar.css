@@ -13,7 +13,7 @@
 }
 
 .shadow-left {
-  box-shadow: -1px 1px 0 var(--shadow-color), 0 -1px 0 var(--shadow-color);
+  box-shadow: -1px 1px 1 var(--shadow-color), 0 -1px 0 var(--shadow-color);
 }
 .shadow-middle {
   box-shadow: 0 1px 0 var(--shadow-color), 0 -1px 0 var(--shadow-color);
