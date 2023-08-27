@@ -85,7 +85,7 @@ const CustomerInfoForms = ({
     }
     // only attempt getting user info if user is logged in
     if (token) getUser();
-  }, [user, token]);
+  }, [user, token, responseError]);
 
   // if user logs in or out reset forms and data
   useEffect(() => {

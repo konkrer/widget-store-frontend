@@ -4,13 +4,13 @@ exports[`CartList snapshot 1`] = `
 <DocumentFragment>
   <div>
     <div
-      class="sc-bdfBwQ dUdyWr"
+      class="sc-aXZVg bhAZvd"
     >
       <div
-        class="sc-gsTCUz HWKaQ CartListDiv mx-auto text-dark"
+        class="sc-gEvEer fGAijC CartListDiv mx-auto text-dark"
       >
         <div
-          class="sc-dlfnbm gnzRnV border-bottom py-1 bg-secondary text-light"
+          class="sc-eqUAAy hzWRsS border-bottom py-1 bg-secondary text-light"
         >
           <div
             class="CartItem-name"
@@ -130,10 +130,10 @@ exports[`CartList snapshot 1`] = `
       </div>
     </div>
     <div
-      class="sc-hKgILt hFsDic"
+      class="sc-fqkvVR leKGvv"
     >
       <table
-        class="sc-eCssSg cdvDQm TabulationTable ml-auto"
+        class="sc-dcJsrY ktTbid TabulationTable ml-auto"
       >
         <tbody>
           <tr>

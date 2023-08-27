@@ -3,10 +3,10 @@
 exports[`Pricing1 snapshot 1`] = `
 <DocumentFragment>
   <span
-    class="sc-bdfBwQ ehKgzr"
+    class="sc-aXZVg dhYZDp"
   >
     <span
-      class="sc-gsTCUz cxQGHo price"
+      class="sc-gEvEer fvHQdC price"
     >
       $400.40
     </span>
@@ -17,21 +17,21 @@ exports[`Pricing1 snapshot 1`] = `
 exports[`Pricing1 w/ discount snapshot 1`] = `
 <DocumentFragment>
   <span
-    class="sc-dlfnbm gHhlng mb-1"
+    class="sc-eqUAAy fghmnz mb-1"
   >
     Sale 15% OFF
   </span>
   <span
-    class="sc-bdfBwQ bnWraN"
+    class="sc-aXZVg dxxgxf"
   >
     <span
-      class="sc-gsTCUz jbCYhM price"
+      class="sc-gEvEer edebcW price"
     >
       $400.40
     </span>
   </span>
   <span
-    class="sc-hKgILt hnYLUB ml-2 p-1"
+    class="sc-fqkvVR eYjNkW ml-2 p-1"
   >
     $340.34
   </span>

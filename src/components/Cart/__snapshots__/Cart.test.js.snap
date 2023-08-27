@@ -3,10 +3,10 @@
 exports[`Cart snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="sc-jSgupP eivSOE ScreenBackground animActive"
+    class="sc-iGgWBj dDMlet ScreenBackground animActive"
   />
   <div
-    class="sc-gKsewC jxCGFd SideCart animActive"
+    class="sc-gsFSXq cuXHRn SideCart animActive"
   >
     <div
       class="text-left px-4 pt-0 pt-lg-3"
@@ -58,13 +58,13 @@ exports[`Cart snapshot 1`] = `
     </div>
     <div>
       <div
-        class="sc-bdfBwQ dUdyWr"
+        class="sc-aXZVg bhAZvd"
       >
         <div
-          class="sc-gsTCUz cBdABB CartListDiv mx-auto text-dark"
+          class="sc-gEvEer jfLmLP CartListDiv mx-auto text-dark"
         >
           <div
-            class="sc-dlfnbm gnzRnV border-bottom py-1 bg-secondary text-light"
+            class="sc-eqUAAy hzWRsS border-bottom py-1 bg-secondary text-light"
           >
             <div
               class="CartItem-name"
@@ -90,10 +90,10 @@ exports[`Cart snapshot 1`] = `
         </div>
       </div>
       <div
-        class="sc-hKgILt hFsDic"
+        class="sc-fqkvVR leKGvv"
       >
         <table
-          class="sc-eCssSg cdvDQm TabulationTable ml-auto"
+          class="sc-dcJsrY ktTbid TabulationTable ml-auto"
         >
           <tbody>
             <tr>

@@ -3,7 +3,7 @@
 exports[`PDModalCard snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="sc-bdfBwQ gWAAnt ProductDetail"
+    class="sc-aXZVg iBYyLT ProductDetail"
     color="var(--dark)"
     data-testid="ModalCard"
   >
@@ -64,10 +64,10 @@ exports[`PDModalCard snapshot 1`] = `
             class="text-right pb-3 pr-5 mr-5"
           >
             <span
-              class="sc-gsTCUz AFRwL"
+              class="sc-gEvEer eaNFBR"
             >
               <span
-                class="sc-dlfnbm kEiGb price"
+                class="sc-eqUAAy hiIFnY price"
               >
                 $400.40
               </span>
